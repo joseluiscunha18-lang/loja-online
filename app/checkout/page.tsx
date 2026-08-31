@@ -1,0 +1,6 @@
+"use client";
+import { ProductPage } from "@/components/shop-shell";
+import { useShop } from "@/lib/shop-context";
+import { formatMZN, STORE } from "@/lib/shop-data";
+export default function Checkout(){return <ProductPage><CheckoutContent/></ProductPage>}
+function CheckoutContent(){const {detailed,subtotal}=useShop();const message=encodeURIComponent(`Olá! Gostaria de encomendar:\n${detailed.map(({product,item})=>`${item.quantity}x ${product.name}`).join("\n")}\nTotal: ${formatMZN(subtotal)}`);return <section className="mx-auto max-w-2xl px-4 py-16"><p className="eyebrow">Finalizar encomenda</p><h1 className="font-display mt-3 text-5xl">A sua sacola</h1>{detailed.length===0?<p className="mt-8 text-muted-foreground">A sua sacola está vazia.</p>:<><div className="mt-8 divide-y border-y">{detailed.map(({product,item,total})=><div className="flex justify-between py-4" key={`${product.id}-${item.variant}`}><span>{item.quantity}x {product.name}</span><span>{formatMZN(total)}</span></div>)}</div><div className="flex justify-between py-6 text-lg font-medium"><span>Total</span><span>{formatMZN(subtotal)}</span></div><a href={`https://wa.me/${STORE.whatsapp}?text=${message}`} className="block rounded-full bg-primary px-6 py-4 text-center text-sm uppercase text-primary-foreground">Encomendar pelo WhatsApp</a></>}</section>}

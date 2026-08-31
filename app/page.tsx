@@ -9,7 +9,8 @@ import { ProductPage } from "@/components/shop-shell";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
-export default function Home() {
+// Inner component — rendered *inside* ShopProvider (via ProductPage)
+function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
   const { openProduct } = useShop();
 
@@ -20,7 +21,7 @@ export default function Home() {
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 
   return (
-    <ProductPage>
+    <>
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 pt-4">
         <div className="relative overflow-hidden rounded-[2rem] bg-sand">
@@ -172,6 +173,14 @@ export default function Home() {
           ))}
         </ul>
       </section>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
+    <ProductPage>
+      <HomeContent />
     </ProductPage>
   );
 }

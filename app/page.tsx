@@ -33,15 +33,15 @@ function HomeContent() {
             className="h-[30rem] sm:h-[34rem]"
             style={{ objectPosition: "right top", objectFit: "cover", width: "100%", transform: "translateX(16%) translateY(-5%)" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/40 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-center gap-5 p-7 sm:p-12">
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-center gap-4 p-7 sm:p-12" style={{ maxWidth: "55%" }}>
             <p className="font-display text-lg italic">Descubra</p>
-            <h1 className="font-display max-w-[9em] text-[3.1rem] leading-[0.92] sm:text-6xl">
+            <h1 className="font-display text-[2.4rem] leading-[0.92] sm:text-5xl">
               Autocuidado
               <br />
               &amp; Beleza
             </h1>
-            <p className="max-w-[16rem] text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Peças modernas e cosmética de confiança para cada momento do seu dia.
             </p>
             <div className="flex flex-col items-start gap-3">

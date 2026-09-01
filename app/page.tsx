@@ -31,7 +31,7 @@ function HomeContent() {
             width={1024}
             height={1280}
             className="h-[40rem] sm:h-[44rem]"
-            style={{ objectPosition: "right top", objectFit: "cover", width: "112%", transform: "translateX(20%)" }}
+            style={{ objectPosition: "right top", objectFit: "cover", width: "104%", transform: "translateX(20%)" }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/40 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-center gap-5 p-7 sm:p-12">

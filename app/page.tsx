@@ -30,15 +30,15 @@ function HomeContent() {
             className="h-[30rem] sm:h-[34rem] w-full"
             style={{
               backgroundImage: `url(${heroImage})`,
-              backgroundSize: "120%",
-              backgroundPosition: "right center",
+              backgroundSize: "135%",
+              backgroundPosition: "right 15%",
               backgroundRepeat: "no-repeat",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/30 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-center gap-4 p-7 sm:p-12" style={{ maxWidth: "55%" }}>
             <p className="font-display text-lg italic">Descubra</p>
-            <h1 className="font-display text-[2.4rem] leading-[0.92] sm:text-5xl">
+            <h1 className="font-display text-[2rem] leading-[0.92] sm:text-4xl">
               Autocuidado
               <br />
               &amp; Beleza

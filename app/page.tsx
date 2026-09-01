@@ -30,8 +30,8 @@ function HomeContent() {
             className="h-[30rem] sm:h-[34rem] w-full"
             style={{
               backgroundImage: `url(${heroImage})`,
-              backgroundSize: "160%",
-              backgroundPosition: "72% 10%",
+              backgroundSize: "contain",
+              backgroundPosition: "right top",
               backgroundRepeat: "no-repeat",
             }}
           />

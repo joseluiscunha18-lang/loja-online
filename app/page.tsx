@@ -9,7 +9,6 @@ import { ProductPage } from "@/components/shop-shell";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
-// Inner component — rendered *inside* ShopProvider (via ProductPage)
 function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
   const { openProduct } = useShop();
@@ -24,43 +23,78 @@ function HomeContent() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 pt-4">
-        <div className="relative overflow-hidden rounded-[2rem] bg-sand">
+        <div className="relative overflow-hidden rounded-[2rem]" style={{ background: "#e8ddd4" }}>
+
+          {/* Imagem de fundo */}
           <div
-            aria-label="Modelo com pele luminosa a segurar um sérum da Bliss Beauty & Care"
-            className="h-[30rem] sm:h-[34rem] w-full"
+            aria-hidden
+            className="absolute inset-0"
             style={{
               backgroundImage: `url(${heroImage})`,
-              backgroundSize: "135%",
-              backgroundPosition: "right 15%",
+              backgroundSize: "115%",
+              backgroundPosition: "85% 20%",
               backgroundRepeat: "no-repeat",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/30 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-center gap-4 p-7 sm:p-12" style={{ maxWidth: "55%" }}>
-            <p className="font-display text-lg italic">Descubra</p>
-            <h1 className="font-display text-[2rem] leading-[0.92] sm:text-4xl">
-              Autocuidado
-              <br />
-              &amp; Beleza
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Peças modernas e cosmética de confiança para cada momento do seu dia.
-            </p>
-            <div className="flex flex-col items-start gap-3">
+
+          {/* Gradiente suave só na esquerda para legibilidade */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(105deg, rgba(232,221,212,0.92) 0%, rgba(232,221,212,0.75) 38%, rgba(232,221,212,0.15) 65%, transparent 100%)",
+            }}
+          />
+
+          {/* Conteúdo */}
+          <div className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12" style={{ minHeight: "32rem" }}>
+
+            {/* Topo: badge */}
+            <div className="flex items-center gap-2">
+              <span
+                className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
+                style={{ background: "rgba(0,0,0,0.08)", color: "#4a3f38" }}
+              >
+                Nova Coleção
+              </span>
+            </div>
+
+            {/* Meio: título */}
+            <div className="flex flex-col gap-3" style={{ maxWidth: "52%" }}>
+              <p className="font-display text-base italic" style={{ color: "#7a6a5f" }}>
+                Descubra
+              </p>
+              <h1
+                className="font-display leading-[0.88]"
+                style={{ fontSize: "2.6rem", color: "#1a1410" }}
+              >
+                Auto
+                <br />
+                cuidado
+                <br />
+                <span style={{ color: "#7a6a5f" }}>&amp; Beleza</span>
+              </h1>
+            </div>
+
+            {/* Baixo: CTA único elegante */}
+            <div className="flex flex-col gap-3" style={{ maxWidth: "52%" }}>
+              <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
+                Cosmética e peças modernas escolhidas a pensar em si.
+              </p>
               <Link
                 href="/produtos"
-                className="inline-flex items-center gap-2.5 rounded-full bg-primary px-6 py-3.5 text-sm tracking-[0.06em] text-primary-foreground uppercase transition-opacity hover:opacity-85"
+                className="inline-flex items-center justify-between gap-3 rounded-2xl px-5 py-4 text-sm font-medium tracking-wide transition-opacity hover:opacity-90"
+                style={{ background: "#1a1410", color: "#f5ede6" }}
               >
-                Explorar Coleção
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/produtos?categoria=Skincare"
-                className="rounded-full border border-border bg-background/80 px-6 py-3 text-sm backdrop-blur transition-colors hover:bg-secondary"
-              >
-                Novidades
+                Explorar
+                <span
+                  className="flex items-center justify-center rounded-full"
+                  style={{ background: "#f5ede6", width: 28, height: 28 }}
+                >
+                  <ArrowRight className="size-3.5" style={{ color: "#1a1410" }} aria-hidden />
+                </span>
               </Link>
             </div>
+
           </div>
         </div>
       </section>
@@ -152,21 +186,9 @@ function HomeContent() {
       <section className="mx-auto mt-16 max-w-6xl px-4">
         <ul className="grid gap-4 sm:grid-cols-3">
           {[
-            {
-              icon: Gem,
-              title: "Produtos originais",
-              text: "Marcas verificadas e fórmulas seguras.",
-            },
-            {
-              icon: Truck,
-              title: "Entrega rápida",
-              text: STORE.logistics,
-            },
-            {
-              icon: MessageCircle,
-              title: "Atendimento humano",
-              text: `Fale connosco por WhatsApp: ${STORE.phoneDisplay}`,
-            },
+            { icon: Gem, title: "Produtos originais", text: "Marcas verificadas e fórmulas seguras." },
+            { icon: Truck, title: "Entrega rápida", text: STORE.logistics },
+            { icon: MessageCircle, title: "Atendimento humano", text: `Fale connosco por WhatsApp: ${STORE.phoneDisplay}` },
           ].map(({ icon: Icon, title, text }) => (
             <li key={title} className="rounded-3xl bg-card p-6 shadow-card">
               <Icon className="size-5" aria-hidden />

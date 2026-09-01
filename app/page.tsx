@@ -30,7 +30,7 @@ function HomeContent() {
             alt="Modelo com pele luminosa a segurar um sérum da Bliss Beauty & Care"
             width={1024}
             height={1280}
-            className="h-[30rem] w-full object-cover object-[55%_20%] sm:h-[34rem]"
+            className="h-[30rem] w-full object-cover object-[15%_20%] sm:h-[34rem]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/40 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-center gap-5 p-7 sm:p-12">

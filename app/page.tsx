@@ -25,13 +25,15 @@ function HomeContent() {
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 pt-4">
         <div className="relative overflow-hidden rounded-[2rem] bg-sand">
-          <img
-            src={heroImage}
-            alt="Modelo com pele luminosa a segurar um sérum da Bliss Beauty & Care"
-            width={1024}
-            height={1280}
-            className="h-[30rem] sm:h-[34rem]"
-            style={{ objectFit: "cover", width: "100%", height: "100%", transform: "scale(0.85) translateX(15%)", transformOrigin: "center top" }}
+          <div
+            aria-label="Modelo com pele luminosa a segurar um sérum da Bliss Beauty & Care"
+            className="h-[30rem] sm:h-[34rem] w-full"
+            style={{
+              backgroundImage: `url(${heroImage})`,
+              backgroundSize: "160%",
+              backgroundPosition: "72% 10%",
+              backgroundRepeat: "no-repeat",
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/30 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-center gap-4 p-7 sm:p-12" style={{ maxWidth: "55%" }}>

@@ -147,7 +147,7 @@ function HomeContent() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="/produtos"
-                  className="inline-flex items-center justify-between gap-4 rounded-xl px-5 py-3.5 text-sm font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                  className="inline-flex items-center justify-between gap-4 rounded-2xl px-5 py-3.5 text-sm font-medium tracking-[0.06em] uppercase whitespace-nowrap"
                   style={{ background: "#1a1410", color: "#f5ede6" }}
                 >
                   Explorar Coleção

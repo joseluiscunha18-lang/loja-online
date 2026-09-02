@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
             loading="lazy"
             width={800}
             height={800}
-            className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="aspect-square w-full scale-[1.38] object-cover transition-transform duration-500 group-hover:scale-[1.45]"
           />
         </button>
 

@@ -102,7 +102,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       items.flatMap((item) => {
         const product = PRODUCTS.find((p) => p.id === item.productId);
         if (!product) return [];
-        return [{ item, product, total: product.price * item.quantity }];
+        return [{ item, product, total: (product.price ?? 0) * item.quantity }];
       }),
     [items],
   );

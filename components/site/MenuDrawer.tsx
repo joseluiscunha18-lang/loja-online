@@ -29,8 +29,8 @@ export function MenuDrawer() {
         }`}
       />
       <aside
-        className={`absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col bg-background shadow-soft transition-transform duration-300 ease-out ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col bg-background shadow-soft transition-all duration-300 ease-out ${
+          menuOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
         }`}
       >
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
@@ -76,6 +76,9 @@ export function MenuDrawer() {
           </ul>
 
           <div className="mt-8 space-y-3 border-t border-border pt-6 text-sm text-muted-foreground">
+            <a href={`tel:${STORE.whatsapp}`} className="flex items-center gap-2.5">
+              <Phone className="size-4" aria-hidden /> {STORE.phoneDisplay}
+            </a>
             <a href={`mailto:${STORE.email}`} className="flex items-center gap-2.5">
               <Mail className="size-4" aria-hidden /> {STORE.email}
             </a>
@@ -85,7 +88,7 @@ export function MenuDrawer() {
               rel="noreferrer"
               className="flex items-center gap-2.5"
             >
-              <Phone className="size-4" aria-hidden /> {STORE.phoneDisplay}
+              <MessageCircle className="size-4" aria-hidden /> WhatsApp
             </a>
             <a
               href={STORE.instagramUrl}

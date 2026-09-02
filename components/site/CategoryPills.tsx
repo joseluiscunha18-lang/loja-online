@@ -9,7 +9,7 @@ export function CategoryPills({
   onChange: (category: Category) => void;
 }) {
   return (
-    <div className="no-scrollbar -mx-4 flex gap-2.5 overflow-x-auto px-4 pl-5">
+    <div className="no-scrollbar flex gap-2.5 overflow-x-auto pb-1">
       {CATEGORIES.map((category) => {
         const isActive = category === active;
         return (

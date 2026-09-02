@@ -1,3 +1,35 @@
-import { ProductPage } from "@/components/shop-shell";
 import { STORE } from "@/lib/shop-data";
-export default function Contacto(){return <ProductPage><section className="mx-auto max-w-3xl px-4 py-20"><p className="eyebrow">Fale connosco</p><h1 className="font-display mt-4 text-5xl">Estamos aqui para ajudar.</h1><div className="mt-10 grid gap-4"><a className="rounded-2xl bg-secondary p-6" href={`https://wa.me/${STORE.whatsapp}`}>WhatsApp<br/><span className="text-muted-foreground">{STORE.phoneDisplay}</span></a><div className="rounded-2xl bg-secondary p-6">Entregas<br/><span className="text-muted-foreground">{STORE.delivery}</span></div></div></section></ProductPage>}
+
+export default function Contacto() {
+  return (
+      <section className="mx-auto max-w-3xl px-4 py-20">
+        <p className="eyebrow">Fale connosco</p>
+        <h1 className="font-display mt-4 text-5xl">Estamos aqui para ajudar.</h1>
+
+        <div className="mt-10 grid gap-4">
+          <div className="rounded-2xl bg-secondary p-6">
+            Telefone
+            <br />
+            <span className="text-muted-foreground">{STORE.phoneDisplay}</span>
+          </div>
+
+          <a
+            className="rounded-2xl bg-secondary p-6"
+            href={`https://wa.me/${STORE.whatsapp}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            WhatsApp
+            <br />
+            <span className="text-muted-foreground">Fale connosco diretamente</span>
+          </a>
+
+          <div className="rounded-2xl bg-secondary p-6">
+            Entregas
+            <br />
+            <span className="text-muted-foreground">{STORE.delivery}</span>
+          </div>
+        </div>
+      </section>
+  );
+}

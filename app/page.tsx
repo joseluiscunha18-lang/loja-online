@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
 import { useState, useMemo, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { ProductPage } from "@/components/shop-shell";
@@ -35,25 +35,251 @@ function FadeUp({
   );
 }
 
-function HomeContent() {
-  const [category, setCategory] = useState<Category>("Tudo");
+/* ─────────────────────────────────────────────────────────────
+   HERO EDITORIAL REVEAL
+   Sequência de 4 fases:
+   0 → Fundo creme sólido + frase 1 surge
+   1 → Frase 2 troca (fade crossfade)
+   2 → Imagem desfocada faz bloom suave por trás do gradiente
+   3 → Imagem nítida revela, título + CTA entram
+   ───────────────────────────────────────────────────────────── */
+function HeroEditorialReveal() {
+  // 0=intro phrase, 1=second phrase, 2=blur bloom, 3=full reveal
+  const [phase, setPhase] = useState(0);
   const [heroLoaded, setHeroLoaded] = useState(false);
-  const { openProduct } = useShop();
 
-  // Pré-carrega a imagem do hero via JS (mais fiável do que um <img> escondido,
-  // que os navegadores despriorizam e pode nunca disparar o onLoad a tempo).
+  // Parallax
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   useEffect(() => {
+    // Pré-carrega a imagem hero em segundo plano
     const img = new window.Image();
+    let done = false;
+    const finish = () => {
+      if (!done) {
+        done = true;
+        setHeroLoaded(true);
+      }
+    };
     img.src = heroImage;
-    if (img.complete) {
-      setHeroLoaded(true);
-    } else {
-      img.onload = () => setHeroLoaded(true);
-    }
+    if (img.complete) finish();
+    else img.onload = finish;
+    const safety = setTimeout(finish, 3000);
+
+    // Sequência de fases - independente do carregamento
+    // Fase 0→1 após 1.1s (troca de frase)
+    const t1 = setTimeout(() => setPhase(1), 1100);
+    // Fase 1→2 após 2.2s (bloom do blur)
+    const t2 = setTimeout(() => setPhase(2), 2200);
+
     return () => {
       img.onload = null;
+      clearTimeout(safety);
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
   }, []);
+
+  // Fase 3 activada quando imagem carrega E estamos na fase 2+
+  useEffect(() => {
+    if (heroLoaded && phase >= 2) {
+      const t = setTimeout(() => setPhase(3), 320);
+      return () => clearTimeout(t);
+    }
+  }, [heroLoaded, phase]);
+
+  const isRevealed = phase === 3;
+
+  return (
+    <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
+      <div
+        className="relative overflow-hidden rounded-[2rem]"
+        style={{ background: "#e8ddd4", minHeight: "32rem" }}
+      >
+        {/* ── Camada 1: placeholder desfocado — bloom suave na fase 2 ── */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${heroBlurDataUrl})`,
+            backgroundSize: "115%",
+            backgroundPosition: "85% 20%",
+            backgroundRepeat: "no-repeat",
+            transform: "scale(1.15)",
+          }}
+          initial={{ opacity: 0, filter: "blur(24px) saturate(0.8)" }}
+          animate={
+            phase >= 2
+              ? { opacity: 1, filter: "blur(16px) saturate(1.15)" }
+              : { opacity: 0, filter: "blur(24px) saturate(0.8)" }
+          }
+          transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+        />
+
+        {/* ── Camada 2: imagem real — surge na fase 3 ── */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            backgroundSize: "115%",
+            backgroundPosition: "85% 20%",
+            backgroundRepeat: "no-repeat",
+            y: bgY,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
+        />
+
+        {/* ── Gradiente lateral — sempre presente ── */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(105deg, rgba(232,221,212,0.94) 0%, rgba(232,221,212,0.80) 38%, rgba(232,221,212,0.20) 65%, transparent 100%)",
+          }}
+        />
+
+        {/* ── Conteúdo ── */}
+        <motion.div
+          className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
+          style={{ minHeight: "32rem", y: contentY, opacity: scrollOpacity }}
+        >
+          {/* Badge topo */}
+          <motion.div
+            initial={{ opacity: 0, y: -14 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, ease: "easeOut", delay: 0.05 }}
+          >
+            <span
+              className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
+              style={{ background: "rgba(0,0,0,0.08)", color: "#4a3f38" }}
+            >
+              Nova Coleção
+            </span>
+          </motion.div>
+
+          {/* ── Bloco central: frases sequenciais + título final ── */}
+          <div className="flex flex-col gap-3" style={{ maxWidth: "60%" }}>
+
+            {/* Frase 1 e Frase 2 — alternância crossfade nas fases 0 e 1 */}
+            <div style={{ minHeight: "3.2rem", position: "relative" }}>
+              {/* Fase 0: frase introdutória */}
+              <AnimatePresence>
+                {phase === 0 && (
+                  <motion.p
+                    key="phrase-0"
+                    className="font-display text-lg italic absolute"
+                    style={{ color: "#7a6a5f", lineHeight: 1.3 }}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    Sinta a sua pele
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              {/* Fase 1: frase secundária */}
+              <AnimatePresence>
+                {phase === 1 && (
+                  <motion.p
+                    key="phrase-1"
+                    className="font-display text-lg italic absolute"
+                    style={{ color: "#7a6a5f", lineHeight: 1.3 }}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    Eleve o seu ritual.
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              {/* Fase 2+: subtítulo "Descubra" que antecede o título */}
+              <AnimatePresence>
+                {phase >= 2 && (
+                  <motion.p
+                    key="phrase-2"
+                    className="font-display text-base italic absolute"
+                    style={{ color: "#7a6a5f" }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    Descubra
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Título principal — entra na fase 3 */}
+            <motion.h1
+              className="font-display leading-[0.88]"
+              style={{ fontSize: "2.2rem", color: "#1a1410" }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.12 }}
+            >
+              Autocuidado
+              <br />
+              <motion.span
+                style={{ color: "#7a6a5f" }}
+                initial={{ opacity: 0 }}
+                animate={isRevealed ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.38 }}
+              >
+                &amp; Beleza
+              </motion.span>
+            </motion.h1>
+          </div>
+
+          {/* CTA — entra por último, na fase 3 */}
+          <motion.div
+            className="flex flex-col gap-3"
+            style={{ maxWidth: "52%" }}
+            initial={{ opacity: 0, y: 22 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.45 }}
+          >
+            <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
+              Cosmética e peças modernas escolhidas a pensar em si.
+            </p>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/produtos"
+                className="inline-flex items-center justify-between gap-2.5 rounded-full px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                style={{ background: "#1a1410", color: "#f5ede6" }}
+              >
+                Explorar Coleção
+                <motion.span
+                  className="flex items-center justify-center rounded-full"
+                  style={{ background: "#f5ede6", width: 18, height: 18 }}
+                  whileHover={{ x: 3 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <ArrowRight className="size-2.5" style={{ color: "#1a1410" }} aria-hidden />
+                </motion.span>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function HomeContent() {
+  const [category, setCategory] = useState<Category>("Tudo");
+  const { openProduct } = useShop();
 
   const products = useMemo(
     () => (category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
@@ -61,142 +287,10 @@ function HomeContent() {
   );
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 
-  /* Parallax no hero */
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
   return (
     <>
-      {/* ── HERO ── */}
-      <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
-        <div
-          className="relative overflow-hidden rounded-[2rem]"
-          style={{ background: "#e8ddd4", minHeight: "32rem" }}
-        >
-          {/* Placeholder desfocado — visível instantaneamente, sem depender da rede */}
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${heroBlurDataUrl})`,
-              backgroundSize: "115%",
-              backgroundPosition: "85% 20%",
-              backgroundRepeat: "no-repeat",
-              filter: "blur(18px) saturate(1.1)",
-              transform: "scale(1.15)",
-            }}
-          />
-
-          {/* Imagem real com parallax — surge suavemente assim que carrega */}
-          <motion.div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${heroImage})`,
-              backgroundSize: "115%",
-              backgroundPosition: "85% 20%",
-              backgroundRepeat: "no-repeat",
-              y: bgY,
-              opacity: heroLoaded ? 1 : 0,
-              transition: "opacity 0.5s ease-out",
-            }}
-          />
-
-          {/* Gradiente */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(105deg, rgba(232,221,212,0.92) 0%, rgba(232,221,212,0.75) 38%, rgba(232,221,212,0.15) 65%, transparent 100%)",
-            }}
-          />
-
-          {/* Conteúdo */}
-          <motion.div
-            className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
-            style={{ minHeight: "32rem", y: contentY, opacity }}
-          >
-            {/* Badge entrada */}
-            <motion.div
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            >
-              <span
-                className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
-                style={{ background: "rgba(0,0,0,0.08)", color: "#4a3f38" }}
-              >
-                Nova Coleção
-              </span>
-            </motion.div>
-
-            {/* Título */}
-            <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
-              <motion.p
-                className="font-display text-base italic"
-                style={{ color: "#7a6a5f" }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.25 }}
-              >
-                Descubra
-              </motion.p>
-
-              <motion.h1
-                className="font-display leading-[0.88]"
-                style={{ fontSize: "2.2rem", color: "#1a1410" }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.35 }}
-              >
-                Autocuidado
-                <br />
-                <motion.span
-                  style={{ color: "#7a6a5f" }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                >
-                  &amp; Beleza
-                </motion.span>
-              </motion.h1>
-            </div>
-
-            {/* CTA */}
-            <motion.div
-              className="flex flex-col gap-3"
-              style={{ maxWidth: "52%" }}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: 0.55 }}
-            >
-              <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
-                Cosmética e peças modernas escolhidas a pensar em si.
-              </p>
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Link
-                  href="/produtos"
-                  className="inline-flex items-center justify-between gap-2.5 rounded-full px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
-                  style={{ background: "#1a1410", color: "#f5ede6" }}
-                >
-                  Explorar Coleção
-                  <motion.span
-                    className="flex items-center justify-center rounded-full"
-                    style={{ background: "#f5ede6", width: 18, height: 18 }}
-                    whileHover={{ x: 3 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    <ArrowRight className="size-2.5" style={{ color: "#1a1410" }} aria-hidden />
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* ── HERO EDITORIAL REVEAL ── */}
+      <HeroEditorialReveal />
 
       {/* ── CATEGORIAS ── */}
       <section className="mx-auto max-w-6xl px-4 pt-12">

@@ -90,7 +90,7 @@ function HeroEditorialReveal() {
           style={{
             backgroundImage: `url(${heroImage})`,
             backgroundSize: "122%",
-            backgroundPosition: "85% 8%",
+            backgroundPosition: "85% 32%",
             backgroundRepeat: "no-repeat",
             y: bgY,
           }}
@@ -114,7 +114,7 @@ function HeroEditorialReveal() {
             {!isRevealed && (
               <motion.p
                 key={phase === 0 ? "phrase-0" : "phrase-1"}
-                className="font-display text-3xl tracking-wide italic sm:text-4xl"
+                className="font-display text-2xl tracking-wide italic sm:text-3xl"
                 style={{ color: "#5c4d43", textShadow: "0 1px 24px rgba(255,255,255,0.35)" }}
                 initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
                 animate={{

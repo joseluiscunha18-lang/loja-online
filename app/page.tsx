@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
@@ -69,8 +68,8 @@ function HeroEditorialReveal() {
   const REVEAL_DELAY = 1.05;
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 1300);
-    const t2 = setTimeout(() => setPhase(2), 3700);
+    const t1 = setTimeout(() => setPhase(1), 1600);
+    const t2 = setTimeout(() => setPhase(2), 4300);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -224,16 +223,9 @@ function HeroEditorialReveal() {
 
 function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
-  const { openProduct } = useShop();
-  const pathname = usePathname();
-  // Cada vez que o utilizador navega para "/" um novo timestamp é gerado,
-  // o que força o React a desmontar e remontar o HeroEditorialReveal —
-  // reiniciando a animação como se fosse a primeira visita.
-  const [heroKey, setHeroKey] = useState(() => Date.now());
-
-  useEffect(() => {
-    setHeroKey(Date.now());
-  }, [pathname]);
+  // heroKey vem do contexto global — é incrementado sempre que o utilizador
+  // clica em "Início" (logo ou menu), forçando o remount do HeroEditorialReveal.
+  const { openProduct, heroKey } = useShop();
 
   const products = useMemo(() => {
     if (category !== "Tudo") {

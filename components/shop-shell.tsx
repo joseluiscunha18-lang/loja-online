@@ -22,7 +22,3 @@ export function ShopShell({ children }: { children: ReactNode }) {
     </ShopProvider>
   );
 }
-
-export function ProductPage({ children }: { children: ReactNode }) {
-  return <ShopShell>{children}</ShopShell>;
-}

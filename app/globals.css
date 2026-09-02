@@ -175,3 +175,31 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Performance: scroll suave e conter repaints ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Conter repaints aos cards de produto */
+article.group {
+  contain: layout style;
+}
+
+/* Imagens de produto: forçar GPU compositing */
+article.group img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimizar scroll horizontal da secção "Mais Vendidos" */
+.no-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+
+.no-scrollbar > * {
+  scroll-snap-align: start;
+}

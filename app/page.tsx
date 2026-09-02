@@ -102,7 +102,7 @@ function HomeContent() {
             </motion.div>
 
             {/* Título */}
-            <div className="flex flex-col gap-3" style={{ maxWidth: "52%" }}>
+            <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
               <motion.p
                 className="font-display text-base italic"
                 style={{ color: "#7a6a5f" }}
@@ -115,7 +115,7 @@ function HomeContent() {
 
               <motion.h1
                 className="font-display leading-[0.88]"
-                style={{ fontSize: "2.6rem", color: "#1a1410" }}
+                style={{ fontSize: "2.2rem", color: "#1a1410" }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.35 }}
@@ -136,7 +136,7 @@ function HomeContent() {
             {/* CTA */}
             <motion.div
               className="flex flex-col gap-3"
-              style={{ maxWidth: "52%" }}
+              style={{ maxWidth: "58%" }}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.55 }}

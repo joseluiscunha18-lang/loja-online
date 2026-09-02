@@ -136,7 +136,7 @@ function HomeContent() {
             {/* CTA */}
             <motion.div
               className="flex flex-col gap-3"
-              style={{ maxWidth: "58%" }}
+              style={{ maxWidth: "52%" }}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.55 }}
@@ -147,7 +147,7 @@ function HomeContent() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="/produtos"
-                  className="inline-flex items-center justify-between gap-3 rounded-2xl px-5 py-4 text-sm font-medium tracking-wide"
+                  className="inline-flex items-center justify-between gap-3 rounded-2xl px-5 py-3.5 text-sm font-medium tracking-wide whitespace-nowrap"
                   style={{ background: "#1a1410", color: "#f5ede6" }}
                 >
                   Explorar Coleção

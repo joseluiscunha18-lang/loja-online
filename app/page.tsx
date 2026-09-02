@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from "fra
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { ProductPage } from "@/components/shop-shell";
-import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
+import { PRODUCTS, STORE, CATEGORIES, heroImage, editorial, formatMZN, type Category, type Product } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
 /* ── Animação de entrada reutilizável ── */
@@ -218,10 +218,25 @@ function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
   const { openProduct } = useShop();
 
-  const products = useMemo(
-    () => (category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
-    [category],
-  );
+  const products = useMemo(() => {
+    if (category !== "Tudo") return PRODUCTS.filter((p) => p.category === category);
+    // Em "Tudo" os produtos vêm ordenados por categoria na base de dados — se
+    // mostrássemos só os primeiros 8 pela ordem original, seriam sempre da
+    // mesma categoria (Skincare) e pareceria que os filtros não fazem nada.
+    // Por isso intercalamos aqui, para a pré-visualização mostrar variedade.
+    const groups = CATEGORIES.filter((c) => c !== "Tudo").map((c) =>
+      PRODUCTS.filter((p) => p.category === c),
+    );
+    const mixed: Product[] = [];
+    for (let i = 0; mixed.length < PRODUCTS.length; i++) {
+      const before = mixed.length;
+      for (const group of groups) {
+        if (group[i]) mixed.push(group[i]);
+      }
+      if (mixed.length === before) break;
+    }
+    return mixed;
+  }, [category]);
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 
   return (

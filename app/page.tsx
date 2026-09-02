@@ -107,8 +107,11 @@ function HeroEditorialReveal() {
           }}
         />
 
-        {/* Frases de entrada — centradas, sobre o fundo sólido */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center px-8 text-center">
+        {/* Frases de entrada — centradas, sobre o fundo sólido.
+            pointer-events-none evita que este overlay (que ocupa o hero
+            inteiro) continue a bloquear cliques no CTA por baixo depois
+            de as frases desaparecerem. */}
+        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-8 text-center">
           <AnimatePresence mode="wait">
             {!isRevealed && (
               <motion.p
@@ -223,11 +226,13 @@ function HomeContent() {
   const { openProduct } = useShop();
 
   const products = useMemo(() => {
-    if (category !== "Tudo") return PRODUCTS.filter((p) => p.category === category);
-    // Em "Tudo" mostramos os produtos pela ordem original da base de dados
-    // (Skincare primeiro). Ao clicar numa categoria específica (ex: Skincare),
-    // a lista fica filtrada — e como o filtro pode conter mais itens do que
-    // os 8 apresentados aqui, a ordem/seleção visível muda naturalmente.
+    if (category !== "Tudo") {
+      // Numa categoria específica (ex: Skincare) reordenamos por nº de
+      // avaliações (desc.) para que a posição dos produtos seja
+      // visivelmente diferente da vista "Tudo" — que mantém sempre a
+      // ordem original da base de dados.
+      return PRODUCTS.filter((p) => p.category === category).sort((a, b) => b.reviews - a.reviews);
+    }
     return PRODUCTS;
   }, [category]);
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);

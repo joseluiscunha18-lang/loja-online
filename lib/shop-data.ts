@@ -54,7 +54,6 @@ export const PRODUCTS: Product[] = [
       "Hidratante facial oil-free com toranja rosa que refresca e hidrata sem obstruir os poros, indicado para pele com tendência a acne.",
     details: ["Oil-free", "Pele com tendência a acne", "Uso diário"],
     bestSeller: true,
-    badge: "Mais vendido",
   },
   {
     id: "uriage-bariederm-cica",
@@ -111,7 +110,7 @@ export const PRODUCTS: Product[] = [
     id: "vaselina-pura",
     name: "QI Purified Vaseline",
     category: "Skincare",
-    price: 550,
+    price: 499,
     rating: 4.6,
     reviews: 73,
     images: [vaselina],

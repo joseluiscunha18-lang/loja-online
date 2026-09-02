@@ -8,5 +8,5 @@ const display = Cormorant_Garamond({ subsets: ['latin'], variable: '--font-displ
 const sans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = { title: 'Bliss Beauty & Care — Maputo', description: 'Cosmética, acessórios e moda selecionados. Entregas em Maputo e Matola.', generator: 'v0.app' }
-export const viewport: Viewport = { colorScheme: 'light', themeColor: '#f7f4ef' }
+export const viewport: Viewport = { colorScheme: 'light', themeColor: '#1a1410' }
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt" className={`${display.variable} ${sans.variable} bg-background`}><head><link rel="preload" as="image" href="/assets/hero.jpg" fetchPriority="high" /></head><body className="font-sans antialiased"><ShopShell>{children}</ShopShell>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html> }

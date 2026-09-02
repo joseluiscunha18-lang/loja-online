@@ -5,13 +5,21 @@ import { formatMZN, productUrl, STORE } from "@/lib/shop-data";
 
 export default function Checkout() {
   const { detailed, subtotal } = useShop();
+
   const message = encodeURIComponent(
-    `Olá! Gostaria de encomendar:\n${detailed
-      .map(
+    [
+      "Ol\u00e1, bom dia! \uD83D\uDC4B",
+      "Gostaria de fazer a seguinte encomenda:",
+      "",
+      ...detailed.map(
         ({ product, item }) =>
-          `${item.quantity}x ${product.name}\n${productUrl(product.id)}`,
-      )
-      .join("\n\n")}\n\nTotal: ${formatMZN(subtotal)}`,
+          `\u25B8 ${item.quantity}x ${product.name}\n   ${productUrl(product.id)}`,
+      ),
+      "",
+      `\uD83D\uDCB0 Total: ${formatMZN(subtotal)}`,
+      "",
+      "Aguardo confirma\u00e7\u00e3o de disponibilidade e informa\u00e7\u00f5es sobre a entrega. Obrigado/a! \uD83D\uDE4F",
+    ].join("\n"),
   );
 
   return (
@@ -20,7 +28,7 @@ export default function Checkout() {
       <h1 className="font-display mt-3 text-5xl">A sua sacola</h1>
 
       {detailed.length === 0 ? (
-        <p className="mt-8 text-muted-foreground">A sua sacola está vazia.</p>
+        <p className="mt-8 text-muted-foreground">A sua sacola est\u00e1 vazia.</p>
       ) : (
         <>
           <div className="mt-8 divide-y border-y">

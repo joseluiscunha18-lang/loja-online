@@ -147,17 +147,17 @@ function HomeContent() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="/produtos"
-                  className="inline-flex items-center justify-between gap-3 rounded-2xl px-5 py-3.5 text-sm font-medium tracking-wide whitespace-nowrap"
+                  className="inline-flex items-center justify-between gap-4 rounded-xl px-5 py-3.5 text-sm font-medium tracking-[0.06em] uppercase whitespace-nowrap"
                   style={{ background: "#1a1410", color: "#f5ede6" }}
                 >
                   Explorar Coleção
                   <motion.span
                     className="flex items-center justify-center rounded-full"
-                    style={{ background: "#f5ede6", width: 28, height: 28 }}
+                    style={{ background: "#f5ede6", width: 22, height: 22 }}
                     whileHover={{ x: 3 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
-                    <ArrowRight className="size-3.5" style={{ color: "#1a1410" }} aria-hidden />
+                    <ArrowRight className="size-3" style={{ color: "#1a1410" }} aria-hidden />
                   </motion.span>
                 </Link>
               </motion.div>

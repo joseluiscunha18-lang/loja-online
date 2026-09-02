@@ -5,7 +5,7 @@ import { useShop } from "@/lib/shop-context";
 import { STORE } from "@/lib/shop-data";
 
 export function Header() {
-  const { count, setCartOpen, setMenuOpen, setSearchOpen } = useShop();
+  const { count, setCartOpen, setMenuOpen, setSearchOpen, resetHero } = useShop();
 
   return (
     <>
@@ -27,7 +27,7 @@ export function Header() {
             <Menu className="size-5" aria-hidden />
           </button>
 
-          <Link href="/" className="flex-1 text-center">
+          <Link href="/" onClick={resetHero} className="flex-1 text-center">
             <span className="font-display block text-[1.35rem] leading-none tracking-tight sm:text-2xl">
               Bliss <span className="italic">Beauty</span> &amp; Care
             </span>

@@ -54,8 +54,8 @@ function HeroEditorialReveal() {
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 1100);
-    const t2 = setTimeout(() => setPhase(2), 2200);
+    const t1 = setTimeout(() => setPhase(1), 1300);
+    const t2 = setTimeout(() => setPhase(2), 3100);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -102,9 +102,8 @@ function HeroEditorialReveal() {
                 className="font-display text-2xl italic"
                 style={{ color: "#7a6a5f" }}
                 initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] } }}
+                exit={{ opacity: 0, y: -16, transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] } }}
               >
                 {phase === 0 ? "Sinta a sua pele" : "Eleve o seu ritual."}
               </motion.p>
@@ -119,7 +118,6 @@ function HeroEditorialReveal() {
         >
           {/* Badge — desce suavemente de cima (delay 0) */}
           <motion.div
-            key={isRevealed ? "badge-in" : "badge-out"}
             initial={{ opacity: 0, y: -16 }}
             animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
             transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0 }}
@@ -139,7 +137,6 @@ function HeroEditorialReveal() {
             <motion.p
               className="font-display text-base italic"
               style={{ color: "#7a6a5f" }}
-              key={isRevealed ? "descubra-in" : "descubra-out"}
               initial={{ opacity: 0, x: -20 }}
               animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
@@ -151,7 +148,6 @@ function HeroEditorialReveal() {
             <motion.h1
               className="font-display leading-[0.88]"
               style={{ fontSize: "2.2rem", color: "#1a1410" }}
-              key={isRevealed ? "h1-in" : "h1-out"}
               initial={{ opacity: 0, y: 28 }}
               animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.38 }}
@@ -161,7 +157,6 @@ function HeroEditorialReveal() {
               {/* "& Beleza" — aparece por último, ainda mais devagar (delay 0.6) */}
               <motion.span
                 style={{ color: "#7a6a5f" }}
-                key={isRevealed ? "beleza-in" : "beleza-out"}
                 initial={{ opacity: 0 }}
                 animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
@@ -175,7 +170,6 @@ function HeroEditorialReveal() {
           <motion.div
             className="flex flex-col gap-3"
             style={{ maxWidth: "52%" }}
-            key={isRevealed ? "cta-in" : "cta-out"}
             initial={{ opacity: 0, y: 24 }}
             animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.78 }}

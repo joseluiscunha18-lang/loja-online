@@ -323,7 +323,7 @@ export const STORE = {
   logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
 };
 
-export const SITE_URL = "https://three.vercel.app";
+export const SITE_URL = "https://bliss-beauty-three.vercel.app";
 
 export function productUrl(productId: string) {
   return `${SITE_URL}/produto/${productId}`;

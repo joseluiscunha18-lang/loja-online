@@ -145,7 +145,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "desodorizantes-stick",
     name: "Dove Advanced Care Body Spray",
-    category: "Skincare",
+    category: "Banho",
     price: null,
     rating: 4.6,
     reviews: 82,
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-rollon",
     name: "Dove Advanced Care Roll-on",
-    category: "Skincare",
+    category: "Banho",
     price: null,
     rating: 4.7,
     reviews: 134,

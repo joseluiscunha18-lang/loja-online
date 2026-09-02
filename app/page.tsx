@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
-import { useState, useMemo, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { ProductPage } from "@/components/shop-shell";
@@ -41,11 +41,23 @@ function FadeUp({
    de referência: 0.1s → 0.6s).
    ───────────────────────────────────────────────────────────── */
 function HeroEditorialReveal() {
+  // 0=frase 1, 1=frase 2, 2+=Descubra
+  const [phase, setPhase] = useState(0);
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase(1), 1100);
+    const t2 = setTimeout(() => setPhase(2), 2200);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
 
   return (
     <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
@@ -96,15 +108,56 @@ function HeroEditorialReveal() {
 
           {/* Título */}
           <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
-            <motion.p
-              className="font-display text-base italic"
-              style={{ color: "#7a6a5f" }}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: 0.25 }}
-            >
-              Descubra
-            </motion.p>
+            {/* Frases sequenciais — crossfade nas fases 0 e 1, "Descubra" a partir da fase 2 */}
+            <div style={{ minHeight: "1.8rem", position: "relative" }}>
+              <AnimatePresence>
+                {phase === 0 && (
+                  <motion.p
+                    key="phrase-0"
+                    className="font-display text-base italic absolute"
+                    style={{ color: "#7a6a5f" }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    Sinta a sua pele
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {phase === 1 && (
+                  <motion.p
+                    key="phrase-1"
+                    className="font-display text-base italic absolute"
+                    style={{ color: "#7a6a5f" }}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    Eleve o seu ritual.
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {phase >= 2 && (
+                  <motion.p
+                    key="phrase-2"
+                    className="font-display text-base italic absolute"
+                    style={{ color: "#7a6a5f" }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    Descubra
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
             <motion.h1
               className="font-display leading-[0.88]"

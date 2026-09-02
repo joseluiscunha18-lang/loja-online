@@ -98,7 +98,7 @@ function HeroEditorialReveal() {
         className="relative overflow-hidden rounded-[2rem]"
         style={{ background: "#e8ddd4", minHeight: "32rem" }}
       >
-        {/* ── Imagem real — fade-in suave na fase 3, sem camadas intermédias ── */}
+        {/* ── Imagem real — fade-in suave quando isRevealed ── */}
         <motion.div
           aria-hidden
           className="absolute inset-0"
@@ -111,7 +111,7 @@ function HeroEditorialReveal() {
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
         />
 
         {/* ── Gradiente lateral — sempre presente ── */}
@@ -123,118 +123,169 @@ function HeroEditorialReveal() {
           }}
         />
 
-        {/* ── Conteúdo ── */}
-        <motion.div
-          className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
-          style={{ minHeight: "32rem", y: contentY, opacity: scrollOpacity }}
-        >
-          {/* Badge topo */}
-          <motion.div
-            initial={{ opacity: 0, y: -14 }}
-            animate={isRevealed ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: "easeOut", delay: 0.05 }}
-          >
-            <span
-              className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
-              style={{ background: "rgba(0,0,0,0.08)", color: "#4a3f38" }}
+        {/* ══════════════════════════════════════════════
+            ESTADO A — Frases editoriais centradas (fases 0 e 1)
+            Layout: ocupa o hero inteiro, conteúdo centrado
+            ══════════════════════════════════════════════ */}
+        <AnimatePresence>
+          {!isRevealed && (
+            <motion.div
+              key="editorial-phrases"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeIn" }}
             >
-              Nova Coleção
-            </span>
-          </motion.div>
+              {/* Linha decorativa acima */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+                style={{
+                  width: 32,
+                  height: 1,
+                  background: "#a8968a",
+                  transformOrigin: "center",
+                  marginBottom: 8,
+                }}
+              />
 
-          {/* ── Bloco central: frases sequenciais + título final ── */}
-          <div className="flex flex-col gap-3" style={{ maxWidth: "60%" }}>
+              {/* Frase com crossfade */}
+              <div style={{ position: "relative", height: "2.8rem" }}>
+                <AnimatePresence mode="wait">
+                  {phase === 0 && (
+                    <motion.p
+                      key="p0"
+                      className="font-display text-2xl italic absolute inset-0 flex items-center justify-center"
+                      style={{ color: "#5a4d45", letterSpacing: "0.01em" }}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      Sinta a sua pele
+                    </motion.p>
+                  )}
+                  {phase === 1 && (
+                    <motion.p
+                      key="p1"
+                      className="font-display text-2xl italic absolute inset-0 flex items-center justify-center"
+                      style={{ color: "#5a4d45", letterSpacing: "0.01em" }}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      Eleve o seu ritual.
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            {/* Frase 1 e Frase 2 — alternância crossfade nas fases 0 e 1 */}
-            <div style={{ minHeight: "3.2rem", position: "relative" }}>
-              {/* Fase 0: frase introdutória */}
-              <AnimatePresence>
-                {phase === 0 && (
-                  <motion.p
-                    key="phrase-0"
-                    className="font-display text-lg italic absolute"
-                    style={{ color: "#7a6a5f", lineHeight: 1.3 }}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    Sinta a sua pele
-                  </motion.p>
-                )}
-              </AnimatePresence>
-
-              {/* Fase 1: frase secundária */}
-              <AnimatePresence>
-                {phase === 1 && (
-                  <motion.p
-                    key="phrase-1"
-                    className="font-display text-lg italic absolute"
-                    style={{ color: "#7a6a5f", lineHeight: 1.3 }}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    Eleve o seu ritual.
-                  </motion.p>
-                )}
-              </AnimatePresence>
-
-
-            </div>
-
-            {/* Título principal — entra na fase 3 */}
-            <motion.h1
-              className="font-display leading-[0.88]"
-              style={{ fontSize: "2.2rem", color: "#1a1410" }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isRevealed ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.12 }}
-            >
-              Autocuidado
-              <br />
-              <motion.span
-                style={{ color: "#7a6a5f" }}
-                initial={{ opacity: 0 }}
-                animate={isRevealed ? { opacity: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.38 }}
-              >
-                &amp; Beleza
-              </motion.span>
-            </motion.h1>
-          </div>
-
-          {/* CTA — entra por último, na fase 3 */}
-          <motion.div
-            className="flex flex-col gap-3"
-            style={{ maxWidth: "52%" }}
-            initial={{ opacity: 0, y: 22 }}
-            animate={isRevealed ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.45 }}
-          >
-            <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
-              Cosmética e peças modernas escolhidas a pensar em si.
-            </p>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/produtos"
-                className="inline-flex items-center justify-between gap-2.5 rounded-full px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
-                style={{ background: "#1a1410", color: "#f5ede6" }}
-              >
-                Explorar Coleção
-                <motion.span
-                  className="flex items-center justify-center rounded-full"
-                  style={{ background: "#f5ede6", width: 18, height: 18 }}
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <ArrowRight className="size-2.5" style={{ color: "#1a1410" }} aria-hidden />
-                </motion.span>
-              </Link>
+              {/* Linha decorativa abaixo */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+                style={{
+                  width: 32,
+                  height: 1,
+                  background: "#a8968a",
+                  transformOrigin: "center",
+                  marginTop: 8,
+                }}
+              />
             </motion.div>
-          </motion.div>
-        </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ══════════════════════════════════════════════
+            ESTADO B — Layout final do hero (fase 3)
+            Entra com animações individuais escalonadas
+            ══════════════════════════════════════════════ */}
+        <AnimatePresence>
+          {isRevealed && (
+            <motion.div
+              key="hero-content"
+              className="absolute inset-0 z-10 flex flex-col justify-between px-7 py-8 sm:px-12"
+              style={{ y: contentY, opacity: scrollOpacity }}
+            >
+              {/* Badge topo */}
+              <motion.div
+                initial={{ opacity: 0, y: -16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.0 }}
+              >
+                <span
+                  className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
+                  style={{ background: "rgba(0,0,0,0.08)", color: "#4a3f38" }}
+                >
+                  Nova Coleção
+                </span>
+              </motion.div>
+
+              {/* Título */}
+              <div className="flex flex-col gap-3" style={{ maxWidth: "60%" }}>
+                <motion.p
+                  className="font-display text-base italic"
+                  style={{ color: "#7a6a5f" }}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+                >
+                  Descubra
+                </motion.p>
+                <motion.h1
+                  className="font-display leading-[0.88]"
+                  style={{ fontSize: "2.2rem", color: "#1a1410" }}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+                >
+                  Autocuidado
+                  <br />
+                  <motion.span
+                    style={{ color: "#7a6a5f" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.45 }}
+                  >
+                    &amp; Beleza
+                  </motion.span>
+                </motion.h1>
+              </div>
+
+              {/* CTA */}
+              <motion.div
+                className="flex flex-col gap-3"
+                style={{ maxWidth: "52%" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.38 }}
+              >
+                <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
+                  Cosmética e peças modernas escolhidas a pensar em si.
+                </p>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/produtos"
+                    className="inline-flex items-center justify-between gap-2.5 rounded-full px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                    style={{ background: "#1a1410", color: "#f5ede6" }}
+                  >
+                    Explorar Coleção
+                    <motion.span
+                      className="flex items-center justify-center rounded-full"
+                      style={{ background: "#f5ede6", width: 18, height: 18 }}
+                      whileHover={{ x: 3 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      <ArrowRight className="size-2.5" style={{ color: "#1a1410" }} aria-hidden />
+                    </motion.span>
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

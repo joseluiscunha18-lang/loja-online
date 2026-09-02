@@ -71,8 +71,8 @@ function HeroEditorialReveal() {
     // Fallback de segurança: ao fim de 3s revela mesmo que a imagem não carregue
     const safety = setTimeout(finish, 3000);
 
-    // Frases: 0→1 ao fim de 1.1s
-    const t1 = setTimeout(() => setPhase(1), 1100);
+    // Frases: 0→1 ao fim de 1.8s (tempo para ler com calma)
+    const t1 = setTimeout(() => setPhase(1), 1800);
 
     return () => {
       img.onload = null;
@@ -81,11 +81,11 @@ function HeroEditorialReveal() {
     };
   }, []);
 
-  // Fase 3 (reveal) = imagem carregada + mínimo 2.2s de frases visíveis
+  // Fase 3 (reveal) = imagem carregada + mínimo 3.6s de frases visíveis
   // Assim as frases têm sempre tempo de ser lidas antes da imagem entrar.
   useEffect(() => {
     if (!heroLoaded) return;
-    const MIN_PHRASE_TIME = 2200;
+    const MIN_PHRASE_TIME = 3600;
     const t = setTimeout(() => setPhase(3), MIN_PHRASE_TIME);
     return () => clearTimeout(t);
   }, [heroLoaded]);
@@ -111,7 +111,7 @@ function HeroEditorialReveal() {
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 1.8, ease: [0.4, 0, 0.2, 1] }}
         />
 
         {/* ── Gradiente lateral — sempre presente ── */}
@@ -133,7 +133,7 @@ function HeroEditorialReveal() {
               key="editorial-phrases"
               className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center"
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeIn" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               {/* Linha decorativa acima */}
               <motion.div
@@ -150,17 +150,21 @@ function HeroEditorialReveal() {
               />
 
               {/* Frase com crossfade */}
-              <div style={{ position: "relative", height: "2.8rem" }}>
+              <div style={{ position: "relative", height: "2.8rem", width: "100%" }}>
                 <AnimatePresence mode="wait">
                   {phase === 0 && (
                     <motion.p
                       key="p0"
-                      className="font-display text-2xl italic absolute inset-0 flex items-center justify-center"
-                      style={{ color: "#5a4d45", letterSpacing: "0.01em" }}
+                      className="font-display italic absolute inset-0 flex items-center justify-center whitespace-nowrap"
+                      style={{
+                        color: "#5a4d45",
+                        letterSpacing: "0.01em",
+                        fontSize: "clamp(1.15rem, 6vw, 1.7rem)",
+                      }}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
                     >
                       Sinta a sua pele
                     </motion.p>
@@ -168,12 +172,16 @@ function HeroEditorialReveal() {
                   {phase === 1 && (
                     <motion.p
                       key="p1"
-                      className="font-display text-2xl italic absolute inset-0 flex items-center justify-center"
-                      style={{ color: "#5a4d45", letterSpacing: "0.01em" }}
+                      className="font-display italic absolute inset-0 flex items-center justify-center whitespace-nowrap"
+                      style={{
+                        color: "#5a4d45",
+                        letterSpacing: "0.01em",
+                        fontSize: "clamp(1.15rem, 6vw, 1.7rem)",
+                      }}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
                     >
                       Eleve o seu ritual.
                     </motion.p>
@@ -185,7 +193,7 @@ function HeroEditorialReveal() {
               <motion.div
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+                transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
                 style={{
                   width: 32,
                   height: 1,
@@ -197,6 +205,7 @@ function HeroEditorialReveal() {
             </motion.div>
           )}
         </AnimatePresence>
+
 
         {/* ══════════════════════════════════════════════
             ESTADO B — Layout final do hero (fase 3)
@@ -213,7 +222,7 @@ function HeroEditorialReveal() {
               <motion.div
                 initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.0 }}
+                transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.05 }}
               >
                 <span
                   className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
@@ -230,7 +239,7 @@ function HeroEditorialReveal() {
                   style={{ color: "#7a6a5f" }}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
                 >
                   Descubra
                 </motion.p>
@@ -239,7 +248,7 @@ function HeroEditorialReveal() {
                   style={{ fontSize: "2.2rem", color: "#1a1410" }}
                   initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+                  transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1], delay: 0.45 }}
                 >
                   Autocuidado
                   <br />
@@ -247,7 +256,7 @@ function HeroEditorialReveal() {
                     style={{ color: "#7a6a5f" }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.7, delay: 0.45 }}
+                    transition={{ duration: 0.85, delay: 0.8 }}
                   >
                     &amp; Beleza
                   </motion.span>
@@ -260,7 +269,7 @@ function HeroEditorialReveal() {
                 style={{ maxWidth: "52%" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.38 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.75 }}
               >
                 <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
                   Cosmética e peças modernas escolhidas a pensar em si.

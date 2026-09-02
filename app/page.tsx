@@ -257,7 +257,7 @@ function HomeContent() {
 
         <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           {products.slice(0, 8).map((product, i) => (
-            <FadeUp key={product.id} delay={i * 0.07}>
+            <FadeUp key={`${category}-${product.id}`} delay={i * 0.07}>
               <ProductCard product={product} />
             </FadeUp>
           ))}

@@ -18,7 +18,14 @@ export async function generateMetadata({
 
   const title = product.name;
   const description = `${formatMZN(product.price)} — ${product.description}`;
-  const imageUrl = `${SITE_URL}${product.images[0]}`;
+  // O WhatsApp (sobretudo a versão Business) muitas vezes não consegue
+  // gerar a miniatura a partir de imagens .webp — por isso a pré-visualização
+  // usa sempre uma cópia .jpg gerada a partir da imagem original.
+  const ogImagePath = product.images[0].replace(
+    /\/assets\/(.+)\.webp$/,
+    "/assets/og/$1.jpg",
+  );
+  const imageUrl = `${SITE_URL}${ogImagePath}`;
 
   return {
     title,
@@ -29,10 +36,13 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/produto/${product.id}`,
-      images: [{ url: imageUrl, width: 800, height: 800, alt: product.name }],
+      // Dimensões abaixo de 300×300 fazem o WhatsApp mostrar
+      // a thumbnail pequena (lateral) em vez da imagem grande.
+      images: [{ url: imageUrl, width: 256, height: 256, alt: product.name, type: "image/jpeg" }],
     },
     twitter: {
-      card: "summary_large_image",
+      // "summary" = miniatura pequena; "summary_large_image" = imagem grande
+      card: "summary",
       title,
       description,
       images: [imageUrl],

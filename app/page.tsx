@@ -112,17 +112,17 @@ function HeroEditorialReveal() {
           </AnimatePresence>
         </div>
 
-        {/* Conteúdo — badge, título, CTA, entram juntos na revelação */}
+        {/* Conteúdo — badge, título, CTA — stagger slide-in após revelação */}
         <motion.div
           className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
           style={{ minHeight: "32rem", y: contentY, opacity: scrollOpacity }}
         >
-          {/* Badge entrada */}
+          {/* Badge — cai de cima (delay 0) */}
           <motion.div
-            key={isRevealed ? "badge-visible" : "badge-hidden"}
-            initial={{ opacity: 0, y: -16 }}
-            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
+            key={isRevealed ? "badge-in" : "badge-out"}
+            initial={{ opacity: 0, y: -22 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -22 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0 }}
           >
             <span
               className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
@@ -132,49 +132,53 @@ function HeroEditorialReveal() {
             </span>
           </motion.div>
 
-          {/* Título */}
+          {/* Título — stagger entre "Descubra", "Autocuidado" e "& Beleza" */}
           <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
+
+            {/* "Descubra" — vem da esquerda (delay 0.12) */}
             <motion.p
               className="font-display text-base italic"
               style={{ color: "#7a6a5f" }}
-              key={isRevealed ? "descubra-visible" : "descubra-hidden"}
-              initial={{ opacity: 0, x: -20 }}
-              animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              key={isRevealed ? "descubra-in" : "descubra-out"}
+              initial={{ opacity: 0, x: -28 }}
+              animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -28 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
             >
               Descubra
             </motion.p>
 
+            {/* "Autocuidado" — sobe de baixo (delay 0.22) */}
             <motion.h1
               className="font-display leading-[0.88]"
               style={{ fontSize: "2.2rem", color: "#1a1410" }}
-              key={isRevealed ? "h1-visible" : "h1-hidden"}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
+              key={isRevealed ? "h1-in" : "h1-out"}
+              initial={{ opacity: 0, y: 36 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
             >
               Autocuidado
               <br />
+              {/* "& Beleza" — fade-in ligeiramente depois (delay 0.38) */}
               <motion.span
                 style={{ color: "#7a6a5f" }}
-                key={isRevealed ? "beleza-visible" : "beleza-hidden"}
-                initial={{ opacity: 0 }}
-                animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                key={isRevealed ? "beleza-in" : "beleza-out"}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.38 }}
               >
                 &amp; Beleza
               </motion.span>
             </motion.h1>
           </div>
 
-          {/* CTA */}
+          {/* CTA — sobe de baixo por último (delay 0.52) */}
           <motion.div
             className="flex flex-col gap-3"
             style={{ maxWidth: "52%" }}
-            key={isRevealed ? "cta-visible" : "cta-hidden"}
-            initial={{ opacity: 0, y: 24 }}
-            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.45 }}
+            key={isRevealed ? "cta-in" : "cta-out"}
+            initial={{ opacity: 0, y: 28 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.52 }}
           >
             <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
               Cosmética e peças modernas escolhidas a pensar em si.

@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from "fra
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { ProductPage } from "@/components/shop-shell";
-import { PRODUCTS, STORE, CATEGORIES, heroImage, editorial, formatMZN, type Category, type Product } from "@/lib/shop-data";
+import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
 /* ── Animação de entrada reutilizável ── */
@@ -155,59 +155,63 @@ function HeroEditorialReveal() {
             </span>
           </motion.div>
 
-          {/* Título */}
-          <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
+          {/* Título + CTA agrupados — subtítulo e botão ficam próximos do título,
+              e o conjunto fica afastado da borda inferior (mb) */}
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8">
+            {/* Título */}
+            <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
 
-            {/* "Autocuidado" — sobe devagar de baixo (delay 0.2) */}
-            <motion.h1
-              className="font-display leading-[0.9]"
-              style={{ fontSize: "2.3rem", color: "#1a1410", textShadow: "0 1px 20px rgba(245,237,230,0.4)" }}
-              initial={{ opacity: 0, y: 28 }}
-              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
-            >
-              Autocuidado
-              <br />
-              {/* "& Beleza" — aparece por último, ainda mais devagar (delay 0.6) */}
-              <motion.span
-                style={{ color: "#6b5c52" }}
-                initial={{ opacity: 0 }}
-                animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.45 }}
+              {/* "Autocuidado" — sobe devagar de baixo (delay 0.2) */}
+              <motion.h1
+                className="font-display leading-[0.9]"
+                style={{ fontSize: "2.3rem", color: "#1a1410", textShadow: "0 1px 20px rgba(245,237,230,0.4)" }}
+                initial={{ opacity: 0, y: 28 }}
+                animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
               >
-                &amp; Beleza
-              </motion.span>
-            </motion.h1>
-          </div>
-
-          {/* CTA — sobe suavemente por último (delay 0.78) */}
-          <motion.div
-            className="flex flex-col gap-3"
-            style={{ maxWidth: "52%" }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
-          >
-            <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
-              Beleza selecionada com qualidade em cada detalhe.
-            </p>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/produtos"
-                className="inline-flex items-center justify-between gap-1.5 rounded-full px-2.5 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
-                style={{ background: "#1a1410", color: "#f5ede6" }}
-              >
-                Explorar Coleção
+                Autocuidado
+                <br />
+                {/* "& Beleza" — aparece por último, ainda mais devagar (delay 0.6) */}
                 <motion.span
-                  className="flex items-center justify-center"
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  style={{ color: "#6b5c52" }}
+                  initial={{ opacity: 0 }}
+                  animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.45 }}
                 >
-                  <ArrowRight className="size-3.5" style={{ color: "#f5ede6" }} strokeWidth={1.75} aria-hidden />
+                  &amp; Beleza
                 </motion.span>
-              </Link>
+              </motion.h1>
+            </div>
+
+            {/* CTA — sobe suavemente por último (delay 0.78) */}
+            <motion.div
+              className="flex flex-col gap-3"
+              style={{ maxWidth: "52%" }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
+            >
+              <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
+                Beleza selecionada com qualidade em cada detalhe.
+              </p>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/produtos"
+                  className="inline-flex items-center justify-between gap-1.5 rounded-full px-2.5 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                  style={{ background: "#1a1410", color: "#f5ede6" }}
+                >
+                  Explorar Coleção
+                  <motion.span
+                    className="flex items-center justify-center"
+                    whileHover={{ x: 3 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <ArrowRight className="size-3.5" style={{ color: "#f5ede6" }} strokeWidth={1.75} aria-hidden />
+                  </motion.span>
+                </Link>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -220,22 +224,11 @@ function HomeContent() {
 
   const products = useMemo(() => {
     if (category !== "Tudo") return PRODUCTS.filter((p) => p.category === category);
-    // Em "Tudo" os produtos vêm ordenados por categoria na base de dados — se
-    // mostrássemos só os primeiros 8 pela ordem original, seriam sempre da
-    // mesma categoria (Skincare) e pareceria que os filtros não fazem nada.
-    // Por isso intercalamos aqui, para a pré-visualização mostrar variedade.
-    const groups = CATEGORIES.filter((c) => c !== "Tudo").map((c) =>
-      PRODUCTS.filter((p) => p.category === c),
-    );
-    const mixed: Product[] = [];
-    for (let i = 0; mixed.length < PRODUCTS.length; i++) {
-      const before = mixed.length;
-      for (const group of groups) {
-        if (group[i]) mixed.push(group[i]);
-      }
-      if (mixed.length === before) break;
-    }
-    return mixed;
+    // Em "Tudo" mostramos os produtos pela ordem original da base de dados
+    // (Skincare primeiro). Ao clicar numa categoria específica (ex: Skincare),
+    // a lista fica filtrada — e como o filtro pode conter mais itens do que
+    // os 8 apresentados aqui, a ordem/seleção visível muda naturalmente.
+    return PRODUCTS;
   }, [category]);
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 

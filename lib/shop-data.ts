@@ -322,3 +322,9 @@ export const STORE = {
   delivery: "Fazemos entregas na Cidade de Maputo e Matola",
   logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
 };
+
+export const SITE_URL = "https://three.vercel.app";
+
+export function productUrl(productId: string) {
+  return `${SITE_URL}/produto/${productId}`;
+}

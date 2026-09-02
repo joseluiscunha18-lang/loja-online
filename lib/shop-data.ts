@@ -29,7 +29,8 @@ export type Product = {
   id: string;
   name: string;
   category: Exclude<Category, "Tudo">;
-  price: number;
+  /** Use `null` quando ainda não houver preço definido — mostra "Sob consulta" */
+  price: number | null;
   rating: number;
   reviews: number;
   images: string[];
@@ -308,7 +309,8 @@ export const PRODUCTS: Product[] = [
 export const heroImage = hero;
 export const heroBlurDataUrl = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAoACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDZC0uKkKYpMVzm4w4A5qMlW6GqepyuqkLxWXp17Kbgo2SKAOwIDLUBGDTlfK8UwctTEijqEYZCazbOKJJsnrWnqKsRtXrWW9rImG6VPU06HQYKLTEf5qKKZmLsDyZNQXSBjiiiqEz/2Q==";
 
-export function formatMZN(value: number) {
+export function formatMZN(value: number | null) {
+  if (value === null) return "Sob consulta";
   return `${value.toLocaleString("pt-PT")} MZN`;
 }
 
@@ -317,8 +319,8 @@ export const STORE = {
   email: "blissbeauty.com",
   instagram: "bliss beauty e care",
   instagramUrl: "https://instagram.com/",
-  phoneDisplay: "+258 84 532 1354",
-  whatsapp: "258845321354",
+  phoneDisplay: "+258 86 060 6170",
+  whatsapp: "258860606170",
   delivery: "Fazemos entregas na Cidade de Maputo e Matola",
   logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
 };

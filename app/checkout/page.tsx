@@ -1,14 +1,17 @@
 "use client";
 import { Phone } from "lucide-react";
 import { useShop } from "@/lib/shop-context";
-import { formatMZN, STORE } from "@/lib/shop-data";
+import { formatMZN, productUrl, STORE } from "@/lib/shop-data";
 
 export default function Checkout() {
   const { detailed, subtotal } = useShop();
   const message = encodeURIComponent(
     `Olá! Gostaria de encomendar:\n${detailed
-      .map(({ product, item }) => `${item.quantity}x ${product.name}`)
-      .join("\n")}\nTotal: ${formatMZN(subtotal)}`,
+      .map(
+        ({ product, item }) =>
+          `${item.quantity}x ${product.name}\n${productUrl(product.id)}`,
+      )
+      .join("\n\n")}\n\nTotal: ${formatMZN(subtotal)}`,
   );
 
   return (

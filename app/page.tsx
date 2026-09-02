@@ -36,13 +36,16 @@ function FadeUp({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   HERO — reveal calmo, sem fases/timers: tudo entra em fade-up
-   com pequenos atrasos escalonados (mesmo timing do page.tsx
-   de referência: 0.1s → 0.6s).
+   HERO EDITORIAL REVEAL
+   Sequência:
+   0 → fundo creme sólido + "Sinta a sua pele" centrada
+   1 → crossfade para "Eleve o seu ritual."
+   2 → frases saem, imagem + título + CTA entram
    ───────────────────────────────────────────────────────────── */
 function HeroEditorialReveal() {
-  // 0=frase 1, 1=frase 2, 2+=Descubra
+  // 0=frase 1, 1=frase 2, 2=revelação (imagem, título, CTA)
   const [phase, setPhase] = useState(0);
+  const isRevealed = phase >= 2;
 
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -65,7 +68,7 @@ function HeroEditorialReveal() {
         className="relative overflow-hidden rounded-[2rem]"
         style={{ background: "#e8ddd4", minHeight: "32rem" }}
       >
-        {/* Imagem com parallax */}
+        {/* Imagem com parallax — só aparece na revelação */}
         <motion.div
           aria-hidden
           className="absolute inset-0"
@@ -76,6 +79,9 @@ function HeroEditorialReveal() {
             backgroundRepeat: "no-repeat",
             y: bgY,
           }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
         />
 
         {/* Gradiente lateral */}
@@ -87,16 +93,36 @@ function HeroEditorialReveal() {
           }}
         />
 
-        {/* Conteúdo */}
+        {/* Frases de entrada — centradas, sobre o fundo sólido */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center px-8 text-center">
+          <AnimatePresence mode="wait">
+            {!isRevealed && (
+              <motion.p
+                key={phase === 0 ? "phrase-0" : "phrase-1"}
+                className="font-display text-2xl italic"
+                style={{ color: "#7a6a5f" }}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                {phase === 0 ? "Sinta a sua pele" : "Eleve o seu ritual."}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Conteúdo — badge, título, CTA, entram juntos na revelação */}
         <motion.div
           className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
           style={{ minHeight: "32rem", y: contentY, opacity: scrollOpacity }}
         >
           {/* Badge entrada */}
           <motion.div
+            key={isRevealed ? "badge-visible" : "badge-hidden"}
             initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
           >
             <span
               className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
@@ -108,71 +134,33 @@ function HeroEditorialReveal() {
 
           {/* Título */}
           <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
-            {/* Frases sequenciais — crossfade nas fases 0 e 1, "Descubra" a partir da fase 2 */}
-            <div style={{ minHeight: "1.8rem", position: "relative" }}>
-              <AnimatePresence>
-                {phase === 0 && (
-                  <motion.p
-                    key="phrase-0"
-                    className="font-display text-base italic absolute"
-                    style={{ color: "#7a6a5f" }}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    Sinta a sua pele
-                  </motion.p>
-                )}
-              </AnimatePresence>
-
-              <AnimatePresence>
-                {phase === 1 && (
-                  <motion.p
-                    key="phrase-1"
-                    className="font-display text-base italic absolute"
-                    style={{ color: "#7a6a5f" }}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    Eleve o seu ritual.
-                  </motion.p>
-                )}
-              </AnimatePresence>
-
-              <AnimatePresence>
-                {phase >= 2 && (
-                  <motion.p
-                    key="phrase-2"
-                    className="font-display text-base italic absolute"
-                    style={{ color: "#7a6a5f" }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  >
-                    Descubra
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </div>
+            <motion.p
+              className="font-display text-base italic"
+              style={{ color: "#7a6a5f" }}
+              key={isRevealed ? "descubra-visible" : "descubra-hidden"}
+              initial={{ opacity: 0, x: -20 }}
+              animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+            >
+              Descubra
+            </motion.p>
 
             <motion.h1
               className="font-display leading-[0.88]"
               style={{ fontSize: "2.2rem", color: "#1a1410" }}
+              key={isRevealed ? "h1-visible" : "h1-hidden"}
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.35 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
             >
               Autocuidado
               <br />
               <motion.span
                 style={{ color: "#7a6a5f" }}
+                key={isRevealed ? "beleza-visible" : "beleza-hidden"}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
+                animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
               >
                 &amp; Beleza
               </motion.span>
@@ -183,9 +171,10 @@ function HeroEditorialReveal() {
           <motion.div
             className="flex flex-col gap-3"
             style={{ maxWidth: "52%" }}
+            key={isRevealed ? "cta-visible" : "cta-hidden"}
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.55 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.45 }}
           >
             <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
               Cosmética e peças modernas escolhidas a pensar em si.

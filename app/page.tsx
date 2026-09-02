@@ -89,8 +89,8 @@ function HeroEditorialReveal() {
           className="absolute inset-0"
           style={{
             backgroundImage: `url(${heroImage})`,
-            backgroundSize: "132%",
-            backgroundPosition: "85% 20%",
+            backgroundSize: "122%",
+            backgroundPosition: "85% 8%",
             backgroundRepeat: "no-repeat",
             y: bgY,
           }}

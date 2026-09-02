@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import { STORE } from "@/lib/shop-data";
+
+export const metadata: Metadata = {
+  title: "Contacto",
+  description:
+    "Fale com a Bliss Beauty & Care por telefone ou WhatsApp. Entregas na Cidade de Maputo e Matola.",
+  alternates: { canonical: "/contacto" },
+};
 
 export default function Contacto() {
   return (

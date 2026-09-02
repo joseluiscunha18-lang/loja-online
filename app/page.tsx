@@ -64,6 +64,10 @@ function HeroEditorialReveal() {
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  // Pequena pausa depois da frase desaparecer, antes de a imagem/título
+  // começarem a entrar — evita o "corte" abrupto entre as duas fases.
+  const REVEAL_DELAY = 1.05;
+
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 1300);
     const t2 = setTimeout(() => setPhase(2), 3100);
@@ -77,7 +81,7 @@ function HeroEditorialReveal() {
     <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
       <div
         className="relative overflow-hidden rounded-[2rem]"
-        style={{ background: "#e8ddd4", minHeight: "32rem" }}
+        style={{ background: "#e8ddd4", minHeight: "29rem" }}
       >
         {/* Imagem com parallax — só aparece na revelação */}
         <motion.div
@@ -85,14 +89,14 @@ function HeroEditorialReveal() {
           className="absolute inset-0"
           style={{
             backgroundImage: `url(${heroImage})`,
-            backgroundSize: "115%",
+            backgroundSize: "132%",
             backgroundPosition: "85% 20%",
             backgroundRepeat: "no-repeat",
             y: bgY,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1], delay: isRevealed ? REVEAL_DELAY : 0 }}
         />
 
         {/* Gradiente lateral */}
@@ -110,11 +114,21 @@ function HeroEditorialReveal() {
             {!isRevealed && (
               <motion.p
                 key={phase === 0 ? "phrase-0" : "phrase-1"}
-                className="font-display text-2xl italic"
-                style={{ color: "#7a6a5f" }}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] } }}
-                exit={{ opacity: 0, y: -16, transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] } }}
+                className="font-display text-3xl tracking-wide italic sm:text-4xl"
+                style={{ color: "#5c4d43", textShadow: "0 1px 24px rgba(255,255,255,0.35)" }}
+                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  transition: { duration: 0.85, ease: [0.25, 0.1, 0.25, 1] },
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -18,
+                  filter: "blur(4px)",
+                  transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
+                }}
               >
                 {phase === 0 ? "Sinta a sua pele" : "Eleve o seu ritual."}
               </motion.p>
@@ -125,13 +139,13 @@ function HeroEditorialReveal() {
         {/* Conteúdo — badge, título, CTA — stagger suave igual às frases */}
         <motion.div
           className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
-          style={{ minHeight: "32rem", y: contentY, opacity: scrollOpacity }}
+          style={{ minHeight: "29rem", y: contentY, opacity: scrollOpacity }}
         >
           {/* Badge — desce suavemente de cima (delay 0) */}
           <motion.div
             initial={{ opacity: 0, y: -16 }}
             animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
-            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0 }}
+            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: isRevealed ? REVEAL_DELAY : 0 }}
           >
             <span
               className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
@@ -146,31 +160,31 @@ function HeroEditorialReveal() {
 
             {/* "Descubra" — desliza da esquerda (delay 0.2) */}
             <motion.p
-              className="font-display text-base italic"
-              style={{ color: "#7a6a5f" }}
+              className="font-display text-base tracking-wide italic"
+              style={{ color: "#6b5c52" }}
               initial={{ opacity: 0, x: -20 }}
               animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+              transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
             >
               Descubra
             </motion.p>
 
             {/* "Autocuidado" — sobe devagar de baixo (delay 0.38) */}
             <motion.h1
-              className="font-display leading-[0.88]"
-              style={{ fontSize: "2.2rem", color: "#1a1410" }}
+              className="font-display leading-[0.9]"
+              style={{ fontSize: "2.3rem", color: "#1a1410", textShadow: "0 1px 20px rgba(245,237,230,0.4)" }}
               initial={{ opacity: 0, y: 28 }}
               animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.38 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.38 }}
             >
               Autocuidado
               <br />
               {/* "& Beleza" — aparece por último, ainda mais devagar (delay 0.6) */}
               <motion.span
-                style={{ color: "#7a6a5f" }}
+                style={{ color: "#6b5c52" }}
                 initial={{ opacity: 0 }}
                 animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.6 }}
               >
                 &amp; Beleza
               </motion.span>
@@ -183,9 +197,9 @@ function HeroEditorialReveal() {
             style={{ maxWidth: "52%" }}
             initial={{ opacity: 0, y: 24 }}
             animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.78 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
           >
-            <p className="text-xs leading-relaxed" style={{ color: "#6b5c52" }}>
+            <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
               Cosmética e peças modernas escolhidas a pensar em si.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>

@@ -1,5 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { heroImage, editorial } from "@/lib/shop-data";
+
+export const metadata: Metadata = {
+  title: "Sobre nós",
+  description:
+    "Conheça a Bliss Beauty & Care: curadoria própria de skincare, cabelo e acessórios, com entrega pessoal em Maputo e Matola.",
+  alternates: { canonical: "/sobre" },
+};
 
 export default function Sobre() {
   return (

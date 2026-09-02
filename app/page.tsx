@@ -158,24 +158,13 @@ function HeroEditorialReveal() {
           {/* Título */}
           <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
 
-            {/* "Descubra" — desliza da esquerda (delay 0.2) */}
-            <motion.p
-              className="font-display text-base tracking-wide italic"
-              style={{ color: "#6b5c52" }}
-              initial={{ opacity: 0, x: -20 }}
-              animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
-            >
-              Descubra
-            </motion.p>
-
-            {/* "Autocuidado" — sobe devagar de baixo (delay 0.38) */}
+            {/* "Autocuidado" — sobe devagar de baixo (delay 0.2) */}
             <motion.h1
               className="font-display leading-[0.9]"
               style={{ fontSize: "2.3rem", color: "#1a1410", textShadow: "0 1px 20px rgba(245,237,230,0.4)" }}
               initial={{ opacity: 0, y: 28 }}
               animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.38 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
             >
               Autocuidado
               <br />
@@ -184,7 +173,7 @@ function HeroEditorialReveal() {
                 style={{ color: "#6b5c52" }}
                 initial={{ opacity: 0 }}
                 animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.6 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.45 }}
               >
                 &amp; Beleza
               </motion.span>
@@ -200,7 +189,7 @@ function HeroEditorialReveal() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
           >
             <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
-              Cosméticos e acessórios cuidadosamente selecionados para realçar a sua beleza, com qualidade em cada detalhe.
+              Beleza selecionada com qualidade em cada detalhe.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link

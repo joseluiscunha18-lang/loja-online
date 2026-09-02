@@ -156,7 +156,7 @@ function HeroEditorialReveal() {
           </motion.div>
 
           {/* Título */}
-          <div className="flex flex-col gap-3" style={{ maxWidth: "50%" }}>
+          <div className="flex flex-col gap-3" style={{ maxWidth: "44%" }}>
 
             {/* "Descubra" — desliza da esquerda (delay 0.2) */}
             <motion.p
@@ -205,7 +205,7 @@ function HeroEditorialReveal() {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/produtos"
-                className="inline-flex items-center justify-between gap-2 rounded-full px-3.5 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                className="inline-flex items-center justify-between gap-1.5 rounded-full px-2.5 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
                 style={{ background: "#1a1410", color: "#f5ede6" }}
               >
                 Explorar Coleção
@@ -214,7 +214,7 @@ function HeroEditorialReveal() {
                   whileHover={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 400 }}
                 >
-                  <ArrowRight className="size-3.5" style={{ color: "#f5ede6" }} aria-hidden />
+                  <ArrowRight className="size-3.5" style={{ color: "#f5ede6" }} strokeWidth={1.75} aria-hidden />
                 </motion.span>
               </Link>
             </motion.div>

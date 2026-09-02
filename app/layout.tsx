@@ -7,7 +7,7 @@ import './globals.css'
 const display = Cormorant_Garamond({ subsets: ['latin'], variable: '--font-display' })
 const sans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 
-const siteUrl = 'https://three.vercel.app'
+const siteUrl = 'https://bliss-beauty-three.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

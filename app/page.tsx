@@ -155,9 +155,10 @@ function HeroEditorialReveal() {
             </span>
           </motion.div>
 
-          {/* Título + CTA agrupados — subtítulo e botão ficam próximos do título,
-              e o conjunto fica afastado da borda inferior (mb) */}
-          <div className="mb-6 flex flex-col gap-4 sm:mb-8">
+          {/* Título + CTA agrupados — grupo sobe (mb maior) para reduzir o vazio
+              sob a etiqueta e evitar a massa condensada junto à borda inferior;
+              gap-6 dá respiração entre o título e o subtítulo/botão */}
+          <div className="mb-14 flex flex-col gap-6 sm:mb-16">
             {/* Título */}
             <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
 
@@ -347,7 +348,7 @@ function HomeContent() {
           {[
             { icon: Gem, title: "Produtos originais", text: "Marcas verificadas e fórmulas seguras." },
             { icon: Truck, title: "Entrega rápida", text: STORE.logistics },
-            { icon: MessageCircle, title: "Atendimento humano", text: `Fale connosco por WhatsApp: ${STORE.phoneDisplay}` },
+            { icon: MessageCircle, title: "Atendimento humano", text: "Fale connosco diretamente pelo WhatsApp." },
           ].map(({ icon: Icon, title, text }, i) => (
             <FadeUp key={title} delay={i * 0.1}>
               <motion.li

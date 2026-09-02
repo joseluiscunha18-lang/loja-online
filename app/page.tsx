@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
@@ -39,6 +39,21 @@ function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
   const [heroLoaded, setHeroLoaded] = useState(false);
   const { openProduct } = useShop();
+
+  // Pré-carrega a imagem do hero via JS (mais fiável do que um <img> escondido,
+  // que os navegadores despriorizam e pode nunca disparar o onLoad a tempo).
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = heroImage;
+    if (img.complete) {
+      setHeroLoaded(true);
+    } else {
+      img.onload = () => setHeroLoaded(true);
+    }
+    return () => {
+      img.onload = null;
+    };
+  }, []);
 
   const products = useMemo(
     () => (category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
@@ -88,15 +103,6 @@ function HomeContent() {
               opacity: heroLoaded ? 1 : 0,
               transition: "opacity 0.5s ease-out",
             }}
-          />
-
-          {/* Imagem "fantasma" só para detetar o momento em que carregou */}
-          <img
-            src={heroImage}
-            alt=""
-            aria-hidden
-            className="hidden"
-            onLoad={() => setHeroLoaded(true)}
           />
 
           {/* Gradiente */}

@@ -5,9 +5,9 @@ import { formatMZN, productUrl, STORE } from "@/lib/shop-data";
 
 function saudacao() {
   const h = new Date().getHours();
-  if (h >= 5 && h < 12) return "Ol\u00e1, bom dia! \u2600\uFE0F";
-  if (h >= 12 && h < 19) return "Ol\u00e1, boa tarde! \uD83D\uDE0A";
-  return "Ol\u00e1, boa noite! \uD83C\uDF19";
+  if (h >= 5 && h < 12) return "Ol\u00e1, bom dia!";
+  if (h >= 12 && h < 19) return "Ol\u00e1, boa tarde!";
+  return "Ol\u00e1, boa noite!";
 }
 
 export default function Checkout() {

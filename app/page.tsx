@@ -49,8 +49,8 @@ function FadeUp({
 /* ─────────────────────────────────────────────────────────────
    HERO EDITORIAL REVEAL
    Sequência:
-   0 → fundo creme sólido + "Sinta a sua pele" centrada
-   1 → crossfade para "Eleve o seu ritual."
+   0 → fundo creme sólido + "A sua beleza merece mais." centrada
+   1 → crossfade para "Descubra o cuidado que faz a diferença."
    2 → frases saem, imagem + título + CTA entram
    ───────────────────────────────────────────────────────────── */
 function HeroEditorialReveal() {
@@ -70,7 +70,7 @@ function HeroEditorialReveal() {
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 1300);
-    const t2 = setTimeout(() => setPhase(2), 3100);
+    const t2 = setTimeout(() => setPhase(2), 3700);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -130,7 +130,7 @@ function HeroEditorialReveal() {
                   transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
                 }}
               >
-                {phase === 0 ? "Sinta a sua pele" : "Revele a sua beleza natural."}
+                {phase === 0 ? "A sua beleza merece mais." : "Descubra o cuidado que faz a diferença."}
               </motion.p>
             )}
           </AnimatePresence>
@@ -156,7 +156,7 @@ function HeroEditorialReveal() {
           </motion.div>
 
           {/* Título */}
-          <div className="flex flex-col gap-3" style={{ maxWidth: "44%" }}>
+          <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
 
             {/* "Descubra" — desliza da esquerda (delay 0.2) */}
             <motion.p
@@ -200,7 +200,7 @@ function HeroEditorialReveal() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
           >
             <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
-              Cosmética e peças modernas escolhidas a pensar em si.
+              Cosméticos e acessórios cuidadosamente selecionados para realçar a sua beleza, com qualidade em cada detalhe.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link

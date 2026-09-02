@@ -68,44 +68,27 @@ function HeroEditorialReveal() {
     img.src = heroImage;
     if (img.complete) finish();
     else img.onload = finish;
+    // Fallback de segurança: ao fim de 3s revela mesmo que a imagem não carregue
     const safety = setTimeout(finish, 3000);
 
-    // Sequência de fases - independente do carregamento
-    // Fase 0→1 após 1.1s (troca de frase)
+    // Frases: 0→1 ao fim de 1.1s
     const t1 = setTimeout(() => setPhase(1), 1100);
-    // Fase 1→2 após 2.2s (bloom do blur)
-    const t2 = setTimeout(() => setPhase(2), 2200);
 
     return () => {
       img.onload = null;
       clearTimeout(safety);
       clearTimeout(t1);
-      clearTimeout(t2);
     };
   }, []);
 
-  // Fase 3 activada quando a imagem carrega E o blur já esteve visível tempo suficiente.
-  // Guardamos quando entrámos na fase 2 para calcular quanto tempo falta esperar.
-  const phase2TimeRef = useRef<number | null>(null);
-
+  // Fase 3 (reveal) = imagem carregada + mínimo 2.2s de frases visíveis
+  // Assim as frases têm sempre tempo de ser lidas antes da imagem entrar.
   useEffect(() => {
-    if (phase === 2) {
-      phase2TimeRef.current = Date.now();
-    }
-  }, [phase]);
-
-  useEffect(() => {
-    if (!heroLoaded || phase < 2) return;
-
-    // O blur precisa de pelo menos 900ms visível antes de sair —
-    // isso garante o bloom suave mesmo quando a imagem já está em cache.
-    const BLUR_MIN_VISIBLE = 900;
-    const elapsed = phase2TimeRef.current ? Date.now() - phase2TimeRef.current : 0;
-    const wait = Math.max(0, BLUR_MIN_VISIBLE - elapsed);
-
-    const t = setTimeout(() => setPhase(3), wait);
+    if (!heroLoaded) return;
+    const MIN_PHRASE_TIME = 2200;
+    const t = setTimeout(() => setPhase(3), MIN_PHRASE_TIME);
     return () => clearTimeout(t);
-  }, [heroLoaded, phase]);
+  }, [heroLoaded]);
 
   const isRevealed = phase === 3;
 
@@ -115,41 +98,7 @@ function HeroEditorialReveal() {
         className="relative overflow-hidden rounded-[2rem]"
         style={{ background: "#e8ddd4", minHeight: "32rem" }}
       >
-        {/* ── Camada 1: placeholder desfocado — bloom suave na fase 2 ── */}
-        {/* Nota: scale está numa div wrapper separada para não conflitar com
-            a animação de opacity/filter do Framer Motion */}
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{ transform: "scale(1.18)", transformOrigin: "center center" }}
-        >
-          <motion.div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${heroBlurDataUrl})`,
-              backgroundSize: "115%",
-              backgroundPosition: "85% 20%",
-              backgroundRepeat: "no-repeat",
-            }}
-            initial={{ opacity: 0, filter: "blur(28px) saturate(0.7)" }}
-            animate={
-              phase >= 2
-                ? {
-                    opacity: isRevealed ? 0 : 1,
-                    filter: "blur(18px) saturate(1.2)",
-                  }
-                : { opacity: 0, filter: "blur(28px) saturate(0.7)" }
-            }
-            transition={{
-              opacity: { duration: isRevealed ? 1.2 : 1.1, ease: [0.25, 0.1, 0.25, 1] },
-              filter: { duration: 1.1, ease: [0.25, 0.1, 0.25, 1] },
-            }}
-          />
-        </div>
-
-        {/* ── Camada 2: imagem real — surge na fase 3 via CSS puro ──
-            Usamos CSS transition em vez de Framer Motion para garantir
-            que a opacidade anima correctamente junto com o parallax (y). */}
+        {/* ── Imagem real — fade-in suave na fase 3, sem camadas intermédias ── */}
         <motion.div
           aria-hidden
           className="absolute inset-0"
@@ -159,9 +108,10 @@ function HeroEditorialReveal() {
             backgroundPosition: "85% 20%",
             backgroundRepeat: "no-repeat",
             y: bgY,
-            opacity: isRevealed ? 1 : 0,
-            transition: "opacity 1.1s cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
         />
 
         {/* ── Gradiente lateral — sempre presente ── */}
@@ -231,22 +181,7 @@ function HeroEditorialReveal() {
                 )}
               </AnimatePresence>
 
-              {/* Fase 2+: subtítulo "Descubra" que antecede o título */}
-              <AnimatePresence>
-                {phase >= 2 && (
-                  <motion.p
-                    key="phrase-2"
-                    className="font-display text-base italic absolute"
-                    style={{ color: "#7a6a5f" }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  >
-                    Descubra
-                  </motion.p>
-                )}
-              </AnimatePresence>
+
             </div>
 
             {/* Título principal — entra na fase 3 */}

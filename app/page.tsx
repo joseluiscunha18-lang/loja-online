@@ -84,12 +84,27 @@ function HeroEditorialReveal() {
     };
   }, []);
 
-  // Fase 3 activada quando imagem carrega E estamos na fase 2+
+  // Fase 3 activada quando a imagem carrega E o blur já esteve visível tempo suficiente.
+  // Guardamos quando entrámos na fase 2 para calcular quanto tempo falta esperar.
+  const phase2TimeRef = useRef<number | null>(null);
+
   useEffect(() => {
-    if (heroLoaded && phase >= 2) {
-      const t = setTimeout(() => setPhase(3), 320);
-      return () => clearTimeout(t);
+    if (phase === 2) {
+      phase2TimeRef.current = Date.now();
     }
+  }, [phase]);
+
+  useEffect(() => {
+    if (!heroLoaded || phase < 2) return;
+
+    // O blur precisa de pelo menos 900ms visível antes de sair —
+    // isso garante o bloom suave mesmo quando a imagem já está em cache.
+    const BLUR_MIN_VISIBLE = 900;
+    const elapsed = phase2TimeRef.current ? Date.now() - phase2TimeRef.current : 0;
+    const wait = Math.max(0, BLUR_MIN_VISIBLE - elapsed);
+
+    const t = setTimeout(() => setPhase(3), wait);
+    return () => clearTimeout(t);
   }, [heroLoaded, phase]);
 
   const isRevealed = phase === 3;
@@ -101,26 +116,40 @@ function HeroEditorialReveal() {
         style={{ background: "#e8ddd4", minHeight: "32rem" }}
       >
         {/* ── Camada 1: placeholder desfocado — bloom suave na fase 2 ── */}
-        <motion.div
+        {/* Nota: scale está numa div wrapper separada para não conflitar com
+            a animação de opacity/filter do Framer Motion */}
+        <div
           aria-hidden
           className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${heroBlurDataUrl})`,
-            backgroundSize: "115%",
-            backgroundPosition: "85% 20%",
-            backgroundRepeat: "no-repeat",
-            transform: "scale(1.15)",
-          }}
-          initial={{ opacity: 0, filter: "blur(24px) saturate(0.8)" }}
-          animate={
-            phase >= 2
-              ? { opacity: 1, filter: "blur(16px) saturate(1.15)" }
-              : { opacity: 0, filter: "blur(24px) saturate(0.8)" }
-          }
-          transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-        />
+          style={{ transform: "scale(1.18)", transformOrigin: "center center" }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url(${heroBlurDataUrl})`,
+              backgroundSize: "115%",
+              backgroundPosition: "85% 20%",
+              backgroundRepeat: "no-repeat",
+            }}
+            initial={{ opacity: 0, filter: "blur(28px) saturate(0.7)" }}
+            animate={
+              phase >= 2
+                ? {
+                    opacity: isRevealed ? 0 : 1,
+                    filter: "blur(18px) saturate(1.2)",
+                  }
+                : { opacity: 0, filter: "blur(28px) saturate(0.7)" }
+            }
+            transition={{
+              opacity: { duration: isRevealed ? 1.2 : 1.1, ease: [0.25, 0.1, 0.25, 1] },
+              filter: { duration: 1.1, ease: [0.25, 0.1, 0.25, 1] },
+            }}
+          />
+        </div>
 
-        {/* ── Camada 2: imagem real — surge na fase 3 ── */}
+        {/* ── Camada 2: imagem real — surge na fase 3 via CSS puro ──
+            Usamos CSS transition em vez de Framer Motion para garantir
+            que a opacidade anima correctamente junto com o parallax (y). */}
         <motion.div
           aria-hidden
           className="absolute inset-0"
@@ -130,10 +159,9 @@ function HeroEditorialReveal() {
             backgroundPosition: "85% 20%",
             backgroundRepeat: "no-repeat",
             y: bgY,
+            opacity: isRevealed ? 1 : 0,
+            transition: "opacity 1.1s cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
         />
 
         {/* ── Gradiente lateral — sempre presente ── */}

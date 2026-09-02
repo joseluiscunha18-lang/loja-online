@@ -6,7 +6,6 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
-import { ProductPage } from "@/components/shop-shell";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
@@ -369,9 +368,5 @@ function HomeContent() {
 }
 
 export default function Home() {
-  return (
-    <ProductPage>
-      <HomeContent />
-    </ProductPage>
-  );
+  return <HomeContent />;
 }

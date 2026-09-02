@@ -130,7 +130,7 @@ function HeroEditorialReveal() {
                   transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
                 }}
               >
-                {phase === 0 ? "Sinta a sua pele" : "Eleve o seu ritual."}
+                {phase === 0 ? "Sinta a sua pele" : "Revele a sua beleza natural."}
               </motion.p>
             )}
           </AnimatePresence>
@@ -156,7 +156,7 @@ function HeroEditorialReveal() {
           </motion.div>
 
           {/* Título */}
-          <div className="flex flex-col gap-3" style={{ maxWidth: "58%" }}>
+          <div className="flex flex-col gap-3" style={{ maxWidth: "50%" }}>
 
             {/* "Descubra" — desliza da esquerda (delay 0.2) */}
             <motion.p
@@ -205,17 +205,16 @@ function HeroEditorialReveal() {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/produtos"
-                className="inline-flex items-center justify-between gap-2.5 rounded-full px-4 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
+                className="inline-flex items-center justify-between gap-2 rounded-full px-3.5 py-2 text-xs font-medium tracking-[0.06em] uppercase whitespace-nowrap"
                 style={{ background: "#1a1410", color: "#f5ede6" }}
               >
                 Explorar Coleção
                 <motion.span
-                  className="flex items-center justify-center rounded-full"
-                  style={{ background: "#f5ede6", width: 18, height: 18 }}
+                  className="flex items-center justify-center"
                   whileHover={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 400 }}
                 >
-                  <ArrowRight className="size-2.5" style={{ color: "#1a1410" }} aria-hidden />
+                  <ArrowRight className="size-3.5" style={{ color: "#f5ede6" }} aria-hidden />
                 </motion.span>
               </Link>
             </motion.div>

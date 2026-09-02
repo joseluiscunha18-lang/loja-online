@@ -1,22 +1,28 @@
-const serum = "/assets/p-serum.jpg";
-const creme = "/assets/p-creme.jpg";
-const limpeza = "/assets/p-limpeza.jpg";
-const oleo = "/assets/p-oleo.jpg";
-const protetor = "/assets/p-protetor.jpg";
-const batom = "/assets/p-batom.jpg";
-const perfume = "/assets/p-perfume.jpg";
-const bolsa = "/assets/p-bolsa.jpg";
-const oculos = "/assets/p-oculos.jpg";
-const relogio = "/assets/p-relogio.jpg";
-const brincos = "/assets/p-brincos.jpg";
-const lenco = "/assets/p-lenco.jpg";
-const blazer = "/assets/p-blazer.jpg";
-const camisa = "/assets/p-camisa.jpg";
-const vestido = "/assets/p-vestido.jpg";
+const pinceis = "/assets/p-pinceis.webp";
+const tiara = "/assets/p-tiara.webp";
+const neutrogena = "/assets/p-neutrogena.webp";
+const buchas = "/assets/p-buchas.webp";
+const vaselina = "/assets/p-vaselina.webp";
+const uriage = "/assets/p-uriage.webp";
+const aloevera = "/assets/p-aloevera.webp";
+const elasticos = "/assets/p-elasticos.webp";
+const esponja = "/assets/p-esponja.webp";
+const niveaRollon = "/assets/p-nivea-rollon.webp";
+const avene = "/assets/p-avene.webp";
+const oleoban = "/assets/p-oleoban.webp";
+const escovaFacial = "/assets/p-escova-facial.webp";
+const balsamos = "/assets/p-balsamos.webp";
+const herbissimo = "/assets/p-herbissimo.webp";
+const desodorizantes = "/assets/p-desodorizantes.webp";
+const cabecasEscova = "/assets/p-cabecas-escova.webp";
+const scrunchies = "/assets/p-scrunchies.webp";
+const amalfi = "/assets/p-amalfi.webp";
+const pedraPomes = "/assets/p-pedra-pomes.webp";
+const presilhas = "/assets/p-presilhas.webp";
 export const editorial = "/assets/editorial.jpg";
 const hero = "/assets/hero.jpg";
 
-export const CATEGORIES = ["Tudo", "Skincare", "Acessórios", "Moda"] as const;
+export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Acessórios"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -36,210 +42,266 @@ export type Product = {
 
 export const PRODUCTS: Product[] = [
   {
-    id: "serum-vitamina-c",
-    name: "Sérum Iluminador Vitamina C",
+    id: "neutrogena-refreshingly-clear",
+    name: "Neutrogena Refreshingly Clear Hidratante",
     category: "Skincare",
-    price: 1850,
-    rating: 4.8,
-    reviews: 128,
-    images: [serum, editorial, creme],
+    price: 1250,
+    rating: 4.7,
+    reviews: 112,
+    images: [neutrogena, editorial],
     description:
-      "Sérum leve de vitamina C estabilizada que uniformiza o tom da pele e devolve o brilho natural. Absorção rápida, sem oleosidade.",
-    details: ["30 ml", "Todos os tipos de pele", "Uso diário, manhã"],
+      "Hidratante facial com toranja rosa que refresca e hidrata sem obstruir os poros. Fórmula oil-free desenvolvida com dermatologistas.",
+    details: ["Oil-free", "Pele com tendência a acne", "Uso diário"],
     bestSeller: true,
     badge: "Mais vendido",
   },
   {
-    id: "creme-hidratante",
-    name: "Creme Hidratante Nutritivo",
+    id: "uriage-bariederm-cica",
+    name: "Uriage Bariéderm Cica Creme",
+    category: "Skincare",
+    price: 1650,
+    rating: 4.8,
+    reviews: 87,
+    images: [uriage, editorial],
+    description:
+      "Creme reparador para peles fragilizadas, com Cica-Uriage que ajuda a acalmar e restaurar a barreira cutânea.",
+    details: ["40 ml", "Peles sensíveis e fragilizadas", "Uso diário"],
+    bestSeller: true,
+  },
+  {
+    id: "avene-cicalfate",
+    name: "Avène Cicalfate+ Creme Reparador",
+    category: "Skincare",
+    price: 1750,
+    rating: 4.9,
+    reviews: 96,
+    images: [avene, editorial],
+    description:
+      "Creme reparador multiusos com Água Termal de Avène e cobre-zinco, ideal para peles irritadas e após pequenas agressões cutâneas.",
+    details: ["40 ml", "Todos os tipos de pele", "Uso local ou geral"],
+    bestSeller: true,
+  },
+  {
+    id: "oleoban-creme-diario",
+    name: "Oleoban Skin First Creme Diário",
     category: "Skincare",
     price: 1450,
     rating: 4.7,
-    reviews: 94,
-    images: [creme, editorial],
+    reviews: 64,
+    images: [oleoban, editorial],
     description:
-      "Textura rica em manteiga de karité e ácido hialurónico para hidratação profunda durante 24 horas.",
-    details: ["50 ml", "Pele seca a normal", "Manhã e noite"],
-    bestSeller: true,
+      "Creme corporal de uso diário que hidrata profundamente e reforça a barreira cutânea, deixando a pele mais macia e confortável.",
+    details: ["Formato família", "Pele seca a normal", "Sem parabenos"],
   },
   {
-    id: "gel-limpeza",
-    name: "Gel de Limpeza Suave",
+    id: "aloe-vera-gel",
+    name: "Gel de Aloe Vera 100%",
     category: "Skincare",
-    price: 980,
-    rating: 4.6,
-    reviews: 76,
-    images: [limpeza, editorial],
-    description:
-      "Espuma delicada que remove impurezas e maquilhagem sem agredir a barreira natural da pele.",
-    details: ["150 ml", "Pele sensível", "Sem sulfatos"],
-  },
-  {
-    id: "oleo-corporal",
-    name: "Óleo Corporal Seda",
-    category: "Skincare",
-    price: 1250,
-    rating: 4.9,
-    reviews: 61,
-    images: [oleo, editorial],
-    description:
-      "Mistura de óleos de argan e amêndoa que deixa a pele macia com acabamento acetinado, nunca pesado.",
-    details: ["100 ml", "Unissexo", "Aroma suave de baunilha"],
-    bestSeller: true,
-  },
-  {
-    id: "protetor-solar",
-    name: "Protetor Solar SPF 50",
-    category: "Skincare",
-    price: 1350,
+    price: 950,
     rating: 4.8,
-    reviews: 143,
-    images: [protetor, editorial],
+    reviews: 121,
+    images: [aloevera, editorial],
     description:
-      "Proteção alta com toque seco e sem resíduo branco. Perfeito para o clima de Maputo, todos os dias.",
-    details: ["60 ml", "Unissexo", "Resistente ao suor"],
-  },
-  {
-    id: "batom-nude",
-    name: "Batom Acetinado Nude",
-    category: "Skincare",
-    price: 750,
-    rating: 4.5,
-    reviews: 52,
-    images: [batom],
-    description:
-      "Batom cremoso de longa duração com pigmento intenso e acabamento acetinado confortável.",
-    details: ["3,5 g", "Longa duração", "Com vitamina E"],
-    options: { label: "Tom", values: ["Nude", "Rosé", "Terracota"] },
-  },
-  {
-    id: "perfume-unissexo",
-    name: "Perfume Unissexo Bliss",
-    category: "Skincare",
-    price: 2950,
-    rating: 4.9,
-    reviews: 88,
-    images: [perfume, editorial],
-    description:
-      "Eau de parfum de notas âmbar, bergamota e madeira de cedro. Assinatura elegante para ele e para ela.",
-    details: ["100 ml", "Unissexo", "Fixação 8h+"],
-    bestSeller: true,
-    badge: "Novo",
-  },
-  {
-    id: "bolsa-couro",
-    name: "Bolsa de Couro Preta",
-    category: "Acessórios",
-    price: 3850,
-    rating: 4.7,
-    reviews: 39,
-    images: [bolsa],
-    description:
-      "Bolsa estruturada em couro sintético premium com alça removível e forro interior em algodão.",
-    details: ["28 × 22 cm", "Alça ajustável", "Ferragens douradas"],
+      "Gel puro de aloé vera para rosto, corpo e cabelo. Acalma, hidrata e refresca — o essencial multiusos da rotina de beleza.",
+    details: ["Fórmula 100% natural", "Uso facial, corporal e capilar", "Textura fresca"],
     bestSeller: true,
   },
   {
-    id: "oculos-sol",
-    name: "Óculos de Sol Clássicos",
-    category: "Acessórios",
-    price: 1650,
+    id: "vaselina-pura",
+    name: "Vaselina Pura",
+    category: "Skincare",
+    price: 450,
     rating: 4.6,
-    reviews: 44,
-    images: [oculos],
+    reviews: 73,
+    images: [vaselina],
     description:
-      "Armação intemporal com lentes com proteção UV400. Modelo unissexo que valoriza qualquer rosto.",
-    details: ["Proteção UV400", "Unissexo", "Estojo incluído"],
+      "Vaselina pura clássica para hidratar lábios, cutículas e zonas secas da pele. O básico que nunca falta em casa.",
+    details: ["Uso multiusos", "Fórmula clássica", "Todos os tipos de pele"],
   },
   {
-    id: "relogio-dourado",
-    name: "Relógio Minimalista Dourado",
-    category: "Acessórios",
-    price: 2750,
-    rating: 4.8,
-    reviews: 33,
-    images: [relogio],
+    id: "herbissimo-sensitive",
+    name: "Herbíssimo Creme Hidratante Sensitive",
+    category: "Skincare",
+    price: 1150,
+    rating: 4.6,
+    reviews: 58,
+    images: [herbissimo],
     description:
-      "Mostrador limpo, caixa dourada e bracelete em malha. Discreto, elegante e para todos os dias.",
-    details: ["Caixa 36 mm", "Resistente à água 3 ATM", "Unissexo"],
+      "Creme hidratante dermatologicamente testado para peles sensíveis, com absorção rápida e toque não oleoso.",
+    details: ["Pele sensível", "Sem perfume", "Absorção rápida"],
   },
   {
-    id: "brincos-argola",
-    name: "Brincos Argola Dourados",
-    category: "Acessórios",
+    id: "balsamos-labiais",
+    name: "Kit de Bálsamos Labiais Coloridos",
+    category: "Skincare",
     price: 890,
     rating: 4.7,
-    reviews: 57,
-    images: [brincos],
+    reviews: 105,
+    images: [balsamos],
     description:
-      "Argolas finas banhadas a ouro, leves e hipoalergénicas — o detalhe que completa qualquer visual.",
-    details: ["Banho de ouro 18k", "Hipoalergénico", "Par"],
-    options: { label: "Tamanho", values: ["Pequeno", "Médio", "Grande"] },
+      "Conjunto de bálsamos labiais hidratantes em várias cores e aromas, perfeitos para levar na mala ou na bolsa.",
+    details: ["Kit com várias unidades", "Fórmula hidratante", "Vários aromas"],
+    options: { label: "Aroma", values: ["Frutas vermelhas", "Coco", "Menta", "Original"] },
   },
   {
-    id: "lenco-seda",
-    name: "Lenço de Seda Areia",
-    category: "Acessórios",
-    price: 1150,
-    rating: 4.5,
-    reviews: 21,
-    images: [lenco],
+    id: "desodorizantes-stick",
+    name: "Kit de Desodorizantes em Stick",
+    category: "Skincare",
+    price: 1350,
+    rating: 4.6,
+    reviews: 82,
+    images: [desodorizantes],
     description:
-      "Lenço em toque de seda, versátil no cabelo, no pescoço ou na bolsa. Cai com fluidez.",
-    details: ["90 × 90 cm", "Toque de seda", "Lavagem à mão"],
+      "Conjunto de desodorizantes sólidos de longa duração, com proteção 48h e fragrâncias variadas para toda a semana.",
+    details: ["Proteção 48h", "Vários aromas", "Kit completo"],
   },
   {
-    id: "blazer-linho",
-    name: "Blazer de Linho Areia",
-    category: "Moda",
-    price: 4250,
-    rating: 4.8,
-    reviews: 46,
-    images: [blazer],
+    id: "nivea-rollon",
+    name: "Nivea Roll-on Natural Radiance",
+    category: "Skincare",
+    price: 550,
+    rating: 4.7,
+    reviews: 134,
+    images: [niveaRollon],
     description:
-      "Blazer oversize em linho leve, com ombros suaves e caimento fluido. Peça-chave de qualquer guarda-roupa.",
-    details: ["100% linho", "Corte oversize", "Forro parcial"],
-    options: { label: "Tamanho", values: ["XS", "S", "M", "L", "XL"] },
+      "Desodorizante roll-on que cuida da pele enquanto protege contra o suor, com fórmula que ajuda a uniformizar o tom da pele.",
+    details: ["50 ml", "Proteção 48h", "Cuidado e proteção"],
+  },
+  {
+    id: "amalfi-gel-duche",
+    name: "Amalfi Gel de Duche Coco",
+    category: "Banho",
+    price: 750,
+    rating: 4.6,
+    reviews: 69,
+    images: [amalfi, editorial],
+    description:
+      "Gel de duche cremoso com aroma tropical de coco, que limpa suavemente enquanto deixa a pele macia e perfumada.",
+    details: ["Aroma de coco", "Formato família", "Pele normal a seca"],
     bestSeller: true,
   },
   {
-    id: "camisa-algodao",
-    name: "Camisa de Algodão Branca",
-    category: "Moda",
-    price: 2150,
+    id: "buchas-banho",
+    name: "Kit de Buchas de Banho",
+    category: "Banho",
+    price: 350,
+    rating: 4.5,
+    reviews: 47,
+    images: [buchas],
+    description:
+      "Conjunto de três buchas coloridas em malha macia, ideais para esfoliar suavemente e ativar a circulação no duche.",
+    details: ["Conjunto com 3 unidades", "Malha macia", "Cores variadas"],
+    options: { label: "Cor", values: ["Verde", "Roxo", "Amarelo"] },
+  },
+  {
+    id: "esponja-rosa",
+    name: "Esponja de Banho Rosa",
+    category: "Banho",
+    price: 220,
+    rating: 4.5,
+    reviews: 38,
+    images: [esponja],
+    description:
+      "Esponja de banho fofa e macia que cria espuma rica com pouco produto, deixando a pele limpa e suave.",
+    details: ["Malha macia", "Cria espuma rica", "Leve e compacta"],
+  },
+  {
+    id: "pedra-pomes",
+    name: "Pedra-pomes Esfoliante Salvitas",
+    category: "Banho",
+    price: 280,
+    rating: 4.4,
+    reviews: 29,
+    images: [pedraPomes],
+    description:
+      "Pedra-pomes natural para esfoliar os pés, remover calos e durezas e deixar a pele lisa e macia.",
+    details: ["Uso nos pés", "Pedra natural", "Fácil de usar"],
+  },
+  {
+    id: "escova-limpeza-facial",
+    name: "Escova de Limpeza Facial Dupla",
+    category: "Acessórios",
+    price: 650,
     rating: 4.6,
-    reviews: 68,
-    images: [camisa],
+    reviews: 41,
+    images: [escovaFacial],
     description:
-      "Camisa unissexo em algodão premium com corte relaxado. Simples, impecável, para todas as ocasiões.",
-    details: ["100% algodão", "Unissexo", "Corte relaxado"],
-    options: { label: "Tamanho", values: ["XS", "S", "M", "L", "XL"] },
+      "Escova facial de silicone com cerdas duplas para uma limpeza profunda, removendo impurezas e células mortas.",
+    details: ["Silicone macio", "Dupla face", "Fácil de lavar"],
   },
   {
-    id: "vestido-cetim",
-    name: "Vestido Longo de Cetim",
-    category: "Moda",
-    price: 3950,
-    rating: 4.9,
-    reviews: 37,
-    images: [vestido],
+    id: "cabecas-escova-eletrica",
+    name: "Cabeças de Escova de Limpeza Elétrica",
+    category: "Acessórios",
+    price: 980,
+    rating: 4.5,
+    reviews: 33,
+    images: [cabecasEscova],
     description:
-      "Vestido slip em cetim com corte enviesado que acompanha o corpo. Elegância discreta para eventos.",
-    details: ["Cetim fluido", "Alças ajustáveis", "Forro interior"],
-    options: { label: "Tamanho", values: ["XS", "S", "M", "L"] },
-    badge: "Edição limitada",
+      "Conjunto de cabeças de substituição para escova de limpeza facial elétrica, em silicone macio e hipoalergénico.",
+    details: ["Pack com 4 cabeças", "Compatível com escovas elétricas", "Silicone hipoalergénico"],
   },
   {
-    id: "conjunto-toalha",
-    name: "Conjunto Ritual de Banho",
-    category: "Moda",
-    price: 1950,
+    id: "pinceis-maquiagem",
+    name: "Conjunto de Pincéis de Maquiagem",
+    category: "Acessórios",
+    price: 1150,
     rating: 4.7,
-    reviews: 18,
-    images: [editorial, oleo],
+    reviews: 55,
+    images: [pinceis],
     description:
-      "Kit com toalha de algodão waffle e óleo corporal — o presente perfeito para quem ama autocuidado.",
-    details: ["Toalha 70 × 140 cm", "Óleo 100 ml", "Embalagem para presente"],
+      "Kit de pincéis coloridos para sombra, delineado e esfumado, com cerdas macias para uma aplicação profissional.",
+    details: ["Kit com 5 unidades", "Cerdas macias", "Cabo ergonómico"],
+    bestSeller: true,
+  },
+  {
+    id: "tiara-perolas",
+    name: "Tiara Dupla de Pérolas",
+    category: "Acessórios",
+    price: 780,
+    rating: 4.6,
+    reviews: 27,
+    images: [tiara],
+    description:
+      "Tiara dupla decorada com pérolas, um acessório elegante que eleva qualquer penteado em segundos.",
+    details: ["Duas tiaras em conjunto", "Detalhe em pérolas", "Confortável para uso prolongado"],
+  },
+  {
+    id: "elasticos-cabelo",
+    name: "Pack de Elásticos de Cabelo Coloridos",
+    category: "Cabelo",
+    price: 320,
+    rating: 4.5,
+    reviews: 62,
+    images: [elasticos],
+    description:
+      "Conjunto com dezenas de elásticos finos e coloridos, perfeitos para pentear e prender o cabelo todos os dias.",
+    details: ["Pack grande", "Cores variadas", "Elástico macio"],
+  },
+  {
+    id: "scrunchies-seda",
+    name: "Conjunto de Scrunchies em Seda",
+    category: "Cabelo",
+    price: 590,
+    rating: 4.8,
+    reviews: 48,
+    images: [scrunchies],
+    description:
+      "Elásticos de cabelo em tecido acetinado que não marcam nem danificam o cabelo, com acabamento elegante.",
+    details: ["Conjunto com várias unidades", "Toque acetinado", "Não marca o cabelo"],
+    bestSeller: true,
+  },
+  {
+    id: "presilhas-cabelo",
+    name: "Conjunto de Presilhas de Cabelo",
+    category: "Cabelo",
+    price: 690,
+    rating: 4.6,
+    reviews: 35,
+    images: [presilhas],
+    description:
+      "Conjunto variado de presilhas em formatos de flores e borboletas, para looks delicados e cheios de personalidade.",
+    details: ["Conjunto com várias peças", "Formatos variados", "Acabamento delicado"],
   },
 ];
 

@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { ProductPage } from "@/components/shop-shell";
 import { heroImage, editorial } from "@/lib/shop-data";
 
 export default function Sobre() {
   return (
-    <ProductPage>
       <div className="mx-auto max-w-4xl px-4 py-10">
         <p className="eyebrow">A nossa história</p>
         <h1 className="font-display mt-2 max-w-2xl text-4xl leading-tight sm:text-5xl">
@@ -67,6 +65,5 @@ export default function Sobre() {
           Explorar Coleção
         </Link>
       </div>
-    </ProductPage>
   );
 }

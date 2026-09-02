@@ -55,15 +55,15 @@ export function ProductModal() {
             transition={{ type: "spring", damping: 32, stiffness: 320 }}
             className="relative flex max-h-[94dvh] w-full max-w-lg flex-col overflow-y-auto rounded-t-[2rem] bg-background sm:rounded-[2rem]"
           >
-            {/* Puxador para arrastar e fechar (só em ecrãs pequenos) */}
-            <div
-              onPointerDown={(e) => dragControls.start(e)}
-              className="flex shrink-0 touch-none cursor-grab justify-center pt-2.5 pb-1 active:cursor-grabbing sm:hidden"
-            >
-              <span className="h-1.5 w-10 rounded-full bg-border" aria-hidden />
-            </div>
-
             <div className="relative bg-secondary">
+              {/* Puxador para arrastar e fechar (só em ecrãs pequenos), sobreposto à imagem */}
+              <div
+                onPointerDown={(e) => dragControls.start(e)}
+                className="absolute inset-x-0 top-0 z-10 flex touch-none cursor-grab justify-center pt-3 pb-6 active:cursor-grabbing sm:hidden"
+              >
+                <span className="h-1.5 w-10 rounded-full bg-background/85 shadow-sm backdrop-blur" aria-hidden />
+              </div>
+
               <img
                 src={activeProduct.images[image]}
                 alt={activeProduct.name}

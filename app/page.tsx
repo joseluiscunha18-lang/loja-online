@@ -22,12 +22,23 @@ function FadeUp({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [ready, setReady] = useState(false);
+
+  // Garante que o browser pinta o estado inicial (opacity 0) antes de
+  // permitir a transição — sem isto, quando o elemento já está visível
+  // no primeiro render, o React/Framer podem "saltar" direto para o
+  // estado final sem mostrar a animação.
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <motion.div
       ref={ref}
       className={className}
       initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      animate={ready && inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay }}
     >
       {children}

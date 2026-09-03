@@ -41,7 +41,7 @@ export function Footer() {
                   className="flex items-center gap-2.5 hover:text-muted-foreground"
                 >
                   <MessageCircle className="size-4 shrink-0" aria-hidden />
-                  <span>WhatsApp: {STORE.phoneDisplay}</span>
+                  <span>WhatsApp</span>
                 </a>
               </li>
               <li>

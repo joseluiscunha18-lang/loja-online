@@ -36,12 +36,9 @@ export async function generateMetadata({
       title,
       description,
       url: `${SITE_URL}/produto/${product.id}`,
-      // Dimensões abaixo de 300×300 fazem o WhatsApp mostrar
-      // a thumbnail pequena (lateral) em vez da imagem grande.
-      images: [{ url: imageUrl, width: 256, height: 256, alt: product.name, type: "image/jpeg" }],
+      images: [{ url: imageUrl, width: 200, height: 200, alt: product.name, type: "image/jpeg" }],
     },
     twitter: {
-      // "summary" = miniatura pequena; "summary_large_image" = imagem grande
       card: "summary",
       title,
       description,

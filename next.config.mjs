@@ -4,10 +4,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // Manter unoptimized:true para assets locais (Vercel free tier)
-    // mas activar formatos modernos para quando for activado
-    unoptimized: true,
+    // Optimização activada para que /_next/image?url=...&w=256 funcione
+    // e sirva imagens fisicamente pequenas para o WhatsApp.
+    unoptimized: false,
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
   },
   // Comprimir respostas HTTP (reduz tempo de carregamento)
   compress: true,

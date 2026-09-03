@@ -18,14 +18,12 @@ export async function generateMetadata({
 
   const title = product.name;
   const description = `${formatMZN(product.price)} — ${product.description}`;
-  // O WhatsApp (sobretudo a versão Business) muitas vezes não consegue
-  // gerar a miniatura a partir de imagens .webp — por isso a pré-visualização
-  // usa sempre uma cópia .jpg gerada a partir da imagem original.
-  const ogImagePath = product.images[0].replace(
-    /\/assets\/(.+)\.webp$/,
-    "/assets/og/$1.jpg",
-  );
-  const imageUrl = `${SITE_URL}${ogImagePath}`;
+
+  // Usa a API de optimização do Next.js/Vercel para servir a imagem
+  // fisicamente redimensionada a 200×200px — o WhatsApp lê o tamanho
+  // real do ficheiro, não as dimensões declaradas nas meta tags.
+  const rawImage = encodeURIComponent(product.images[0]);
+  const imageUrl = `${SITE_URL}/_next/image?url=${rawImage}&w=256&q=75`;
 
   return {
     title,

@@ -25,7 +25,7 @@ export default function Checkout() {
       "",
       `\uD83D\uDCB0 Total: ${formatMZN(subtotal)}`,
       "",
-      "Aguardo confirma\u00e7\u00e3o de disponibilidade e informa\u00e7\u00f5es sobre a entrega. Obrigado/a! \uD83D\uDE4F",
+      "Obrigado/a!",
     ].join("\n"),
   );
 

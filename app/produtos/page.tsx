@@ -17,7 +17,6 @@ function ProdutosContent() {
   );
   const [isPending, startTransition] = useTransition();
 
-  // Sincroniza com a URL sempre que o par\u00e2metro "categoria" mudar
   useEffect(() => {
     startTransition(() => {
       setCategory(isCategory(categoriaParam) ? categoriaParam : "Tudo");
@@ -35,10 +34,10 @@ function ProdutosContent() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
-      <p className="eyebrow">A cole\u00e7\u00e3o Bliss</p>
-      <h1 className="font-display mt-3 text-5xl">Todos os produtos</h1>
+      <p className="eyebrow">A coleção Bliss</p>
+      <h1 className="font-display mt-3 text-5xl">Todos os nossos produtos</h1>
       <p className="mt-4 max-w-xl text-muted-foreground">
-        Beleza, acess\u00f3rios e moda escolhidos para si.
+        Beleza, acessórios e moda escolhidos para si.
       </p>
       <div className="mt-8">
         <CategoryPills active={category} onChange={handleCategoryChange} />
@@ -49,7 +48,7 @@ function ProdutosContent() {
       >
         {products.length === 0 ? (
           <p className="col-span-full py-16 text-center text-sm text-muted-foreground">
-            N\u00e3o h\u00e1 produtos nesta categoria no momento.
+            Não há produtos nesta categoria no momento.
           </p>
         ) : (
           products.map((p) => <ProductCard key={p.id} product={p} />)

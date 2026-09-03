@@ -29,6 +29,10 @@ export function Footer() {
                   <span>E-mail de suporte: {STORE.email}</span>
                 </a>
               </li>
+              <li className="flex items-center gap-2.5">
+                <Phone className="size-4 shrink-0" aria-hidden />
+                <span>Telefone: {STORE.phoneDisplay}</span>
+              </li>
               <li>
                 <a
                   href={`https://wa.me/${STORE.whatsapp}`}
@@ -36,8 +40,8 @@ export function Footer() {
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-muted-foreground"
                 >
-                  <Phone className="size-4 shrink-0" aria-hidden />
-                  <span>Telefone / WhatsApp: {STORE.phoneDisplay}</span>
+                  <MessageCircle className="size-4 shrink-0" aria-hidden />
+                  <span>WhatsApp: {STORE.phoneDisplay}</span>
                 </a>
               </li>
               <li>

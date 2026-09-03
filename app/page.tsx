@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
-import { PRODUCTS, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
+import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
 import { useShop } from "@/lib/shop-context";
 
 /* ── Animação de entrada reutilizável ── */
@@ -295,21 +295,9 @@ function HomeContent() {
       <section className="mx-auto mt-16 max-w-6xl px-4">
         <ul className="grid gap-4 sm:grid-cols-3">
           {[
-            {
-              icon: Gem,
-              title: "Produtos originais",
-              text: "Trabalhamos com produtos de marcas reconhecidas, escolhidos pensando na qualidade e no cuidado diário.",
-            },
-            {
-              icon: Truck,
-              title: "Entrega rápida",
-              text: "Fazemos levantamento e delivery nos dias úteis. Disponível em Maputo & Matola.",
-            },
-            {
-              icon: MessageCircle,
-              title: "Atendimento humano",
-              text: "Fale connosco diretamente pelo WhatsApp. Estamos aqui para te ajudar a escolher o melhor.",
-            },
+            { icon: Gem, title: "Produtos originais", text: "Marcas verificadas e fórmulas seguras." },
+            { icon: Truck, title: "Entrega rápida", text: STORE.logistics },
+            { icon: MessageCircle, title: "Atendimento humano", text: "Fale connosco diretamente pelo WhatsApp." },
           ].map(({ icon: Icon, title, text }, i) => (
             <FadeUp key={title} delay={i * 0.1}>
               <motion.li

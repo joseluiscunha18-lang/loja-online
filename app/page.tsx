@@ -88,9 +88,14 @@ function HeroEditorialReveal() {
 
   return (
     <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
-      <div
+      <motion.div
         className="relative overflow-hidden rounded-[2rem]"
         style={{ background: "#e8ddd4", minHeight: "29rem" }}
+        /* Quando já foi visto (volta ao início), entra suavemente com
+           um leve fade + subida — evita o aparecimento brusco */
+        initial={alreadySeen ? { opacity: 0, y: 10 } : false}
+        animate={alreadySeen ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {/* Imagem com parallax — só aparece na revelação */}
         <motion.div
@@ -226,7 +231,7 @@ function HeroEditorialReveal() {
             </motion.div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

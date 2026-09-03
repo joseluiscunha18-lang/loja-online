@@ -53,8 +53,12 @@ function FadeUp({
    2 → frases saem, imagem + título + CTA entram
    ───────────────────────────────────────────────────────────── */
 function HeroEditorialReveal() {
+  // Se já animou nesta sessão, começa directamente na fase revelada (2)
+  const alreadySeen =
+    typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-seen") === "1";
+
   // 0=frase 1, 1=frase 2, 2=revelação (imagem, título, CTA)
-  const [phase, setPhase] = useState(0);
+  const [phase, setPhase] = useState(alreadySeen ? 2 : 0);
   const isRevealed = phase >= 2;
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -68,12 +72,18 @@ function HeroEditorialReveal() {
   const REVEAL_DELAY = 1.05;
 
   useEffect(() => {
+    // Se já viu, não agenda os timers
+    if (alreadySeen) return;
     const t1 = setTimeout(() => setPhase(1), 1600);
-    const t2 = setTimeout(() => setPhase(2), 4300);
+    const t2 = setTimeout(() => {
+      setPhase(2);
+      sessionStorage.setItem("hero-seen", "1");
+    }, 4300);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -223,9 +233,7 @@ function HeroEditorialReveal() {
 
 function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
-  // heroKey vem do contexto global — é incrementado sempre que o utilizador
-  // clica em "Início" (logo ou menu), forçando o remount do HeroEditorialReveal.
-  const { openProduct, heroKey } = useShop();
+  const { openProduct } = useShop();
 
   const products = useMemo(() => {
     if (category !== "Tudo") {
@@ -237,8 +245,8 @@ function HomeContent() {
 
   return (
     <>
-      {/* ── HERO EDITORIAL REVEAL — key={heroKey} remonta a cada visita ── */}
-      <HeroEditorialReveal key={heroKey} />
+      {/* ── HERO EDITORIAL REVEAL — anima uma vez por sessão (reset só com F5) ── */}
+      <HeroEditorialReveal />
 
       {/* ── CATEGORIAS ── */}
       <section className="mx-auto max-w-6xl px-4 pt-12">

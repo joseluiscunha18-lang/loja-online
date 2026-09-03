@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Todos os produtos",
+  title: "Todos os nossos produtos",
   description:
     "Explore skincare, cabelo, banho e acessórios de beleza da Bliss Beauty & Care, com entrega em Maputo e Matola.",
   alternates: { canonical: "/produtos" },

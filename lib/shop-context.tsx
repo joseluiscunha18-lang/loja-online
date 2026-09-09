@@ -34,8 +34,6 @@ type ShopContextValue = {
   activeProduct: Product | null;
   openProduct: (product: Product) => void;
   closeProduct: () => void;
-  heroKey: number;
-  resetHero: () => void;
 };
 
 const ShopContext = createContext<ShopContextValue | null>(null);
@@ -51,7 +49,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [hydrated, setHydrated] = useState(false);
-  const [heroKey, setHeroKey] = useState(0);
+
 
   useEffect(() => {
     try {
@@ -128,8 +126,6 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     activeProduct,
     openProduct: (product) => setActiveProduct(product),
     closeProduct: () => setActiveProduct(null),
-    heroKey,
-    resetHero: () => setHeroKey((k) => k + 1),
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

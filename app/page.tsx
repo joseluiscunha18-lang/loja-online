@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight, Gem, MessageCircle, Truck } from "lucide-react";
-import { useState, useMemo, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
@@ -53,22 +53,51 @@ function FadeUp({
    2 → frases saem, imagem + título + CTA entram
    ───────────────────────────────────────────────────────────── */
 function HeroEditorialReveal() {
+  // Se já animou nesta sessão, começa directamente na fase revelada (2)
+  const alreadySeen =
+    typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-seen") === "1";
+
+  // 0=frase 1, 1=frase 2, 2=revelação (imagem, título, CTA)
+  const [phase, setPhase] = useState(alreadySeen ? 2 : 0);
+  const isRevealed = phase >= 2;
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  // Pequena pausa depois da frase desaparecer, antes de a imagem/título
+  // começarem a entrar — evita o "corte" abrupto entre as duas fases.
+  const REVEAL_DELAY = 1.05;
+
+  useEffect(() => {
+    // Se já viu, não agenda os timers
+    if (alreadySeen) return;
+    const t1 = setTimeout(() => setPhase(1), 1600);
+    const t2 = setTimeout(() => {
+      setPhase(2);
+      sessionStorage.setItem("hero-seen", "1");
+    }, 4300);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <section ref={heroRef} className="mx-auto max-w-6xl px-4 pt-4">
       <motion.div
         className="relative overflow-hidden rounded-[2rem]"
         style={{ background: "#e8ddd4", minHeight: "29rem" }}
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1] }}
+        /* Quando já foi visto (volta ao início), entra suavemente com
+           um leve fade + subida — evita o aparecimento brusco */
+        initial={alreadySeen ? { opacity: 0, y: 10 } : false}
+        animate={alreadySeen ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        {/* Imagem com parallax */}
+        {/* Imagem com parallax — só aparece na revelação */}
         <motion.div
           aria-hidden
           className="absolute inset-0"
@@ -80,8 +109,8 @@ function HeroEditorialReveal() {
             y: bgY,
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1], delay: isRevealed ? REVEAL_DELAY : 0 }}
         />
 
         {/* Gradiente lateral */}
@@ -93,16 +122,47 @@ function HeroEditorialReveal() {
           }}
         />
 
-        {/* Conteúdo — badge, título, CTA */}
+        {/* Frases de entrada — centradas, sobre o fundo sólido.
+            pointer-events-none evita que este overlay (que ocupa o hero
+            inteiro) continue a bloquear cliques no CTA por baixo depois
+            de as frases desaparecerem. */}
+        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-8 text-center">
+          <AnimatePresence mode="wait">
+            {!isRevealed && (
+              <motion.p
+                key={phase === 0 ? "phrase-0" : "phrase-1"}
+                className="font-display text-2xl tracking-wide italic sm:text-3xl"
+                style={{ color: "#5c4d43", textShadow: "0 1px 24px rgba(255,255,255,0.35)" }}
+                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  transition: { duration: 0.85, ease: [0.25, 0.1, 0.25, 1] },
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -18,
+                  filter: "blur(4px)",
+                  transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
+                }}
+              >
+                {phase === 0 ? "A sua beleza merece mais." : "Descubra o cuidado que faz a diferença."}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Conteúdo — badge, título, CTA — stagger suave igual às frases */}
         <motion.div
           className="relative z-10 flex flex-col justify-between gap-0 px-7 py-8 sm:px-12"
           style={{ minHeight: "29rem", y: contentY, opacity: scrollOpacity }}
         >
-          {/* Badge */}
+          {/* Badge — desce suavemente de cima (delay 0) */}
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.35 }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
+            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay: isRevealed ? REVEAL_DELAY : 0 }}
           >
             <span
               className="rounded-full px-3 py-1 text-[11px] tracking-widest uppercase"
@@ -112,36 +172,42 @@ function HeroEditorialReveal() {
             </span>
           </motion.div>
 
+          {/* Título + CTA agrupados — grupo sobe (mb maior) para reduzir o vazio
+              sob a etiqueta e evitar a massa condensada junto à borda inferior;
+              gap-6 dá respiração entre o título e o subtítulo/botão */}
           <div className="mb-14 flex flex-col gap-6 sm:mb-16">
             {/* Título */}
             <div className="-ml-3 flex flex-col gap-3 sm:-ml-4" style={{ maxWidth: "48%" }}>
+
+              {/* "Autocuidado" — sobe devagar de baixo (delay 0.2) */}
               <motion.h1
                 className="font-display leading-[0.9]"
                 style={{ fontSize: "2.3rem", color: "#1a1410", textShadow: "0 1px 20px rgba(245,237,230,0.4)" }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1], delay: 0.45 }}
+                initial={{ opacity: 0, y: 28 }}
+                animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.2 }}
               >
                 Autocuidado
                 <br />
+                {/* "& Beleza" — aparece por último, ainda mais devagar (delay 0.6) */}
                 <motion.span
                   style={{ color: "#6b5c52" }}
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1], delay: 0.65 }}
+                  animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.45 }}
                 >
                   &amp; Beleza
                 </motion.span>
               </motion.h1>
             </div>
 
-            {/* CTA */}
+            {/* CTA — sobe suavemente por último (delay 0.78) */}
             <motion.div
               className="flex flex-col gap-3"
               style={{ maxWidth: "52%" }}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.7 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: REVEAL_DELAY + 0.78 }}
             >
               <p className="text-[0.8rem] leading-relaxed font-medium" style={{ color: "#5c4d43" }}>
                 Beleza selecionada com qualidade em cada detalhe.

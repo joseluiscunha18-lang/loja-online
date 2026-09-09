@@ -361,8 +361,8 @@ function HomeContent() {
       <section className="mx-auto mt-16 max-w-6xl px-4">
         <ul className="grid gap-4 sm:grid-cols-3">
           {[
-            { icon: Gem, title: "Produtos originais", text: "Marcas verificadas e fórmulas seguras." },
-            { icon: Truck, title: "Entrega rápida", text: STORE.logistics },
+            { icon: Gem, title: "Produtos selecionados com cuidado", text: "Trabalhamos com produtos de marcas reconhecidas, escolhidos pensando na qualidade e no cuidado diário." },
+            { icon: Truck, title: "Entrega rápida", text: "Entregas em Maputo & Matola. Levantamento nas Torres Vermelhas ou na Primeira Rotunda da circular, nos dias úteis." },
             { icon: MessageCircle, title: "Atendimento humano", text: "Fale connosco diretamente pelo WhatsApp." },
           ].map(({ icon: Icon, title, text }, i) => (
             <FadeUp key={title} delay={i * 0.1}>

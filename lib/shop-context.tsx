@@ -50,13 +50,12 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
-
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setItems(JSON.parse(raw) as CartItem[]);
     } catch {
-      /* ignora carrinho inválido */
+      /* ignora carrinho invalido */
     }
     setHydrated(true);
   }, []);

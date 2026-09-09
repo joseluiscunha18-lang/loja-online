@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { PRODUCTS, type Product } from "./shop-data";
+import { PRODUCTS, type Product, type Category } from "./shop-data";
 
-/** Seed baseado no minuto actual — muda a cada minuto como se viesse de um backend. */
-function getSeed(): number {
+/** Seed baseado no minuto actual. */
+function getTimeSeed(): number {
   const now = new Date();
   return (
     now.getFullYear() * 100000000 +
@@ -25,26 +25,33 @@ function shuffleWithSeed(items: Product[], seed: number): Product[] {
     .map(({ p }) => p);
 }
 
-/** Devolve os produtos embaralhados. Actualiza automaticamente a cada minuto. */
-export function useShuffledProducts(): Product[] {
-  const [seed, setSeed] = useState(getSeed);
+/**
+ * Devolve produtos embaralhados de forma reactiva:
+ * - Muda a cada minuto (timer sincronizado com o relógio)
+ * - Muda sempre que a categoria muda (navCnt incrementado pelo componente)
+ * - Muda quando se volta para "Tudo"
+ */
+export function useShuffledProducts(category: Category, navCnt: number): Product[] {
+  const [timeSeed, setTimeSeed] = useState(getTimeSeed);
 
   useEffect(() => {
-    // Calcula quantos milissegundos faltam para o próximo minuto
     const msUntilNextMinute = () => {
       const now = new Date();
       return (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
     };
-
-    // Aguarda o início do próximo minuto exacto, depois repete a cada 60s
     const timeout = setTimeout(() => {
-      setSeed(getSeed());
-      const interval = setInterval(() => setSeed(getSeed()), 60_000);
+      setTimeSeed(getTimeSeed());
+      const interval = setInterval(() => setTimeSeed(getTimeSeed()), 60_000);
       return () => clearInterval(interval);
     }, msUntilNextMinute());
-
     return () => clearTimeout(timeout);
   }, []);
 
-  return shuffleWithSeed(PRODUCTS, seed);
+  // Seed combinado: tempo + categoria + contador de navegação
+  const categorySeed = category.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const seed = timeSeed + categorySeed * 777 + navCnt * 999983;
+
+  const all = shuffleWithSeed(PRODUCTS, seed);
+  if (category === "Tudo") return all;
+  return all.filter((p) => p.category === category);
 }

@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
-import { useShop } from "@/lib/shop-context";
+
 
 /* ── Animação de entrada reutilizável ── */
 function FadeUp({
@@ -329,12 +329,7 @@ function HomeContent() {
   );
 }
 
-function HomeWrapper() {
-  const { heroKey } = useShop();
-  return <HomeContent key={heroKey} />;
-}
-
 export default function Home() {
-  return <HomeWrapper />;
+  return <HomeContent />;
 }
 

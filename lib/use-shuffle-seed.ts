@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { PRODUCTS, type Product, type Category } from "./shop-data";
 
-/** Seed baseado no minuto actual. */
 function getTimeSeed(): number {
   const now = new Date();
   return (
@@ -14,22 +13,24 @@ function getTimeSeed(): number {
   );
 }
 
-function shuffleWithSeed(items: Product[], seed: number): Product[] {
-  const seededRand = (n: number) => {
-    let s = (seed * 9301 + 49297 + n * 233) % 233280;
-    return s / 233280;
-  };
-  return [...items]
-    .map((p, i) => ({ p, sort: seededRand(i) }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ p }) => p);
+/** Fisher-Yates com seed — embaralha qualquer lista de forma determinística */
+function shuffleWithSeed<T>(items: T[], seed: number): T[] {
+  const arr = [...items];
+  let s = seed;
+  for (let i = arr.length - 1; i > 0; i--) {
+    // LCG simples para gerar próximo número pseudo-aleatório
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    const j = s % (i + 1);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 /**
- * Devolve produtos embaralhados de forma reactiva:
- * - Muda a cada minuto (timer sincronizado com o relógio)
- * - Muda sempre que a categoria muda (navCnt incrementado pelo componente)
- * - Muda quando se volta para "Tudo"
+ * Devolve produtos embaralhados:
+ * - Filtra primeiro pela categoria
+ * - Depois embaralha o subconjunto → ordem muda mesmo dentro de cada categoria
+ * - Seed muda a cada minuto e a cada mudança de categoria (navCnt)
  */
 export function useShuffledProducts(category: Category, navCnt: number): Product[] {
   const [timeSeed, setTimeSeed] = useState(getTimeSeed);
@@ -47,11 +48,13 @@ export function useShuffledProducts(category: Category, navCnt: number): Product
     return () => clearTimeout(timeout);
   }, []);
 
-  // Seed combinado: tempo + categoria + contador de navegação
-  const categorySeed = category.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
-  const seed = timeSeed + categorySeed * 777 + navCnt * 999983;
+  // Filtra primeiro
+  const subset = category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category);
 
-  const all = shuffleWithSeed(PRODUCTS, seed);
-  if (category === "Tudo") return all;
-  return all.filter((p) => p.category === category);
+  // Seed único por categoria + tempo + navegação
+  const categorySeed = category.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const seed = timeSeed ^ (categorySeed * 2654435761) ^ (navCnt * 2246822519);
+
+  // Embaralha o subconjunto já filtrado
+  return shuffleWithSeed(subset, seed);
 }

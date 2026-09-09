@@ -34,7 +34,7 @@ const yaraPerfume = "/assets/p-yara-perfume.webp";
 export const editorial = "/assets/editorial.jpg";
 const hero = "/assets/hero.jpg";
 
-export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Maquiagem", "Perfume", "Acessórios"] as const;
+export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Desodorizante", "Maquiagem", "Perfume"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "desodorizantes-stick",
     name: "Dove Advanced Care Body Spray",
-    category: "Banho",
+    category: "Desodorizante",
     price: null,
     rating: 4.6,
     reviews: 82,
@@ -169,7 +169,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-rollon",
     name: "Dove Advanced Care Roll-on",
-    category: "Banho",
+    category: "Desodorizante",
     price: null,
     rating: 4.7,
     reviews: 134,
@@ -231,7 +231,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "escova-limpeza-facial",
     name: "Escova de Limpeza Facial Dupla",
-    category: "Acessórios",
+    category: "Maquiagem",
     price: 650,
     rating: 4.6,
     reviews: 41,
@@ -243,7 +243,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "cabecas-escova-eletrica",
     name: "Cabeças de Escova de Limpeza Elétrica",
-    category: "Acessórios",
+    category: "Maquiagem",
     price: 980,
     rating: 4.5,
     reviews: 33,
@@ -255,7 +255,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "pinceis-maquiagem",
     name: "Conjunto de Pincéis de Maquiagem",
-    category: "Acessórios",
+    category: "Maquiagem",
     price: 1150,
     rating: 4.7,
     reviews: 55,
@@ -268,7 +268,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "tiara-perolas",
     name: "Tiara Dupla de Pérolas",
-    category: "Acessórios",
+    category: "Cabelo",
     price: 780,
     rating: 4.6,
     reviews: 27,
@@ -366,7 +366,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-fresh",
     name: "Nivea Deodorant Brightening Hijab Fresh Roll-on",
-    category: "Banho",
+    category: "Desodorizante",
     price: 250,
     rating: 4.6,
     reviews: 67,
@@ -378,7 +378,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-active",
     name: "Nivea Deodorant Hijab Active Bright & Dry Roll-on",
-    category: "Banho",
+    category: "Desodorizante",
     price: 250,
     rating: 4.7,
     reviews: 53,
@@ -390,7 +390,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-soft",
     name: "Nivea Deodorant Hijab Soft Bright & Shaveless Roll-on",
-    category: "Banho",
+    category: "Desodorizante",
     price: 250,
     rating: 4.7,
     reviews: 48,
@@ -426,7 +426,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "instituto-rosa-mosqueta",
     name: "Instituto Español Óleo Corporal Rosa Mosqueta (400ml)",
-    category: "Skincare",
+    category: "Perfume",
     price: 900,
     rating: 4.8,
     reviews: 117,

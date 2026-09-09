@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from "fra
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
+import { useShuffledProducts } from "@/lib/use-shuffle-seed";
 import { useShop } from "@/lib/shop-context";
 
 /* ── Animação de entrada reutilizável ── */
@@ -240,12 +241,15 @@ function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
   const { openProduct } = useShop();
 
+  // Produtos embaralhados — actualiza a cada minuto como se viesse de um backend.
+  const shuffledProducts = useShuffledProducts();
+
   const products = useMemo(() => {
     if (category !== "Tudo") {
-      return PRODUCTS.filter((p) => p.category === category).sort((a, b) => b.reviews - a.reviews);
+      return shuffledProducts.filter((p) => p.category === category);
     }
-    return PRODUCTS;
-  }, [category]);
+    return shuffledProducts;
+  }, [category, shuffledProducts]);
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 
   return (

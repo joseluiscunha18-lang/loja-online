@@ -2,6 +2,7 @@
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, CATEGORIES, type Category } from "@/lib/shop-data";
+import { useShuffledProducts } from "@/lib/use-shuffle-seed";
 import { Suspense, useEffect, useMemo, useTransition, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -27,9 +28,12 @@ function ProdutosContent() {
     startTransition(() => setCategory(next));
   };
 
+  // Produtos embaralhados — actualiza a cada minuto como se viesse de um backend.
+  const shuffledProducts = useShuffledProducts();
+
   const products = useMemo(
-    () => (category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
-    [category],
+    () => (category === "Tudo" ? shuffledProducts : shuffledProducts.filter((p) => p.category === category)),
+    [category, shuffledProducts],
   );
 
   return (

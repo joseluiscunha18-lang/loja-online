@@ -12,7 +12,7 @@ const pages = [
 ] as const;
 
 export function MenuDrawer() {
-  const { menuOpen, setMenuOpen, resetHero } = useShop();
+  const { menuOpen, setMenuOpen } = useShop();
 
   return (
     <div
@@ -51,10 +51,7 @@ export function MenuDrawer() {
               <li key={page.to}>
                 <Link
                   href={page.to}
-                  onClick={() => {
-                    setMenuOpen(false);
-                    if (page.to === "/") resetHero();
-                  }}
+                  onClick={() => setMenuOpen(false)}
                   className="font-display block py-2.5 text-2xl transition-colors hover:text-muted-foreground"
                 >
                   {page.label}

@@ -28,13 +28,16 @@ function ProdutosContent() {
     startTransition(() => setCategory(next));
   };
 
-  // Produtos embaralhados — actualiza a cada minuto como se viesse de um backend.
-  const shuffledProducts = useShuffledProducts();
+  const [navCnt, setNavCnt] = useState(0);
 
-  const products = useMemo(
-    () => (category === "Tudo" ? shuffledProducts : shuffledProducts.filter((p) => p.category === category)),
-    [category, shuffledProducts],
-  );
+  const originalHandleCategoryChange = handleCategoryChange;
+  function handleCategoryChangeWithShuffle(next: Category) {
+    setNavCnt((n) => n + 1);
+    originalHandleCategoryChange(next);
+  }
+
+  // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
+  const products = useShuffledProducts(category, navCnt);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
@@ -44,7 +47,7 @@ function ProdutosContent() {
         Beleza, acessórios e moda escolhidos para si.
       </p>
       <div className="mt-8">
-        <CategoryPills active={category} onChange={handleCategoryChange} />
+        <CategoryPills active={category} onChange={handleCategoryChangeWithShuffle} />
       </div>
       <div
         className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"

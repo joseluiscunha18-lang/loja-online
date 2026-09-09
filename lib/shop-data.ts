@@ -19,10 +19,22 @@ const scrunchies = "/assets/p-scrunchies.webp";
 const amalfi = "/assets/p-amalfi.webp";
 const pedraPomes = "/assets/p-pedra-pomes.webp";
 const presilhas = "/assets/p-presilhas.webp";
+const uriageXemose = "/assets/p-uriage-xemose.webp";
+const aveneShampoo = "/assets/p-avene-shampoo.webp";
+const lorealMen = "/assets/p-loreal-men.webp";
+const skalaAmido = "/assets/p-skala-amido.webp";
+const niveaHijabFresh = "/assets/p-nivea-hijab-fresh.webp";
+const niveaHijabActive = "/assets/p-nivea-hijab-active.webp";
+const niveaHijabSoft = "/assets/p-nivea-hijab-soft.webp";
+const totexArgan = "/assets/p-totex-argan.webp";
+const risqueChocolight = "/assets/p-risque-chocolight.webp";
+const institutoRosa = "/assets/p-instituto-rosa.webp";
+const institutoAloeVera = "/assets/p-instituto-aloevera.webp";
+const yaraPerfume = "/assets/p-yara-perfume.webp";
 export const editorial = "/assets/editorial.jpg";
 const hero = "/assets/hero.jpg";
 
-export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Acessórios"] as const;
+export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Maquiagem", "Perfume", "Acessórios"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -301,6 +313,153 @@ export const PRODUCTS: Product[] = [
     description:
       "Conjunto variado de presilhas em formatos de flores e borboletas, para looks delicados e cheios de personalidade.",
     details: ["Conjunto com várias peças", "Formatos variados", "Acabamento delicado"],
+  },
+  {
+    id: "uriage-xemose-stick",
+    name: "Uriage Xémose Stick Lèvres Hidratante",
+    category: "Skincare",
+    price: 1250,
+    rating: 4.8,
+    reviews: 74,
+    images: [uriageXemose],
+    description:
+      "Stick labial hidratante da linha Xémose, especialmente formulado para lábios muito secos e atópicos. Sem perfume, hipoalergénico e com Água Termal de Uriage.",
+    details: ["4g", "Sem perfume", "Hipoalergénico", "Lábios secos e atópicos"],
+  },
+  {
+    id: "avene-shampoo-bebe",
+    name: "Avène Shampoo Bebé Hipoalergénico",
+    category: "Cabelo",
+    price: 500,
+    rating: 4.7,
+    reviews: 58,
+    images: [aveneShampoo],
+    description:
+      "Shampoo suave e hipoalergénico para bebé com fórmula de hidratação enriquecida, sem parabenos, corantes, fragrâncias nem sulfatos. Dermatologicamente testado.",
+    details: ["200 ml", "Sem parabenos, corantes e sulfatos", "Hipoalergénico", "Para bebé"],
+  },
+  {
+    id: "loreal-men-stress-resist",
+    name: "L'Oréal Men Expert Stress Resist Gel de Duche 5 em 1",
+    category: "Banho",
+    price: 850,
+    rating: 4.6,
+    reviews: 91,
+    images: [lorealMen],
+    description:
+      "Gel de duche relaxante 5 em 1 para corpo, rosto, cabelo, barba e bigode. Fórmula anti-stress que limpa profundamente e revitaliza a pele do homem.",
+    details: ["5 em 1: corpo, rosto, cabelo, barba e bigode", "Fórmula relaxante", "Frasco com 30% menos plástico"],
+  },
+  {
+    id: "skala-amido-milho",
+    name: "Skala Expert Amido de Milho 2 em 1 (1000g)",
+    category: "Cabelo",
+    price: 650,
+    rating: 4.8,
+    reviews: 143,
+    images: [skalaAmido],
+    description:
+      "Creme de pentear e hidratante 2 em 1 com amido de milho, manteiga de karité, óleo de coco e D-Pantenol. Proporciona ultra-reparação, força e brilho ao cabelo.",
+    details: ["1000g", "2 em 1: creme de pentear + hidratante", "Vegano", "Amido de milho, manteiga de karité e óleo de coco"],
+    bestSeller: true,
+  },
+  {
+    id: "nivea-hijab-fresh",
+    name: "Nivea Deodorant Brightening Hijab Fresh Roll-on",
+    category: "Banho",
+    price: 250,
+    rating: 4.6,
+    reviews: 67,
+    images: [niveaHijabFresh],
+    description:
+      "Desodorizante roll-on brightening com Vitamina C e Extrato de Sakura. Protecção de 48h, 0% álcool e fórmula de longa duração para uma sensação de frescura duradoura.",
+    details: ["50 ml", "48h de protecção", "Vitamina C e Extrato de Sakura", "0% álcool"],
+  },
+  {
+    id: "nivea-hijab-active",
+    name: "Nivea Deodorant Hijab Active Bright & Dry Roll-on",
+    category: "Banho",
+    price: 250,
+    rating: 4.7,
+    reviews: 53,
+    images: [niveaHijabActive],
+    description:
+      "Desodorizante antitranspirante roll-on com 99% de ação antibacteriana e Vitamina C. Protecção de 48h, 0% álcool, fórmula Bright & Dry para axilas mais claras e secas.",
+    details: ["50 ml", "49h Anti-Perspirante", "99% Antibacteriano", "Vitamina C", "0% álcool"],
+  },
+  {
+    id: "nivea-hijab-soft",
+    name: "Nivea Deodorant Hijab Soft Bright & Shaveless Roll-on",
+    category: "Banho",
+    price: 250,
+    rating: 4.7,
+    reviews: 48,
+    images: [niveaHijabSoft],
+    description:
+      "Desodorizante antitranspirante com protecção Derma Active 72h, Vitamina C e Extrato de Pérola. Fórmula Bright & Shaveless para axilas mais claras e suaves.",
+    details: ["50 ml", "72h Anti-Perspirante", "Vitamina C e Extrato de Pérola", "0% álcool"],
+  },
+  {
+    id: "totex-argan-conditioner",
+    name: "Totex Cosmetic Argan Condicionador Bifásico (400ml)",
+    category: "Cabelo",
+    price: 750,
+    rating: 4.7,
+    reviews: 82,
+    images: [totexArgan],
+    description:
+      "Condicionador bifásico de uso profissional com óleo de argão. Hidrata, condiciona e facilita o penteado sem necessidade de enxaguar, deixando o cabelo brilhante e macio.",
+    details: ["400 ml", "Uso profissional", "Óleo de argão", "Não necessita enxaguar"],
+  },
+  {
+    id: "risque-chocolight",
+    name: "Risque Verniz de Unhas Chocolight",
+    category: "Maquiagem",
+    price: 150,
+    rating: 4.5,
+    reviews: 39,
+    images: [risqueChocolight],
+    description:
+      "Verniz de unhas cremoso da Risque na cor Chocolight, uma nova tonalidade chocolate sofisticada e versátil para um look moderno e elegante.",
+    details: ["8,1 ml", "Acabamento cremoso", "Nova cor Chocolight"],
+  },
+  {
+    id: "instituto-rosa-mosqueta",
+    name: "Instituto Español Óleo Corporal Rosa Mosqueta (400ml)",
+    category: "Skincare",
+    price: 900,
+    rating: 4.8,
+    reviews: 117,
+    images: [institutoRosa],
+    description:
+      "Óleo corporal de rosa mosqueta para banho, duche e massagem. Acondicionador de pele com propriedades regeneradoras que nutre e suaviza profundamente a pele.",
+    details: ["400 ml", "Para banho, duche e massagem", "Óleo de Rosa Mosqueta", "Acondicionador de pele"],
+    bestSeller: true,
+  },
+  {
+    id: "instituto-aloe-vera",
+    name: "Instituto Español Gel de Duche Aloe Vera (1250ml)",
+    category: "Banho",
+    price: 1250,
+    rating: 4.7,
+    reviews: 134,
+    images: [institutoAloeVera],
+    description:
+      "Gel de duche hidratante com 100% Aloe Vera natural, em formato familiar de 1250 ml. Cuida da pele com propriedades calmantes e hidratantes do aloé vera puro.",
+    details: ["1250 ml", "100% Aloe Vera natural", "Hidratante", "Formato familiar"],
+    bestSeller: true,
+  },
+  {
+    id: "yara-perfume-oil",
+    name: "Yara Óleo de Perfume Concentrado Roll-on",
+    category: "Perfume",
+    price: 100,
+    rating: 4.6,
+    reviews: 61,
+    images: [yaraPerfume],
+    description:
+      "Óleo de perfume concentrado Yara em frasco roll-on, uma fragrância oriental intensa e duradoura. Fácil de aplicar e perfeito para levar na bolsa.",
+    details: ["Roll-on", "Perfume concentrado", "Fragrância oriental"],
   },
 ];
 

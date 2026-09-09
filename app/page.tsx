@@ -184,7 +184,7 @@ function HomeContent() {
 
   return (
     <>
-      {/* ── HERO EDITORIAL REVEAL — anima uma vez por sessão (reset só com F5) ── */}
+      {/* ── HERO EDITORIAL REVEAL — reanima ao voltar ao Início via menu ── */}
       <HeroEditorialReveal />
 
       {/* ── CATEGORIAS ── */}
@@ -329,7 +329,12 @@ function HomeContent() {
   );
 }
 
+function HomeWrapper() {
+  const { heroKey } = useShop();
+  return <HomeContent key={heroKey} />;
+}
+
 export default function Home() {
-  return <HomeContent />;
+  return <HomeWrapper />;
 }
 

@@ -239,17 +239,16 @@ function HeroEditorialReveal() {
 
 function HomeContent() {
   const [category, setCategory] = useState<Category>("Tudo");
+  const [navCnt, setNavCnt] = useState(0);
   const { openProduct } = useShop();
 
-  // Produtos embaralhados — actualiza a cada minuto como se viesse de um backend.
-  const shuffledProducts = useShuffledProducts();
+  function handleCategoryChange(next: Category) {
+    setNavCnt((n) => n + 1);
+    setCategory(next);
+  }
 
-  const products = useMemo(() => {
-    if (category !== "Tudo") {
-      return shuffledProducts.filter((p) => p.category === category);
-    }
-    return shuffledProducts;
-  }, [category, shuffledProducts]);
+  // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
+  const products = useShuffledProducts(category, navCnt);
   const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
 
   return (
@@ -267,7 +266,7 @@ function HomeContent() {
         </FadeUp>
 
         <FadeUp delay={0.1}>
-          <CategoryPills active={category} onChange={setCategory} />
+          <CategoryPills active={category} onChange={handleCategoryChange} />
         </FadeUp>
 
         <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">

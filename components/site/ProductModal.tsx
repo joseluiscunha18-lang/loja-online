@@ -1,16 +1,24 @@
 "use client";
 import { Minus, Plus, Star, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import { useShop } from "@/lib/shop-context";
-import { formatMZN } from "@/lib/shop-data";
+import { formatMZN, PRODUCTS } from "@/lib/shop-data";
 
 export function ProductModal() {
-  const { activeProduct, closeProduct, add } = useShop();
+  const { activeProduct, closeProduct, add, openProduct } = useShop();
   const [image, setImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState<string | undefined>(undefined);
   const dragControls = useDragControls();
+
+  // Produtos relacionados: mesma categoria, excluindo o actual, máx 6
+  const related = useMemo(() => {
+    if (!activeProduct) return [];
+    return PRODUCTS
+      .filter((p) => p.category === activeProduct.category && p.id !== activeProduct.id)
+      .slice(0, 6);
+  }, [activeProduct]);
 
   useEffect(() => {
     if (!activeProduct) return;
@@ -187,6 +195,38 @@ export function ProductModal() {
                 </button>
               </div>
             </div>
+
+            {/* ── PRODUTOS RELACIONADOS ── */}
+            {related.length > 0 && (
+              <div className="border-t border-border px-6 pt-6 pb-8">
+                <p className="eyebrow mb-4">Pode também gostar</p>
+                <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
+                  {related.map((product) => (
+                    <motion.button
+                      key={product.id}
+                      type="button"
+                      onClick={() => openProduct(product)}
+                      className="w-36 shrink-0 text-left"
+                      whileHover={{ y: -3 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="overflow-hidden rounded-2xl bg-secondary">
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          width={300}
+                          height={300}
+                          loading="lazy"
+                          className="aspect-square w-full object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                      <p className="mt-2 line-clamp-2 text-xs font-medium leading-snug">{product.name}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{formatMZN(product.price)}</p>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       )}

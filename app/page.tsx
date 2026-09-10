@@ -270,9 +270,9 @@ function HomeContent() {
           <CategoryPills active={category} onChange={handleCategoryChange} />
         </FadeUp>
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
-            key={category}
+            key={category + "-" + navCnt}
             className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}

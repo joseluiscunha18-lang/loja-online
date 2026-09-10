@@ -4,6 +4,7 @@ import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, CATEGORIES, type Category } from "@/lib/shop-data";
 import { useShuffledProducts } from "@/lib/use-shuffle-seed";
 import { Suspense, useEffect, useMemo, useTransition, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
 function isCategory(value: string | null): value is Category {
@@ -49,18 +50,33 @@ function ProdutosContent() {
       <div className="mt-8">
         <CategoryPills active={category} onChange={handleCategoryChangeWithShuffle} />
       </div>
-      <div
-        className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
-        style={{ opacity: isPending ? 0.6 : 1, transition: "opacity 0.15s ease" }}
-      >
-        {products.length === 0 ? (
-          <p className="col-span-full py-16 text-center text-sm text-muted-foreground">
-            Não há produtos nesta categoria no momento.
-          </p>
-        ) : (
-          products.map((p) => <ProductCard key={p.id} product={p} />)
-        )}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={category}
+          className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          {products.length === 0 ? (
+            <p className="col-span-full py-16 text-center text-sm text-muted-foreground">
+              Não há produtos nesta categoria no momento.
+            </p>
+          ) : (
+            products.map((p, i) => (
+              <motion.div
+                key={p.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.035, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                <ProductCard product={p} />
+              </motion.div>
+            ))
+          )}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

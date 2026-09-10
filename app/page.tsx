@@ -249,7 +249,8 @@ function HomeContent() {
 
   // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
   const products = useShuffledProducts(category, navCnt);
-  const bestSellers = PRODUCTS.filter((p) => p.bestSeller);
+  // Últimos 8 produtos adicionados (novidades)
+  const novidades = [...PRODUCTS].slice(-8).reverse();
 
   return (
     <>
@@ -269,18 +270,32 @@ function HomeContent() {
           <CategoryPills active={category} onChange={handleCategoryChange} />
         </FadeUp>
 
-        <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
-          {products.slice(0, 8).map((product, i) => (
-            <FadeUp key={`${category}-${product.id}`} delay={i * 0.04}>
-              <ProductCard product={product} />
-            </FadeUp>
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={category}
+            className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            {products.slice(0, 8).map((product, i) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.04, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         <FadeUp delay={0.1} className="mt-10 flex justify-center">
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
             <Link
-              href={`/produtos?categoria=${category}`}
+              href="https://bliss-beauty-three.vercel.app/produtos"
               className="block rounded-full border border-border px-8 py-3.5 text-sm tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
             >
               Ver toda a coleção
@@ -289,15 +304,15 @@ function HomeContent() {
         </FadeUp>
       </section>
 
-      {/* ── MAIS VENDIDOS ── */}
+      {/* ── NOVIDADES ── */}
       <section className="mt-16">
         <FadeUp className="mx-auto mb-5 flex max-w-6xl items-end justify-between gap-4 px-4">
-          <h2 className="font-display text-3xl">Mais Vendidos</h2>
-          <span className="eyebrow">Seleção Bliss</span>
+          <h2 className="font-display text-3xl">Novidades</h2>
+          <span className="eyebrow">Recém chegados</span>
         </FadeUp>
 
         <div className="no-scrollbar flex gap-4 overflow-x-auto px-4 pb-2">
-          {bestSellers.map((product, i) => (
+          {novidades.map((product, i) => (
             <motion.button
               key={product.id}
               type="button"

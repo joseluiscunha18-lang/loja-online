@@ -35,7 +35,27 @@ const niveaRichCare = "/assets/p-nivea-rich-care.webp";
 const niveaCoconut = "/assets/p-nivea-coconut.webp";
 const niveaBodyCream = "/assets/p-nivea-body-cream.webp";
 export const editorial = "/assets/editorial.jpg";
-const hero = "/assets/hero.jpg";
+export const heroImage = "/assets/hero.jpg";
+
+export const SITE_URL = "https://bliss-beauty-three.vercel.app";
+
+export const STORE = {
+  name: "Bliss Beauty",
+  tagline: "Beleza que cuida de si",
+  whatsapp: "258840000000",
+  email: "blissbeauty@gmail.com",
+  address: "Maputo, Moçambique",
+  delivery: "Fazemos entregas na Cidade de Maputo e Matola",
+  logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
+} as const;
+
+export function formatMZN(value: number): string {
+  return value.toLocaleString("pt-MZ", { style: "currency", currency: "MZN", maximumFractionDigits: 0 });
+}
+
+export function productUrl(id: string): string {
+  return `${SITE_URL}/produto/${id}`;
+}
 
 export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Desodorizante", "Maquiagem", "Perfume"] as const;
 export type Category = (typeof CATEGORIES)[number];

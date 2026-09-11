@@ -31,6 +31,9 @@ const risqueChocolight = "/assets/p-risque-chocolight.webp";
 const institutoRosa = "/assets/p-instituto-rosa.webp";
 const institutoAloeVera = "/assets/p-instituto-aloevera.webp";
 const yaraPerfume = "/assets/p-yara-perfume.webp";
+const niveaRichCare = "/assets/p-nivea-rich-care.webp";
+const niveaCoconut = "/assets/p-nivea-coconut.webp";
+const niveaBodyCream = "/assets/p-nivea-body-cream.webp";
 export const editorial = "/assets/editorial.jpg";
 const hero = "/assets/hero.jpg";
 
@@ -227,18 +230,6 @@ export const PRODUCTS: Product[] = [
     description:
       "Pedra-pomes desenvolvida para remover pele morta, calosidades e durezas na sola dos pés, suavizando calcanhares ásperos.",
     details: ["Uso nos pés", "Pedra natural", "Fácil de usar"],
-  },
-  {
-    id: "escova-limpeza-facial",
-    name: "Escova de Limpeza Facial Dupla",
-    category: "Maquiagem",
-    price: 650,
-    rating: 4.6,
-    reviews: 41,
-    images: [escovaFacial],
-    description:
-      "Escova facial de silicone com cerdas duplas para uma limpeza profunda, removendo impurezas e células mortas.",
-    details: ["Silicone macio", "Dupla face", "Fácil de lavar"],
   },
   {
     id: "cabecas-escova-eletrica",
@@ -461,29 +452,40 @@ export const PRODUCTS: Product[] = [
       "Óleo de perfume concentrado Yara em frasco roll-on, uma fragrância oriental intensa e duradoura. Fácil de aplicar e perfeito para levar na bolsa.",
     details: ["Roll-on", "Perfume concentrado", "Fragrância oriental"],
   },
+  {
+    id: "nivea-rich-care-shower-oil",
+    name: "Nivea Rich Care Shower Oil (200ml)",
+    category: "Banho",
+    price: 900,
+    rating: 4.8,
+    reviews: 98,
+    images: [niveaRichCare],
+    description:
+      "Óleo de duche nutritivo com 55% de óleos naturais, Vitaminas C e E. Limpa e hidrata profundamente a pele durante o banho, deixando-a suave e sedosa.",
+    details: ["200 ml", "55% óleos naturais", "Vitaminas C e E", "Pele normal a seca"],
+  },
+  {
+    id: "nivea-coconut-body-cream",
+    name: "Nivea Coconut & Monoi Oil Cream (400ml)",
+    category: "Skincare",
+    price: 450,
+    rating: 4.7,
+    reviews: 112,
+    images: [niveaCoconut],
+    description:
+      "Creme corporal Oil in Cream com coco e óleo de monoi, ideal para pele normal a seca. Fórmula rica que nutre e suaviza a pele com um toque de óleo leve.",
+    details: ["400 ml", "Óleo de coco e monoi", "Pele normal a seca", "Oil in Cream"],
+  },
+  {
+    id: "nivea-intensive-moisturising",
+    name: "Nivea Body Cream Intensive Moisturising (400ml)",
+    category: "Skincare",
+    price: 450,
+    rating: 4.8,
+    reviews: 145,
+    images: [niveaBodyCream],
+    description:
+      "Creme corporal intensivo 5 em 1 com Deep Moisture Serum e minerais do mar. Hidratação de 48h de absorção rápida para pele normal a seca.",
+    details: ["400 ml", "48h de hidratação", "5 em 1", "Deep Moisture Serum e minerais do mar"],
+  },
 ];
-
-export const heroImage = hero;
-export const heroBlurDataUrl = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAoACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDZC0uKkKYpMVzm4w4A5qMlW6GqepyuqkLxWXp17Kbgo2SKAOwIDLUBGDTlfK8UwctTEijqEYZCazbOKJJsnrWnqKsRtXrWW9rImG6VPU06HQYKLTEf5qKKZmLsDyZNQXSBjiiiqEz/2Q==";
-
-export function formatMZN(value: number | null) {
-  if (value === null) return "Sob consulta";
-  return `${value.toLocaleString("pt-PT")} MZN`;
-}
-
-export const STORE = {
-  name: "Bliss Beauty & Care",
-  email: "blissbeauty.com",
-  instagram: "bliss beauty e care",
-  instagramUrl: "https://instagram.com/",
-  phoneDisplay: "+258 86 060 6170",
-  whatsapp: "258860606170",
-  delivery: "Fazemos entregas na Cidade de Maputo e Matola",
-  logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
-};
-
-export const SITE_URL = "https://bliss-beauty-three.vercel.app";
-
-export function productUrl(productId: string) {
-  return `${SITE_URL}/produto/${productId}`;
-}

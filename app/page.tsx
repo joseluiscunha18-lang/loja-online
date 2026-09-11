@@ -312,7 +312,7 @@ function HomeContent() {
         </FadeUp>
 
         <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2">
-          <div className="w-4 shrink-0" aria-hidden />
+          <div className="w-2 shrink-0" aria-hidden />
           {novidades.map((product, i) => (
             <motion.button
               key={product.id}
@@ -337,7 +337,7 @@ function HomeContent() {
               <p className="text-sm text-muted-foreground">{formatMZN(product.price)}</p>
             </motion.button>
           ))}
-          <div className="w-4 shrink-0" aria-hidden />
+          <div className="w-2 shrink-0" aria-hidden />
         </div>
       </section>
 

@@ -49,7 +49,8 @@ export const STORE = {
   logistics: "Atendimento e Entregas: Cidade de Maputo & Matola",
 } as const;
 
-export function formatMZN(value: number): string {
+export function formatMZN(value: number | null | undefined): string {
+  if (value == null) return "—";
   return value.toLocaleString("pt-MZ", { style: "currency", currency: "MZN", maximumFractionDigits: 0 });
 }
 
@@ -181,7 +182,7 @@ export const PRODUCTS: Product[] = [
     id: "desodorizantes-stick",
     name: "Dove Advanced Care Body Spray",
     category: "Desodorizante",
-    price: null,
+    price: 250,
     rating: 4.6,
     reviews: 82,
     images: [desodorizantes],
@@ -193,7 +194,7 @@ export const PRODUCTS: Product[] = [
     id: "nivea-rollon",
     name: "Dove Advanced Care Roll-on",
     category: "Desodorizante",
-    price: null,
+    price: 250,
     rating: 4.7,
     reviews: 134,
     images: [niveaRollon],

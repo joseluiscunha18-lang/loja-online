@@ -60,30 +60,38 @@ export function ProductModal() {
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 32, stiffness: 320 }}
+            transition={{ type: "spring", damping: 40, stiffness: 400 }}
             className="relative flex max-h-[94dvh] w-full max-w-lg flex-col overflow-y-auto rounded-t-[2rem] bg-background sm:rounded-[2rem]"
           >
             <div className="relative bg-secondary">
               {/* Puxador para arrastar e fechar (só em ecrãs pequenos), sobreposto à imagem */}
               <div
-                onPointerDown={(e) => dragControls.start(e)}
+                onPointerDown={(e) => { e.stopPropagation(); dragControls.start(e); }}
                 className="absolute inset-x-0 top-0 z-10 flex touch-none cursor-grab justify-center pt-3 pb-6 active:cursor-grabbing sm:hidden"
               >
                 <span className="h-1.5 w-10 rounded-full bg-background/85 shadow-sm backdrop-blur" aria-hidden />
               </div>
 
-              <img
-                src={activeProduct.images[image]}
-                alt={activeProduct.name}
-                width={800}
-                height={800}
-                className="aspect-square w-full object-cover"
-              />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={activeProduct.id + "-" + image}
+                  src={activeProduct.images[image]}
+                  alt={activeProduct.name}
+                  width={800}
+                  height={800}
+                  className="aspect-square w-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                />
+              </AnimatePresence>
               <button
                 type="button"
-                onClick={closeProduct}
+                onClick={(e) => { e.stopPropagation(); closeProduct(); }}
                 aria-label="Fechar detalhes"
-                className="absolute top-4 right-4 grid size-10 place-items-center rounded-full bg-background/85 backdrop-blur"
+                style={{ zIndex: 50 }}
+                className="absolute top-4 right-4 grid size-10 place-items-center rounded-full bg-background/85 backdrop-blur touch-none"
               >
                 <X className="size-5" aria-hidden />
               </button>

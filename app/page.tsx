@@ -341,7 +341,7 @@ function HomeContent() {
                 />
               </div>
               <p className="mt-3 truncate text-sm font-medium">{product.name}</p>
-              <p className="text-sm text-muted-foreground">{formatMZN(product.price)}</p>
+              <p className="text-sm font-semibold tracking-tight">{formatMZN(product.price)}</p>
             </motion.button>
           ))}
           <div className="w-2 shrink-0" aria-hidden />

@@ -46,7 +46,7 @@ function ProdutosContent() {
     useInfiniteReveal(products, category + "-" + navCnt);
 
   const isAllProducts = category === "Tudo";
-  const pageTitle = isAllProducts ? "Todas as coleções" : category;
+  const pageTitle = isAllProducts ? "Todas nossas coleções" : category;
   const pageSubtitle = isAllProducts
     ? "Beleza, acessórios e moda escolhidos para si."
     : `Os melhores produtos da categoria ${category}.`;

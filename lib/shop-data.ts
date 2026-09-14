@@ -55,7 +55,8 @@ export const SITE_URL = "https://bliss-beauty-three.vercel.app";
 export const STORE = {
   name: "Bliss Beauty",
   tagline: "Beleza que cuida de si",
-  whatsapp: "258840000000",
+  whatsapp: "258860606170",
+  phoneDisplay: "+258 86 060 6170",
   email: "blissbeauty@gmail.com",
   address: "Maputo, Moçambique",
   delivery: "Fazemos entregas na Cidade de Maputo e Matola",

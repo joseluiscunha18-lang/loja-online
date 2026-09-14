@@ -34,6 +34,19 @@ const yaraPerfume = "/assets/p-yara-perfume.webp";
 const niveaRichCare = "/assets/p-nivea-rich-care.webp";
 const niveaCoconut = "/assets/p-nivea-coconut.webp";
 const niveaBodyCream = "/assets/p-nivea-body-cream.webp";
+const skalaFrutastica = "/assets/p-skala-frutastica.webp";
+const luxBodyWash = "/assets/p-lux-bodywash.webp";
+const ohSoSpritzer = "/assets/p-ohso-spritzer.webp";
+const andreiaGel = "/assets/p-andreia-gel.webp";
+const panosMicrofibra = "/assets/p-panos-microfibra.webp";
+const yaraRosa = "/assets/p-yara-rosa.webp";
+const skalaMelanciaPack = "/assets/p-skala-melancia-pack.webp";
+const intimusLencos = "/assets/p-intimus-lencos.webp";
+const institutoUrea = "/assets/p-instituto-urea.webp";
+const herbissimoLavanda = "/assets/p-herbissimo-lavanda.webp";
+const salonSosCachos = "/assets/p-salon-sos-cachos.webp";
+const anitaClareador = "/assets/p-anita-clareador.webp";
+const niveaCocoaButter = "/assets/p-nivea-cocoa-butter.webp";
 export const editorial = "/assets/editorial.jpg";
 export const heroImage = "/assets/hero.jpg";
 
@@ -508,5 +521,165 @@ export const PRODUCTS: Product[] = [
     description:
       "Creme corporal intensivo 5 em 1 com Deep Moisture Serum e minerais do mar. Hidratação de 48h de absorção rápida para pele normal a seca.",
     details: ["400 ml", "48h de hidratação", "5 em 1", "Deep Moisture Serum e minerais do mar"],
+  },
+  {
+    id: "skala-frutastica-pack",
+    name: "Skala Frutástica 2 em 1 (1000g)",
+    category: "Cabelo",
+    price: 450,
+    rating: 4.8,
+    reviews: 203,
+    images: [skalaFrutastica],
+    description:
+      "Creme de pentear e hidratante 2 em 1 da linha Frutástica, disponível em 5 sabores: Uva, Morango, Melancia, Banana e Coco. Vegano, com ingredientes naturais e fórmula liberada.",
+    details: ["1000g", "5 sabores disponíveis", "2 em 1", "Vegano", "Sem ingredientes de origem animal"],
+    bestSeller: true,
+  },
+  {
+    id: "lux-bodywash",
+    name: "Lux Body Wash (Romantic Hibiscus / Velvet Jasmine)",
+    category: "Banho",
+    price: 550,
+    rating: 4.6,
+    reviews: 87,
+    images: [luxBodyWash],
+    description:
+      "Gel de banho Lux com fragrância duradoura de 24h. Disponível em Romantic Hibiscus (fragrância opulenta) e Velvet Jasmine (fragrância delicada). Com óleo essencial Everscent.",
+    details: ["Fragrância 24h", "Óleo essencial Everscent", "2 fragrâncias disponíveis"],
+  },
+  {
+    id: "ohso-heavenly-spritzer",
+    name: "Oh So Heavenly Wrapped in Romance Body Spritzer",
+    category: "Perfume",
+    price: 900,
+    rating: 4.7,
+    reviews: 64,
+    images: [ohSoSpritzer],
+    description:
+      "Body spritzer da linha Classic Care com fragrância encantadora de Blushing Red Berries e Rosewood. Leve, refrescante e perfeito para o dia a dia.",
+    details: ["Fragrância Blushing Red Berries & Rosewood", "Spray corporal", "Classic Care"],
+  },
+  {
+    id: "andreia-gel-polish",
+    name: "Andreia Professional Gel Polish",
+    category: "Maquiagem",
+    price: 450,
+    rating: 4.8,
+    reviews: 112,
+    images: [andreiaGel],
+    description:
+      "Verniz de gel profissional Andreia em 3 linhas: Gel Polish clássico, The Gel Polish (sem solventes, ultra pigmentado) e True Pure (100% vegano, 0% plástico). Acabamento duradouro e brilhante.",
+    details: ["Sem solventes", "Ultra pigmentado", "Opção 100% vegana disponível", "Uso profissional"],
+  },
+  {
+    id: "panos-microfibra",
+    name: "Pack Panos de Microfibra (5 peças)",
+    category: "Banho",
+    price: 150,
+    rating: 4.5,
+    reviews: 48,
+    images: [panosMicrofibra],
+    description:
+      "Pack com 5 panos de microfibra em cores pastel variadas. Absorção rápida, macios e versáteis — ideais para rosto, corpo e cabelo.",
+    details: ["5 peças", "Cores variadas", "Alta absorção", "Microfibra macia"],
+  },
+  {
+    id: "yara-rollon-rosa",
+    name: "Yara Roll-on Perfume Oil (15ml)",
+    category: "Perfume",
+    price: 100,
+    rating: 4.7,
+    reviews: 93,
+    images: [yaraRosa],
+    description:
+      "Óleo de perfume concentrado Yara em frasco roll-on de 15ml. Fragrância oriental floral de longa duração, suave e feminina.",
+    details: ["15 ml", "Roll-on", "Fragrância oriental floral", "Perfume concentrado"],
+  },
+  {
+    id: "skala-melancia-pack",
+    name: "Skala Melancia Pack (Shampoo 325ml + Condicionador 200ml)",
+    category: "Cabelo",
+    price: 850,
+    rating: 4.8,
+    reviews: 156,
+    images: [skalaMelanciaPack],
+    description:
+      "Pack duo Skala Frutástica Melancia: shampoo de 325ml sem sal e sulfato + condicionador de 200ml, ambos com óleo de semente de melancia. Para cachos e crespos desnutridos sem definição.",
+    details: ["Shampoo 325ml + Condicionador 200ml", "Sem sal e sulfato", "Para cachos e crespos", "Óleo de semente de melancia"],
+    bestSeller: true,
+  },
+  {
+    id: "intimus-lencos-intimos",
+    name: "Intimus Lenços Umedecidos Íntimos Defesa Natural",
+    category: "Skincare",
+    price: 100,
+    rating: 4.6,
+    reviews: 71,
+    images: [intimusLencos],
+    description:
+      "Lenços umedecidos íntimos com pH balanceado que ajudam a preservar as defesas naturais. Suaves, hipoalergénicos e dermatologicamente testados para uso íntimo feminino.",
+    details: ["pH balanceado", "Preserva as defesas naturais", "Uso íntimo feminino", "Dermatologicamente testado"],
+  },
+  {
+    id: "instituto-urea-creme",
+    name: "Instituto Español Urea 20% Crema Reparadora",
+    category: "Skincare",
+    price: 1000,
+    rating: 4.9,
+    reviews: 138,
+    images: [institutoUrea],
+    description:
+      "Creme reparador avançado com 20% de ureia para pele áspera ou seca. Ultra hidratante, repara, protege e suaviza as zonas mais ásperas. Qualidade farmacêutica.",
+    details: ["20% Ureia", "Para pele áspera ou seca", "Repara, protege e suaviza", "Ultra hidratação"],
+    bestSeller: true,
+  },
+  {
+    id: "herbissimo-lavanda",
+    name: "Herbíssimo Desodorizante Creme Lavanda (55g)",
+    category: "Desodorizante",
+    price: 550,
+    rating: 4.7,
+    reviews: 89,
+    images: [herbissimoLavanda],
+    description:
+      "Desodorizante antitranspirante em creme com aroma de lavanda e fórmula Hidra+. Protecção de 48h, sem testes em animais e com embalagem reciclável.",
+    details: ["55g", "48h de protecção", "Aroma lavanda", "Sem testes em animais", "Embalagem reciclável"],
+  },
+  {
+    id: "salon-line-sos-cachos",
+    name: "Salon Line S.O.S Cachos Mel e Óleo de Argan (1kg)",
+    category: "Cabelo",
+    price: 1400,
+    rating: 4.9,
+    reviews: 174,
+    images: [salonSosCachos],
+    description:
+      "Ativador de cachos 2 em 1 com mel e óleo de argan para restauração extrema. Proporciona definição profunda, brilho intenso e efeito reparador da raiz às pontas. Para cabelos 3ABC-4ABC.",
+    details: ["1kg", "Mel e óleo de argan", "2 em 1", "Para cachos 3ABC-4ABC", "Reparação & Força"],
+    bestSeller: true,
+  },
+  {
+    id: "anita-clareador-intimo",
+    name: "Anita Creme Clareador Íntimo Virilha & Axilas (60ml)",
+    category: "Skincare",
+    price: 1350,
+    rating: 4.7,
+    reviews: 96,
+    images: [anitaClareador],
+    description:
+      "Creme clareador íntimo para virilha e axilas com Bioex Whiteplex. Clareia manchas, uniformiza o tom, ilumina e melhora o aspecto da pele. Também indicado para pescoço, cotovelos e joelhos.",
+    details: ["60 ml", "Virilha, axilas, pescoço e cotovelos", "Bioex Whiteplex", "Dermatologicamente testado"],
+  },
+  {
+    id: "nivea-cocoa-butter",
+    name: "Nivea Body Cream Cocoa Butter (400ml)",
+    category: "Skincare",
+    price: 450,
+    rating: 4.8,
+    reviews: 161,
+    images: [niveaCocoaButter],
+    description:
+      "Creme corporal 5 em 1 com manteiga de cacau e Vitamina E. Hidratação nutritiva de 48h com Deep Moisture Serum para pele seca. Absorção rápida e aroma suave de cacau.",
+    details: ["400 ml", "48h de hidratação nutritiva", "5 em 1", "Manteiga de cacau e Vitamina E", "Pele seca"],
   },
 ];

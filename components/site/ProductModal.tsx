@@ -116,7 +116,7 @@ export function ProductModal() {
               <p className="eyebrow">{activeProduct.category}</p>
               <div className="mt-2 flex items-start justify-between gap-4">
                 <h2 className="font-display text-2xl leading-tight">{activeProduct.name}</h2>
-                <p className="font-display shrink-0 text-2xl">{formatMZN(activeProduct.price)}</p>
+                <p className="shrink-0 text-2xl font-semibold tracking-tight">{formatMZN(activeProduct.price)}</p>
               </div>
 
 

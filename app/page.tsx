@@ -249,8 +249,11 @@ function HomeContent() {
 
   // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
   const products = useShuffledProducts(category, navCnt);
-  // Últimos 8 produtos adicionados (novidades)
-  const novidades = [...PRODUCTS].slice(-8).reverse();
+  // Novidades: últimos produtos adicionados, excluindo os que já aparecem na grelha
+  const novidades = useMemo(() => {
+    const gridIds = new Set(products.slice(0, 8).map((p) => p.id));
+    return [...PRODUCTS].slice(-12).reverse().filter((p) => !gridIds.has(p.id)).slice(0, 8);
+  }, [products]);
 
   return (
     <>
@@ -277,7 +280,7 @@ function HomeContent() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.22 }}
           >
             {products.slice(0, 8).map((product, i) => (
               <motion.div
@@ -362,13 +365,13 @@ function HomeContent() {
               transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
             />
             <div className="p-7 sm:p-10">
-              <p className="eyebrow">O ritual Bliss</p>
               <h2 className="font-display mt-3 max-w-md text-3xl leading-tight sm:text-4xl">
-                Produtos originais, escolhidos um a um.
+                Criada para celebrar o autocuidado.
               </h2>
               <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
-                Trabalhamos apenas com fórmulas e peças que usamos e recomendamos. Cada encomenda é
-                conferida à mão antes de sair para entrega em Maputo ou Matola.
+                Não é preciso esperar por uma ocasião especial para se mimar. Trouxemos até si uma
+                seleção de produtos de beleza e cuidados pessoais — escolhidos para tornar a sua
+                rotina mais bonita e especial, com entregas em Maputo e Matola.
               </p>
               <Link
                 href="/sobre"

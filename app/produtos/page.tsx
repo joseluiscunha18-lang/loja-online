@@ -41,10 +41,8 @@ function ProdutosContent() {
   // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
   const products = useShuffledProducts(category, navCnt);
 
-  const { visibleItems, isLoadingMore, sentinelRef, skeletonCount } = useInfiniteReveal(
-    products,
-    category + "-" + navCnt,
-  );
+  const { visibleItems, isInitialLoading, isLoadingMore, sentinelRef, initialSkeletonCount, skeletonCount } =
+    useInfiniteReveal(products, category + "-" + navCnt);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
@@ -64,7 +62,11 @@ function ProdutosContent() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        {visibleItems.length === 0 ? (
+        {isInitialLoading ? (
+          Array.from({ length: initialSkeletonCount }).map((_, i) => (
+            <ProductCardSkeleton key={`initial-skeleton-${i}`} />
+          ))
+        ) : visibleItems.length === 0 ? (
           <p className="col-span-full py-16 text-center text-sm text-muted-foreground">
             Não há produtos nesta categoria no momento.
           </p>
@@ -72,7 +74,8 @@ function ProdutosContent() {
           visibleItems.map((p) => <ProductCard key={p.id} product={p} />)
         )}
 
-        {isLoadingMore &&
+        {!isInitialLoading &&
+          isLoadingMore &&
           Array.from({ length: skeletonCount }).map((_, i) => (
             <ProductCardSkeleton key={`skeleton-${i}`} />
           ))}

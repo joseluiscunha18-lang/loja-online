@@ -346,6 +346,17 @@ function HomeContent() {
           ))}
           <div className="w-2 shrink-0" aria-hidden />
         </div>
+
+        <FadeUp delay={0.1} className="mt-8 flex justify-center">
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              href="https://bliss-beauty-three.vercel.app/produtos"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
+            >
+              Ver todas as novidades <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </motion.div>
+        </FadeUp>
       </section>
 
       {/* ── EDITORIAL ── */}

@@ -377,12 +377,12 @@ function HomeContent() {
             />
             <div className="p-7 sm:p-10">
               <h2 className="font-display mt-3 max-w-md text-3xl leading-tight sm:text-4xl">
-                Criada para celebrar o autocuidado.
+                Beleza para todas as peles, todas as histórias.
               </h2>
               <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
-                Não é preciso esperar por uma ocasião especial para se mimar. Trouxemos até si uma
-                seleção de produtos de beleza e cuidados pessoais — escolhidos para tornar a sua
-                rotina mais bonita e especial, com entregas em Maputo e Matola.
+                Acreditamos que o cuidado com a pele não tem um só rosto. Trouxemos até si uma
+                seleção de produtos de beleza e cuidados pessoais, pensados para toda a gente —
+                com entregas em Maputo e Matola.
               </p>
               <Link
                 href="/sobre"

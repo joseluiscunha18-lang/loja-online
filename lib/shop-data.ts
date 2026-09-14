@@ -71,7 +71,7 @@ export function productUrl(id: string): string {
   return `${SITE_URL}/produto/${id}`;
 }
 
-export const CATEGORIES = ["Tudo", "Skincare", "Cabelo", "Banho", "Desodorizante", "Maquiagem", "Perfume"] as const;
+export const CATEGORIES = ["Tudo", "Cuidado Corporal", "Rosto & Lábios", "Cabelo", "Banho", "Perfume & Desodorizante", "Unhas & Maquiagem"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "neutrogena-refreshingly-clear",
     name: "Neutrogena Refreshingly Clear Hidratante",
-    category: "Skincare",
+    category: "Rosto & Lábios",
     price: 1250,
     rating: 4.7,
     reviews: 112,
@@ -107,7 +107,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "uriage-bariederm-cica",
     name: "Uriage Bariéderm-Cica Labial",
-    category: "Skincare",
+    category: "Rosto & Lábios",
     price: 1250,
     rating: 4.8,
     reviews: 87,
@@ -120,7 +120,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "avene-cicalfate",
     name: "Avène Cicalfate+ Lèvres Creme Labial",
-    category: "Skincare",
+    category: "Rosto & Lábios",
     price: 1350,
     rating: 4.9,
     reviews: 96,
@@ -133,7 +133,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "oleoban-creme-diario",
     name: "Oleoban Creme Diário Hidratante (1kg)",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 4900,
     rating: 4.7,
     reviews: 64,
@@ -145,7 +145,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "aloe-vera-gel",
     name: "Wokali Aloe Vera Hydrating Lotion",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 350,
     rating: 4.8,
     reviews: 121,
@@ -158,7 +158,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "vaselina-pura",
     name: "QI Purified Vaseline",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 499,
     rating: 4.6,
     reviews: 73,
@@ -170,7 +170,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "herbissimo-sensitive",
     name: "Herbíssimo Creme Hidratante Sensitive",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 1150,
     rating: 4.6,
     reviews: 58,
@@ -182,7 +182,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "balsamos-labiais",
     name: "Aichun Beauty Lip Balm Argan & Aloe",
-    category: "Skincare",
+    category: "Rosto & Lábios",
     price: 200,
     rating: 4.7,
     reviews: 105,
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "desodorizantes-stick",
     name: "Dove Advanced Care Body Spray",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 250,
     rating: 4.6,
     reviews: 82,
@@ -206,7 +206,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-rollon",
     name: "Dove Advanced Care Roll-on",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 250,
     rating: 4.7,
     reviews: 134,
@@ -268,7 +268,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "cabecas-escova-eletrica",
     name: "Cabeças de Escova de Limpeza Elétrica",
-    category: "Maquiagem",
+    category: "Unhas & Maquiagem",
     price: 980,
     rating: 4.5,
     reviews: 33,
@@ -280,7 +280,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "pinceis-maquiagem",
     name: "Conjunto de Pincéis de Maquiagem",
-    category: "Maquiagem",
+    category: "Unhas & Maquiagem",
     price: 1150,
     rating: 4.7,
     reviews: 55,
@@ -342,7 +342,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "uriage-xemose-stick",
     name: "Uriage Xémose Stick Lèvres Hidratante",
-    category: "Skincare",
+    category: "Rosto & Lábios",
     price: 1250,
     rating: 4.8,
     reviews: 74,
@@ -391,7 +391,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-fresh",
     name: "Nivea Deodorant Brightening Hijab Fresh Roll-on",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 250,
     rating: 4.6,
     reviews: 67,
@@ -403,7 +403,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-active",
     name: "Nivea Deodorant Hijab Active Bright & Dry Roll-on",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 250,
     rating: 4.7,
     reviews: 53,
@@ -415,7 +415,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-hijab-soft",
     name: "Nivea Deodorant Hijab Soft Bright & Shaveless Roll-on",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 250,
     rating: 4.7,
     reviews: 48,
@@ -439,7 +439,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "risque-chocolight",
     name: "Risque Verniz de Unhas Chocolight",
-    category: "Maquiagem",
+    category: "Unhas & Maquiagem",
     price: 150,
     rating: 4.5,
     reviews: 39,
@@ -451,7 +451,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "instituto-rosa-mosqueta",
     name: "Instituto Español Óleo Corporal Rosa Mosqueta (400ml)",
-    category: "Perfume",
+    category: "Perfume & Desodorizante",
     price: 900,
     rating: 4.8,
     reviews: 117,
@@ -477,7 +477,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "yara-perfume-oil",
     name: "Yara Óleo de Perfume Concentrado Roll-on",
-    category: "Perfume",
+    category: "Perfume & Desodorizante",
     price: 100,
     rating: 4.6,
     reviews: 61,
@@ -501,7 +501,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-coconut-body-cream",
     name: "Nivea Coconut & Monoi Oil Cream (400ml)",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 450,
     rating: 4.7,
     reviews: 112,
@@ -513,7 +513,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-intensive-moisturising",
     name: "Nivea Body Cream Intensive Moisturising (400ml)",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 450,
     rating: 4.8,
     reviews: 145,
@@ -550,7 +550,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "ohso-heavenly-spritzer",
     name: "Oh So Heavenly Wrapped in Romance Body Spritzer",
-    category: "Perfume",
+    category: "Perfume & Desodorizante",
     price: 900,
     rating: 4.7,
     reviews: 64,
@@ -562,7 +562,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "andreia-gel-polish",
     name: "Andreia Professional Gel Polish",
-    category: "Maquiagem",
+    category: "Unhas & Maquiagem",
     price: 450,
     rating: 4.8,
     reviews: 112,
@@ -586,7 +586,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "yara-rollon-rosa",
     name: "Yara Roll-on Perfume Oil (15ml)",
-    category: "Perfume",
+    category: "Perfume & Desodorizante",
     price: 100,
     rating: 4.7,
     reviews: 93,
@@ -611,7 +611,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "intimus-lencos-intimos",
     name: "Intimus Lenços Umedecidos Íntimos Defesa Natural",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 100,
     rating: 4.6,
     reviews: 71,
@@ -623,7 +623,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "instituto-urea-creme",
     name: "Instituto Español Urea 20% Crema Reparadora",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 1000,
     rating: 4.9,
     reviews: 138,
@@ -636,7 +636,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "herbissimo-lavanda",
     name: "Herbíssimo Desodorizante Creme Lavanda (55g)",
-    category: "Desodorizante",
+    category: "Perfume & Desodorizante",
     price: 550,
     rating: 4.7,
     reviews: 89,
@@ -661,7 +661,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "anita-clareador-intimo",
     name: "Anita Creme Clareador Íntimo Virilha & Axilas (60ml)",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 1350,
     rating: 4.7,
     reviews: 96,
@@ -673,7 +673,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nivea-cocoa-butter",
     name: "Nivea Body Cream Cocoa Butter (400ml)",
-    category: "Skincare",
+    category: "Cuidado Corporal",
     price: 450,
     rating: 4.8,
     reviews: 161,

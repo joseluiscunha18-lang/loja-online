@@ -1,12 +1,20 @@
 "use client";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductCardSkeleton } from "@/components/site/ProductCardSkeleton";
 import { PRODUCTS } from "@/lib/shop-data";
-import { AnimatePresence, motion } from "framer-motion";
+import { useInfiniteReveal } from "@/lib/use-infinite-reveal";
+import { motion } from "framer-motion";
 
-// Últimos 16 produtos adicionados — os mais recentes primeiro
+// Últimos produtos adicionados — os mais recentes primeiro
 const novidades = [...PRODUCTS].slice(-16).reverse();
 
 export default function Novidades() {
+  const { visibleItems, isLoadingMore, sentinelRef, skeletonCount } = useInfiniteReveal(
+    novidades,
+    "novidades",
+    8,
+  );
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <p className="eyebrow">Recém chegados</p>
@@ -15,25 +23,24 @@ export default function Novidades() {
         Os produtos mais recentes da Bliss — escolhidos e adicionados à loja com cuidado.
       </p>
 
-      <AnimatePresence mode="sync">
-        <motion.div
-          className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.22 }}
-        >
-          {novidades.map((p, i) => (
-            <motion.div
-              key={p.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22, delay: i * 0.03 }}
-            >
-              <ProductCard product={p} />
-            </motion.div>
+      <motion.div
+        className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        {visibleItems.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+
+        {isLoadingMore &&
+          Array.from({ length: skeletonCount }).map((_, i) => (
+            <ProductCardSkeleton key={`skeleton-${i}`} />
           ))}
-        </motion.div>
-      </AnimatePresence>
+      </motion.div>
+
+      {/* sentinela invisível: quando entra em vista, revela o próximo lote */}
+      <div ref={sentinelRef} className="h-px w-full" aria-hidden />
     </section>
   );
 }

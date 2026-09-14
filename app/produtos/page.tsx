@@ -39,19 +39,23 @@ function ProdutosContent() {
     handleCategoryChange(next);
   }
 
-  // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
+  // Produtos embaralhados — muda apenas quando o utilizador troca de categoria.
   const products = useShuffledProducts(category, navCnt);
 
   const { visibleItems, isInitialLoading, isLoadingMore, sentinelRef, initialSkeletonCount, skeletonCount } =
     useInfiniteReveal(products, category + "-" + navCnt);
 
+  const isAllProducts = category === "Tudo";
+  const pageTitle = isAllProducts ? "Todas as coleções" : category;
+  const pageSubtitle = isAllProducts
+    ? "Beleza, acessórios e moda escolhidos para si."
+    : `Os melhores produtos da categoria ${category}.`;
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <p className="eyebrow">A coleção Bliss</p>
-      <h1 className="font-display mt-3 text-5xl">Todos os nossos produtos</h1>
-      <p className="mt-4 max-w-xl text-muted-foreground">
-        Beleza, acessórios e moda escolhidos para si.
-      </p>
+      <h1 className="font-display mt-3 text-5xl">{pageTitle}</h1>
+      <p className="mt-4 max-w-xl text-muted-foreground">{pageSubtitle}</p>
       <div className="mt-8">
         <CategoryPills active={category} onChange={handleCategoryChangeWithShuffle} />
       </div>

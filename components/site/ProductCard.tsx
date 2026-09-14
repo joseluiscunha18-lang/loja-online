@@ -31,7 +31,7 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
             decoding="async"
             width={400}
             height={400}
-            className="aspect-square w-full scale-[1.08] object-cover transition-transform duration-500 will-change-transform group-hover:scale-[1.14]"
+            className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </button>
 
@@ -45,7 +45,7 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
           type="button"
           onClick={handleLike}
           aria-label={liked ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-          className="absolute top-3 right-3 grid size-9 place-items-center rounded-full bg-background/85 backdrop-blur"
+          className="absolute top-3 right-3 grid size-9 place-items-center rounded-full bg-background/90"
         >
           <Heart className={`size-4 ${liked ? "fill-foreground" : ""}`} aria-hidden />
         </button>

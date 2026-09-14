@@ -51,18 +51,18 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
         </button>
       </div>
 
-      <div className="flex items-start gap-2 px-1 pt-3">
+      <div className="flex items-center gap-2 px-1 pt-2.5">
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm leading-tight font-medium">{product.name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{formatMZN(product.price)}</p>
+          <h3 className="truncate text-sm leading-snug font-medium">{product.name}</h3>
+          <p className="mt-0.5 text-sm font-semibold tracking-tight">{formatMZN(product.price)}</p>
         </div>
         <button
           type="button"
           onClick={handleAdd}
-          aria-label={`Adicionar ${product.name} \u00e0 sacola`}
-          className="grid size-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-85 active:scale-95"
+          aria-label={`Adicionar ${product.name} à sacola`}
+          className="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-85 active:scale-95"
         >
-          <Plus className="size-4" aria-hidden />
+          <Plus className="size-3.5" aria-hidden />
         </button>
       </div>
     </article>

@@ -301,7 +301,7 @@ function HomeContent() {
               href="https://bliss-beauty-three.vercel.app/produtos"
               className="inline-flex items-center gap-2 rounded-2xl border border-foreground/25 px-6 py-2.5 text-sm transition-colors hover:bg-secondary"
             >
-              Ver toda a coleção <ArrowRight className="size-3.5" aria-hidden />
+              Ver mais coleções <ArrowRight className="size-3.5" aria-hidden />
             </Link>
           </motion.div>
         </FadeUp>

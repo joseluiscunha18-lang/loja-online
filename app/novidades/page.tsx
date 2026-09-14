@@ -9,11 +9,8 @@ import { motion } from "framer-motion";
 const novidades = [...PRODUCTS].slice(-16).reverse();
 
 export default function Novidades() {
-  const { visibleItems, isLoadingMore, sentinelRef, skeletonCount } = useInfiniteReveal(
-    novidades,
-    "novidades",
-    8,
-  );
+  const { visibleItems, isInitialLoading, isLoadingMore, sentinelRef, initialSkeletonCount, skeletonCount } =
+    useInfiniteReveal(novidades, "novidades", 8);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
@@ -29,11 +26,14 @@ export default function Novidades() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        {visibleItems.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
+        {isInitialLoading
+          ? Array.from({ length: initialSkeletonCount }).map((_, i) => (
+              <ProductCardSkeleton key={`initial-skeleton-${i}`} />
+            ))
+          : visibleItems.map((p) => <ProductCard key={p.id} product={p} />)}
 
-        {isLoadingMore &&
+        {!isInitialLoading &&
+          isLoadingMore &&
           Array.from({ length: skeletonCount }).map((_, i) => (
             <ProductCardSkeleton key={`skeleton-${i}`} />
           ))}

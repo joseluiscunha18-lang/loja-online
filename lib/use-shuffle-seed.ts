@@ -1,17 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PRODUCTS, type Product, type Category } from "./shop-data";
-
-function getTimeSeed(): number {
-  const now = new Date();
-  return (
-    now.getFullYear() * 100000000 +
-    (now.getMonth() + 1) * 1000000 +
-    now.getDate() * 10000 +
-    now.getHours() * 100 +
-    now.getMinutes()
-  );
-}
 
 /** Fisher-Yates com seed — embaralha qualquer lista de forma determinística */
 function shuffleWithSeed<T>(items: T[], seed: number): T[] {
@@ -30,30 +19,20 @@ function shuffleWithSeed<T>(items: T[], seed: number): T[] {
  * Devolve produtos embaralhados:
  * - Filtra primeiro pela categoria
  * - Depois embaralha o subconjunto → ordem muda mesmo dentro de cada categoria
- * - Seed muda a cada minuto e a cada mudança de categoria (navCnt)
+ * - O "seed" base é fixado uma única vez, quando a página é aberta
+ *   (dá uma ordem diferente a cada visita), e só muda por ação real do
+ *   utilizador — ao trocar de categoria (navCnt). NUNCA muda sozinho
+ *   enquanto o utilizador está parado a ver a página.
  */
 export function useShuffledProducts(category: Category, navCnt: number): Product[] {
-  const [timeSeed, setTimeSeed] = useState(getTimeSeed);
-
-  useEffect(() => {
-    const msUntilNextMinute = () => {
-      const now = new Date();
-      return (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
-    };
-    const timeout = setTimeout(() => {
-      setTimeSeed(getTimeSeed());
-      const interval = setInterval(() => setTimeSeed(getTimeSeed()), 60_000);
-      return () => clearInterval(interval);
-    }, msUntilNextMinute());
-    return () => clearTimeout(timeout);
-  }, []);
+  const [sessionSeed] = useState(() => Date.now());
 
   // Filtra primeiro
   const subset = category === "Tudo" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category);
 
-  // Seed único por categoria + tempo + navegação
+  // Seed único por categoria + sessão + navegação (sem componente de tempo real)
   const categorySeed = category.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
-  const seed = timeSeed ^ (categorySeed * 2654435761) ^ (navCnt * 2246822519);
+  const seed = sessionSeed ^ (categorySeed * 2654435761) ^ (navCnt * 2246822519);
 
   // Embaralha o subconjunto já filtrado
   return shuffleWithSeed(subset, seed);

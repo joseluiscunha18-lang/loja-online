@@ -8,6 +8,7 @@ import { useInfiniteReveal } from "@/lib/use-infinite-reveal";
 import { Suspense, useEffect, useTransition, useState } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
+import LoadingProdutos from "./loading";
 
 function isCategory(value: string | null): value is Category {
   return !!value && (CATEGORIES as readonly string[]).includes(value);
@@ -89,7 +90,7 @@ function ProdutosContent() {
 
 export default function Produtos() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<LoadingProdutos />}>
       <ProdutosContent />
     </Suspense>
   );

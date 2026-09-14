@@ -351,9 +351,9 @@ function HomeContent() {
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
               href="https://bliss-beauty-three.vercel.app/produtos"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-full border border-foreground/25 px-5 py-2 text-xs tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
             >
-              Ver todas as novidades <ArrowRight className="size-4" aria-hidden />
+              Ver mais novidades <ArrowRight className="size-3.5" aria-hidden />
             </Link>
           </motion.div>
         </FadeUp>

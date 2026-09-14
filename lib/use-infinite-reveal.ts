@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 const DEFAULT_PAGE_SIZE = 12;
 const INITIAL_LOAD_MS = 1500;
-const SIMULATED_LOAD_MS = 650;
+const SIMULATED_LOAD_MS = 700;
 
 /**
  * Simula paginação vinda de um servidor:
@@ -51,21 +51,24 @@ export function useInfiniteReveal<T>(
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
-        setIsLoadingMore((loading) => {
-          if (loading) return loading;
-          window.setTimeout(() => {
-            setVisibleCount((v) => Math.min(v + pageSize, totalCount));
-            setIsLoadingMore(false);
-          }, SIMULATED_LOAD_MS);
-          return true;
-        });
+        // Deixa de observar imediatamente: garante que só é pedido UM lote
+        // por aproximação real ao fundo da lista, sem cascatas automáticas.
+        observer.unobserve(node);
+
+        setIsLoadingMore(true);
+        window.setTimeout(() => {
+          setVisibleCount((v) => Math.min(v + pageSize, totalCount));
+          setIsLoadingMore(false);
+        }, SIMULATED_LOAD_MS);
       },
-      { rootMargin: "600px 0px" },
+      // Margem pequena: só dispara quando o utilizador está mesmo perto do
+      // fundo da grelha, não assim que a página abre.
+      { rootMargin: "0px 0px 80px 0px" },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [hasMore, isInitialLoading, pageSize, totalCount]);
+  }, [hasMore, isInitialLoading, pageSize, totalCount, visibleCount]);
 
   return {
     visibleItems: isInitialLoading ? [] : items.slice(0, visibleCount),

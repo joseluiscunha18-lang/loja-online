@@ -332,8 +332,8 @@ function HomeContent() {
                   loading="lazy"
                   width={800}
                   height={800}
-                  className="aspect-square w-full object-cover object-center will-change-transform"
-                  whileHover={{ scale: 1.08 }}
+                  className="aspect-square w-full object-cover object-center will-change-transform scale-110"
+                  whileHover={{ scale: 1.2 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 />
               </div>

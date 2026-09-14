@@ -299,7 +299,7 @@ function HomeContent() {
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
             <Link
               href="https://bliss-beauty-three.vercel.app/produtos"
-              className="inline-flex items-center gap-2 rounded-full border border-foreground/25 px-5 py-2 text-xs tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-2xl border border-foreground/25 px-6 py-2.5 text-sm transition-colors hover:bg-secondary"
             >
               Ver toda a coleção <ArrowRight className="size-3.5" aria-hidden />
             </Link>
@@ -351,7 +351,7 @@ function HomeContent() {
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
               href="/novidades"
-              className="inline-flex items-center gap-2 rounded-full border border-foreground/25 px-5 py-2 text-xs tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-2xl border border-foreground/25 px-6 py-2.5 text-sm transition-colors hover:bg-secondary"
             >
               Ver mais novidades <ArrowRight className="size-3.5" aria-hidden />
             </Link>

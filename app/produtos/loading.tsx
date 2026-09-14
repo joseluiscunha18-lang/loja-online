@@ -6,7 +6,7 @@ export default function LoadingProdutos() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <p className="eyebrow">A coleção Bliss</p>
-      <h1 className="font-display mt-3 text-5xl">Todas as coleções</h1>
+      <h1 className="font-display mt-3 text-5xl">Todas nossas coleções</h1>
       <p className="mt-4 max-w-xl text-muted-foreground">
         Beleza, acessórios e moda escolhidos para si.
       </p>

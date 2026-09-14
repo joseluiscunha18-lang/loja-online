@@ -1,5 +1,5 @@
 "use client";
-import { Minus, Plus, ShieldCheck, X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import { useShop } from "@/lib/shop-context";
@@ -119,12 +119,7 @@ export function ProductModal() {
                 <p className="font-display shrink-0 text-2xl">{formatMZN(activeProduct.price)}</p>
               </div>
 
-              <div className="mt-3 flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
-                  <ShieldCheck className="size-3.5 text-foreground" aria-hidden />
-                  Produto original · Marca verificada
-                </span>
-              </div>
+
 
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
                 {activeProduct.description}

@@ -99,11 +99,11 @@ export function MenuDrawer() {
               <MessageCircle className="size-4" aria-hidden /> {STORE.instagram}
             </a>
           </div>
-        </nav>
 
-        <p className="border-t border-border px-6 py-4 text-xs text-muted-foreground">
-          {STORE.logistics}
-        </p>
+          <p className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground">
+            {STORE.logistics}
+          </p>
+        </nav>
       </aside>
     </div>
   );

@@ -365,7 +365,7 @@ function HomeContent() {
           <div className="overflow-hidden rounded-[2rem] bg-secondary/70">
             <motion.img
               src={editorial}
-              alt="Frasco de óleo essencial rodeado de folhas de eucalipto sobre tecido bege"
+              alt="Mãos de diferentes tons de pele unidas, com creme em forma de coração"
               loading="lazy"
               width={1280}
               height={800}

@@ -1,5 +1,5 @@
 "use client";
-import { Minus, Plus, Star, X } from "lucide-react";
+import { Minus, Plus, ShieldCheck, X } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import { useShop } from "@/lib/shop-context";
@@ -119,20 +119,10 @@ export function ProductModal() {
                 <p className="font-display shrink-0 text-2xl">{formatMZN(activeProduct.price)}</p>
               </div>
 
-              <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-                <span className="flex">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star
-                      key={i}
-                      className={`size-4 ${
-                        i < Math.round(activeProduct.rating) ? "fill-foreground text-foreground" : ""
-                      }`}
-                      aria-hidden
-                    />
-                  ))}
-                </span>
-                <span>
-                  {activeProduct.rating.toFixed(1)} ({activeProduct.reviews} avaliações)
+              <div className="mt-3 flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <ShieldCheck className="size-3.5 text-foreground" aria-hidden />
+                  Produto original · Marca verificada
                 </span>
               </div>
 

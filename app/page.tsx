@@ -318,21 +318,25 @@ function HomeContent() {
               key={product.id}
               type="button"
               onClick={() => openProduct(product)}
-              className="w-44 shrink-0 text-left"
+              className="w-56 shrink-0 text-left"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               whileHover={{ y: -4 }}
             >
-              <img
-                src={product.images[0]}
-                alt={product.name}
-                loading="lazy"
-                width={800}
-                height={800}
-                className="aspect-[4/5] w-full rounded-3xl bg-secondary object-cover will-change-transform"
-              />
+              <div className="overflow-hidden rounded-3xl bg-secondary">
+                <motion.img
+                  src={product.images[0]}
+                  alt={product.name}
+                  loading="lazy"
+                  width={800}
+                  height={800}
+                  className="aspect-square w-full object-cover object-center will-change-transform"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                />
+              </div>
               <p className="mt-3 truncate text-sm font-medium">{product.name}</p>
               <p className="text-sm text-muted-foreground">{formatMZN(product.price)}</p>
             </motion.button>

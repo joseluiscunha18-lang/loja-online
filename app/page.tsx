@@ -350,7 +350,7 @@ function HomeContent() {
         <FadeUp delay={0.1} className="mt-8 flex justify-center">
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
-              href="https://bliss-beauty-three.vercel.app/produtos"
+              href="/novidades"
               className="inline-flex items-center gap-2 rounded-full border border-foreground/25 px-5 py-2 text-xs tracking-[0.06em] uppercase transition-colors hover:bg-secondary"
             >
               Ver mais novidades <ArrowRight className="size-3.5" aria-hidden />

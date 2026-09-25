@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from "fra
 import { ProductCard } from "@/components/site/ProductCard";
 import { CategoryPills } from "@/components/site/CategoryPills";
 import { PRODUCTS, STORE, heroImage, editorial, formatMZN, type Category } from "@/lib/shop-data";
-import { useShuffledProducts } from "@/lib/use-shuffle-seed";
+import { useShuffledProducts, shuffleWithSeed } from "@/lib/use-shuffle-seed";
 import { useShop } from "@/lib/shop-context";
 
 /* ── Animação de entrada reutilizável ── */
@@ -249,11 +249,14 @@ function HomeContent() {
 
   // Produtos embaralhados — muda a cada minuto e a cada mudança de categoria.
   const products = useShuffledProducts(category, navCnt);
-  // Novidades: últimos produtos adicionados, excluindo os que já aparecem na grelha
+  // Novidades: sorteadas a cada visita a partir dos produtos mais recentes,
+  // para não mostrar sempre os mesmos — excluindo os que já aparecem na grelha.
+  const [novidadesSeed] = useState(() => Date.now());
   const novidades = useMemo(() => {
     const gridIds = new Set(products.slice(0, 8).map((p) => p.id));
-    return [...PRODUCTS].slice(-12).reverse().filter((p) => !gridIds.has(p.id)).slice(0, 8);
-  }, [products]);
+    const recentPool = [...PRODUCTS].slice(-24).filter((p) => !gridIds.has(p.id));
+    return shuffleWithSeed(recentPool, novidadesSeed).slice(0, 8);
+  }, [products, novidadesSeed]);
 
   return (
     <>

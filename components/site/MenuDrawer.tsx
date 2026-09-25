@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { MessageCircle, Mail, Phone, X, Instagram, Users } from "lucide-react";
+import { MessageCircle, Mail, Phone, X, Users } from "lucide-react";
 import { useShop } from "@/lib/shop-context";
 import { CATEGORIES, STORE } from "@/lib/shop-data";
+import { InstagramIcon } from "./InstagramIcon";
 
 const pages = [
   { to: "/", label: "Início" },
@@ -96,7 +97,7 @@ export function MenuDrawer() {
               rel="noreferrer"
               className="flex items-center gap-2.5"
             >
-              <Instagram className="size-4" aria-hidden /> {STORE.instagram}
+              <InstagramIcon className="size-4" aria-hidden /> {STORE.instagram}
             </a>
             <a
               href={STORE.whatsappGroupUrl}

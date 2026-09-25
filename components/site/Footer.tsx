@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { MessageCircle, Mail, MapPin, Phone } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Phone, Instagram, Users } from "lucide-react";
 import { STORE } from "@/lib/shop-data";
 
 export function Footer() {
@@ -51,8 +51,19 @@ export function Footer() {
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-muted-foreground"
                 >
-                  <MessageCircle className="size-4 shrink-0" aria-hidden />
+                  <Instagram className="size-4 shrink-0" aria-hidden />
                   <span>Instagram: {STORE.instagram}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={STORE.whatsappGroupUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2.5 hover:text-muted-foreground"
+                >
+                  <Users className="size-4 shrink-0" aria-hidden />
+                  <span>Grupo de WhatsApp</span>
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-muted-foreground">

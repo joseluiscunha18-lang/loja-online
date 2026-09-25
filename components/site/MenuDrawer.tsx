@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { MessageCircle, Mail, Phone, X } from "lucide-react";
+import { MessageCircle, Mail, Phone, X, Instagram, Users } from "lucide-react";
 import { useShop } from "@/lib/shop-context";
 import { CATEGORIES, STORE } from "@/lib/shop-data";
 
@@ -96,7 +96,15 @@ export function MenuDrawer() {
               rel="noreferrer"
               className="flex items-center gap-2.5"
             >
-              <MessageCircle className="size-4" aria-hidden /> {STORE.instagram}
+              <Instagram className="size-4" aria-hidden /> {STORE.instagram}
+            </a>
+            <a
+              href={STORE.whatsappGroupUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2.5"
+            >
+              <Users className="size-4" aria-hidden /> Grupo de WhatsApp
             </a>
           </div>
 

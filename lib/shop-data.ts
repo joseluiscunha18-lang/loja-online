@@ -47,6 +47,16 @@ const herbissimoLavanda = "/assets/p-herbissimo-lavanda.webp";
 const salonSosCachos = "/assets/p-salon-sos-cachos.webp";
 const anitaClareador = "/assets/p-anita-clareador.webp";
 const niveaCocoaButter = "/assets/p-nivea-cocoa-butter.webp";
+const geminiPerfume = "/assets/p-gemini-perfume.webp";
+const soulPetalasRosa = "/assets/p-soul-petalas-rosa.webp";
+const fariisAfrahBonbon = "/assets/p-fariis-afrah-bonbon.webp";
+const helloKittySplash = "/assets/p-hello-kitty-splash.webp";
+const sabonetesIntimosTrio = "/assets/p-sabonetes-intimos-trio.webp";
+const victoriaSecretSplash = "/assets/p-victoria-secret-splash.webp";
+const institutoEspanolGelIntimo = "/assets/p-instituto-espanol-gel-intimo.webp";
+const mascaraFacialSadoer = "/assets/p-mascara-facial-sadoer.webp";
+const doveMenStick = "/assets/p-dove-men-stick.webp";
+const kariteLipOil = "/assets/p-karite-lip-oil.webp";
 export const editorial = "/assets/editorial.jpg";
 export const heroImage = "/assets/hero.jpg";
 
@@ -72,7 +82,7 @@ export function productUrl(id: string): string {
   return `${SITE_URL}/produto/${id}`;
 }
 
-export const CATEGORIES = ["Tudo", "Cuidado Corporal", "Rosto & Lábios", "Cabelo", "Banho", "Perfume & Desodorizante", "Unhas & Maquiagem"] as const;
+export const CATEGORIES = ["Tudo", "Cuidado Corporal", "Rosto & Lábios", "Cabelo", "Banho", "Perfume & Desodorizante", "Unhas", "Maquiagem"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -269,7 +279,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "escova-limpeza-facial",
     name: "Escova de Limpeza Facial",
-    category: "Unhas & Maquiagem",
+    category: "Rosto & Lábios",
     price: 200,
     rating: 4.5,
     reviews: 33,
@@ -440,7 +450,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "risque-chocolight",
     name: "Risque Verniz de Unhas Chocolight",
-    category: "Unhas & Maquiagem",
+    category: "Unhas",
     price: 150,
     rating: 4.5,
     reviews: 39,
@@ -563,7 +573,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "andreia-gel-polish",
     name: "Andreia Professional Gel Polish",
-    category: "Unhas & Maquiagem",
+    category: "Unhas",
     price: 450,
     rating: 4.8,
     reviews: 112,
@@ -682,5 +692,166 @@ export const PRODUCTS: Product[] = [
     description:
       "Creme corporal 5 em 1 com manteiga de cacau e Vitamina E. Hidratação nutritiva de 48h com Deep Moisture Serum para pele seca. Absorção rápida e aroma suave de cacau.",
     details: ["400 ml", "48h de hidratação nutritiva", "5 em 1", "Manteiga de cacau e Vitamina E", "Pele seca"],
+  },
+  {
+    id: "gemini-perfume-aurora-scents",
+    name: "Gemini (M) Type - Aurora Scents",
+    category: "Perfume & Desodorizante",
+    price: 1900,
+    rating: 4.8,
+    reviews: 21,
+    images: [geminiPerfume],
+    description:
+      "Eau de parfum inspirado Gemini (M) Type, da Aurora Scents, com um aroma âmbar amadeirado sofisticado e de longa duração.",
+    details: ["Eau de parfum", "Aroma âmbar amadeirado", "Longa duração"],
+  },
+  {
+    id: "soul-sabonete-intimo-petalas-rosa",
+    name: "Sabonete Íntimo Pétalas de Rosa - Soul Cosméticos",
+    category: "Banho",
+    price: 700,
+    rating: 4.6,
+    reviews: 34,
+    images: [soulPetalasRosa],
+    description:
+      "Sabonete líquido íntimo com pétalas de rosa e sensação térmica, pH balanceado para respeitar a flora íntima.",
+    details: ["200 ml", "pH balanceado", "Sensação térmica", "Aroma pétalas de rosa"],
+  },
+  {
+    id: "fariis-afrah-bonbon",
+    name: "Fariis Afrah BonBon Eau de Parfum",
+    category: "Perfume & Desodorizante",
+    price: 2000,
+    rating: 4.9,
+    reviews: 27,
+    images: [fariisAfrahBonbon],
+    description:
+      "Eau de parfum Afrah BonBon da Fariis, um aroma doce e envolvente em frasco elegante, ideal para um perfume marcante no dia a dia.",
+    details: ["100 ml", "Eau de parfum", "Aroma doce e envolvente"],
+  },
+  {
+    id: "hello-kitty-body-splash",
+    name: "Hello Kitty + Love Joy Good Girl Body Splash",
+    category: "Perfume & Desodorizante",
+    price: 350,
+    rating: 4.6,
+    reviews: 40,
+    images: [helloKittySplash],
+    description:
+      "Fragrância corporal Hello Kitty + Love Joy, com notas de maçã, morango e caramelo, num frasco divertido e colecionável.",
+    details: ["250 ml", "Notas de maçã, morango e caramelo", "Body fragrance"],
+  },
+  {
+    id: "apinil-sabonete-intimo-aroeira",
+    name: "Sabonete Íntimo Aroeira - Apinil",
+    category: "Banho",
+    price: 700,
+    rating: 4.5,
+    reviews: 18,
+    images: [sabonetesIntimosTrio],
+    description:
+      "Sabonete líquido íntimo com extrato de barbatimão e aroeira, formulado para uma higiene suave e equilibrada.",
+    details: ["200 ml", "Extrato de barbatimão e aroeira", "Uso diário"],
+  },
+  {
+    id: "bionattiva-sabonete-uva-acai",
+    name: "Sabonete Feminino Uva e Açaí - BioNattiva",
+    category: "Banho",
+    price: 700,
+    rating: 4.5,
+    reviews: 22,
+    images: [sabonetesIntimosTrio],
+    description:
+      "Sabonete líquido feminino com pH balanceado e extrato de uva e açaí, para uma higiene íntima suave e refrescante.",
+    details: ["200 ml", "pH balanceado", "Extrato de uva e açaí"],
+  },
+  {
+    id: "soul-sabonete-intimo-melancia-fresh",
+    name: "Sabonete Íntimo Melancia Fresh - Soul Cosméticos",
+    category: "Banho",
+    price: 700,
+    rating: 4.6,
+    reviews: 25,
+    images: [sabonetesIntimosTrio],
+    description:
+      "Sabonete líquido íntimo com aroma de melancia e sensação térmica, pH balanceado para respeitar a flora íntima.",
+    details: ["200 ml", "pH balanceado", "Sensação térmica", "Aroma de melancia"],
+  },
+  {
+    id: "victorias-secret-body-splash",
+    name: "Victoria's Secret Fragrance Mist",
+    category: "Perfume & Desodorizante",
+    price: 950,
+    rating: 4.8,
+    reviews: 88,
+    images: [victoriaSecretSplash],
+    description:
+      "Body splash Victoria's Secret em várias fragrâncias, com fixação leve e perfumada para refrescar a pele ao longo do dia.",
+    details: ["250 ml / 8.4 fl oz", "Fragrance mist", "Várias fragrâncias disponíveis"],
+    options: {
+      label: "Fragrância",
+      values: [
+        "Amber Romance",
+        "Rush",
+        "Midnight Bloom",
+        "Bare Vanilla",
+        "Pear Glacé",
+        "Velvet Petals",
+        "Love Spell",
+        "Pure Seduction",
+        "Aqua Kiss",
+        "Coconut Passion",
+      ],
+    },
+  },
+  {
+    id: "instituto-espanol-gel-intimo",
+    name: "Instituto Español Gel Íntimo",
+    category: "Banho",
+    price: 900,
+    rating: 4.7,
+    reviews: 30,
+    images: [institutoEspanolGelIntimo],
+    description:
+      "Gel de higiene íntima feminina de uso diário, que respeita o pH natural da pele. Testado dermatologicamente.",
+    details: ["Uso diário", "Respeita o pH natural da pele", "Testado dermatologicamente"],
+  },
+  {
+    id: "mascara-facial-sadoer-botany",
+    name: "Máscara Facial Botany and Fruits Skin Care - Sadoer",
+    category: "Rosto & Lábios",
+    price: 70,
+    rating: 4.4,
+    reviews: 52,
+    images: [mascaraFacialSadoer],
+    description:
+      "Máscara facial hidratante em tecido, com ativos botânicos e frutados que ajudam a suavizar, iluminar e revitalizar a pele.",
+    details: ["Máscara facial em tecido", "Uso único", "Fórmula hidratante e iluminadora"],
+    options: { label: "Aroma", values: ["Morango", "Aloe Vera", "Mel"] },
+  },
+  {
+    id: "dove-men-stick-stain-defense",
+    name: "Dove Men+Care 72H Stain Defense Clean Antitranspirante Stick",
+    category: "Perfume & Desodorizante",
+    price: 950,
+    rating: 4.7,
+    reviews: 44,
+    images: [doveMenStick],
+    description:
+      "Desodorizante antitranspirante em stick para homem, com proteção de 72h, Vitamina E e fórmula não irritante que evita marcas brancas e manchas amarelas na roupa.",
+    details: ["78 g", "Proteção 72h", "Com Vitamina E", "Anti marcas brancas e manchas amarelas"],
+  },
+  {
+    id: "karite-lip-oil-moist",
+    name: "Karité Lip Oil Moist (5ml)",
+    category: "Rosto & Lábios",
+    price: 350,
+    rating: 4.6,
+    reviews: 37,
+    images: [kariteLipOil],
+    description:
+      "Óleo labial hidratante Lip Oil Moist da Karité, com cuidado labial intensivo e reparação de emergência para lábios macios e nutridos.",
+    details: ["5 ml", "Cuidado labial intensivo", "Reparação de emergência"],
+    options: { label: "Cor", values: ["Vinho", "Bordô", "Pink", "Coral", "Rosa Claro", "Rosa Bebé"] },
   },
 ];

@@ -31,7 +31,7 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
             decoding="async"
             width={400}
             height={400}
-            className="aspect-square w-full object-contain transition-transform duration-300 group-hover:scale-105"
+            className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </button>
 

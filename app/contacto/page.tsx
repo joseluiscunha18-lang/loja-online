@@ -32,6 +32,28 @@ export default function Contacto() {
             <span className="text-muted-foreground">Fale connosco diretamente</span>
           </a>
 
+          <a
+            className="rounded-2xl bg-secondary p-6"
+            href={STORE.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram
+            <br />
+            <span className="text-muted-foreground">{STORE.instagram}</span>
+          </a>
+
+          <a
+            className="rounded-2xl bg-secondary p-6"
+            href={STORE.whatsappGroupUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Grupo de WhatsApp
+            <br />
+            <span className="text-muted-foreground">Novidades e promoções em primeira mão</span>
+          </a>
+
           <div className="rounded-2xl bg-secondary p-6">
             Entregas
             <br />

@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { MessageCircle, Mail, MapPin, Phone, Instagram, Users } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Phone, Users } from "lucide-react";
 import { STORE } from "@/lib/shop-data";
+import { InstagramIcon } from "./InstagramIcon";
 
 export function Footer() {
   return (
@@ -51,7 +52,7 @@ export function Footer() {
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-muted-foreground"
                 >
-                  <Instagram className="size-4 shrink-0" aria-hidden />
+                  <InstagramIcon className="size-4 shrink-0" aria-hidden />
                   <span>Instagram: {STORE.instagram}</span>
                 </a>
               </li>

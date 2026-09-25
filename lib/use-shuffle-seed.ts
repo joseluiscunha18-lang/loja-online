@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PRODUCTS, type Product, type Category } from "./shop-data";
 
 /** Fisher-Yates com seed — embaralha qualquer lista de forma determinística */
-function shuffleWithSeed<T>(items: T[], seed: number): T[] {
+export function shuffleWithSeed<T>(items: T[], seed: number): T[] {
   const arr = [...items];
   let s = seed;
   for (let i = arr.length - 1; i > 0; i--) {

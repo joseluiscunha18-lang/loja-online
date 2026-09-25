@@ -754,18 +754,6 @@ export const PRODUCTS: Product[] = [
     details: ["200 ml", "Extrato de barbatimão e aroeira", "Uso diário"],
   },
   {
-    id: "bionattiva-sabonete-uva-acai",
-    name: "Sabonete Feminino Uva e Açaí - BioNattiva",
-    category: "Banho",
-    price: 700,
-    rating: 4.5,
-    reviews: 22,
-    images: [sabonetesIntimosTrio],
-    description:
-      "Sabonete líquido feminino com pH balanceado e extrato de uva e açaí, para uma higiene íntima suave e refrescante.",
-    details: ["200 ml", "pH balanceado", "Extrato de uva e açaí"],
-  },
-  {
     id: "soul-sabonete-intimo-melancia-fresh",
     name: "Sabonete Íntimo Melancia Fresh - Soul Cosméticos",
     category: "Banho",

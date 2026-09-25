@@ -757,18 +757,6 @@ export const PRODUCTS: Product[] = [
     details: ["200 ml", "Extrato de barbatimão e aroeira", "Uso diário"],
   },
   {
-    id: "soul-sabonete-intimo-melancia-fresh",
-    name: "Sabonete Íntimo Melancia Fresh - Soul Cosméticos",
-    category: "Banho",
-    price: 700,
-    rating: 4.6,
-    reviews: 25,
-    images: [sabonetesIntimosTrio],
-    description:
-      "Sabonete líquido íntimo com aroma de melancia e sensação térmica, pH balanceado para respeitar a flora íntima.",
-    details: ["200 ml", "pH balanceado", "Sensação térmica", "Aroma de melancia"],
-  },
-  {
     id: "victorias-secret-body-splash",
     name: "Victoria's Secret Fragrance Mist",
     category: "Perfume & Desodorizante",

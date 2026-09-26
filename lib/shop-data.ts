@@ -758,7 +758,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "victorias-secret-body-splash",
-    name: "Victoria's Secret Fragrance Mist",
+    name: "Body Splash Victoria's Secret",
     category: "Perfume & Desodorizante",
     price: 950,
     rating: 4.8,

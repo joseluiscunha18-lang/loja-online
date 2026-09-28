@@ -20,7 +20,7 @@ const amalfi = "/assets/p-amalfi.webp";
 const pedraPomes = "/assets/p-pedra-pomes.webp";
 const presilhas = "/assets/p-presilhas.webp";
 const uriageXemose = "/assets/p-uriage-xemose.webp";
-const aveneShampoo = "/assets/p-avene-shampoo.webp";
+const aveneShampoo = "/assets/p-baby-dove-shampoo.jpg";
 const lorealMen = "/assets/p-loreal-men.webp";
 const skalaAmido = "/assets/p-skala-amido.webp";
 const niveaHijabFresh = "/assets/p-nivea-hijab-fresh.webp";
@@ -367,7 +367,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "avene-shampoo-bebe",
-    name: "Avène Shampoo Bebé Hipoalergénico",
+    name: "Baby Dove Hidratação Enriquecida",
     category: "Cabelo",
     price: 500,
     rating: 4.7,
@@ -589,7 +589,7 @@ export const PRODUCTS: Product[] = [
     id: "panos-microfibra",
     name: "Pack Panos de Microfibra (5 peças)",
     category: "Banho",
-    price: 150,
+    price: 330,
     rating: 4.5,
     reviews: 48,
     images: [panosMicrofibra],

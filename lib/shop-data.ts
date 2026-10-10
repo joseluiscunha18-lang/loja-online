@@ -57,6 +57,23 @@ const institutoEspanolGelIntimo = "/assets/p-instituto-espanol-gel-intimo.webp";
 const mascaraFacialSadoer = "/assets/p-mascara-facial-sadoer.webp";
 const doveMenStick = "/assets/p-dove-men-stick.webp";
 const kariteLipOil = "/assets/p-karite-lip-oil.webp";
+const laGirlPromatte = "/assets/p-la-girl-promatte.webp";
+const brooklynGel = "/assets/p-brooklyn-gel.webp";
+const sadoerStrawberry = "/assets/p-sadoer-strawberry.webp";
+const sadoerCoconut = "/assets/p-sadoer-coconut.webp";
+const aveneSpf50 = "/assets/p-avene-spf50.webp";
+const amalicoChebe = "/assets/p-amalico-chebe.webp";
+const murielRosaMosqueta = "/assets/p-muriel-rosa-mosqueta.webp";
+const murielManga = "/assets/p-muriel-manga.webp";
+const portiaMarula = "/assets/p-portia-marula.webp";
+const johnsonsTopToToe = "/assets/p-johnsons-top-to-toe.webp";
+const portiaPomegranate = "/assets/p-portia-pomegranate.webp";
+const lattafaAsad = "/assets/p-lattafa-asad.webp";
+const biodermaPigmentbio = "/assets/p-bioderma-pigmentbio.webp";
+const johnsonsActiveKids = "/assets/p-johnsons-active-kids.webp";
+const miniFanUrso = "/assets/p-mini-fan-urso.webp";
+const miniFanCoelho = "/assets/p-mini-fan-coelho.webp";
+const sadoerAvocado = "/assets/p-sadoer-avocado.webp";
 export const editorial = "/assets/editorial.jpg";
 export const heroImage = "/assets/hero.jpg";
 
@@ -85,7 +102,7 @@ export function productUrl(id: string): string {
   return `${SITE_URL}/produto/${id}`;
 }
 
-export const CATEGORIES = ["Tudo", "Cuidado Corporal", "Rosto & Lábios", "Cabelo", "Banho", "Perfume & Desodorizante", "Unhas", "Maquiagem"] as const;
+export const CATEGORIES = ["Tudo", "Cuidado Corporal", "Rosto & Lábios", "Cabelo", "Banho", "Perfume & Desodorizante", "Unhas", "Maquiagem", "Acessórios"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Product = {
@@ -832,5 +849,223 @@ export const PRODUCTS: Product[] = [
       "Óleo labial hidratante Lip Oil Moist da Karité, com cuidado labial intensivo e reparação de emergência para lábios macios e nutridos.",
     details: ["5 ml", "Cuidado labial intensivo", "Reparação de emergência"],
     options: { label: "Cor", values: ["Vinho", "Bordô", "Pink", "Coral", "Rosa Claro", "Rosa Bebé"] },
+  },
+  {
+    id: "amalico-chebe-hair-oil-250",
+    name: "Amalico Chebe Tchad Hair Oil (250ml)",
+    category: "Cabelo",
+    price: 1000,
+    rating: 0,
+    reviews: 0,
+    images: [amalicoChebe],
+    description:
+      "Óleo de tratamento capilar Amalico Chebe Tchad, enriquecido com pó de chebe, que ajuda a promover o crescimento, hidratar profundamente, fortalecer os fios e reduzir a quebra e as pontas duplas.",
+    details: ["250 ml", "Pó de chebe do Tchad", "Fortalece e reduz a quebra"],
+    options: { label: "Variante", values: ["Com manteiga de carité", "Com óleo de amla"] },
+  },
+  {
+    id: "amalico-chebe-hair-oil-500",
+    name: "Amalico Chebe Tchad Hair Oil (500ml)",
+    category: "Cabelo",
+    price: 1850,
+    rating: 0,
+    reviews: 0,
+    images: [amalicoChebe],
+    description:
+      "Óleo de tratamento capilar Amalico Chebe Tchad, enriquecido com pó de chebe, que ajuda a promover o crescimento, hidratar profundamente, fortalecer os fios e reduzir a quebra e as pontas duplas.",
+    details: ["500 ml", "Pó de chebe do Tchad", "Fortalece e reduz a quebra"],
+    options: { label: "Variante", values: ["Com manteiga de carité", "Com óleo de amla"] },
+  },
+  {
+    id: "brooklyn-hair-styling-gel",
+    name: "Brooklyn Hair Styling Gel Transparente",
+    category: "Cabelo",
+    price: 500,
+    rating: 0,
+    reviews: 0,
+    images: [brooklynGel],
+    description:
+      "Gel modelador transparente que ajuda a definir os caracóis, controlar os fios e dar acabamento aos penteados. Ideal para fitagem, baby hairs e outros penteados em cabelos naturais e crespos.",
+    details: ["Transparente", "Define caracóis e baby hairs", "Cabelos naturais e crespos"],
+  },
+  {
+    id: "la-girl-pro-matte-foundation",
+    name: "L.A. Girl PRO.matte HD Long Wear Matte Foundation",
+    category: "Maquiagem",
+    price: 1600,
+    rating: 0,
+    reviews: 0,
+    images: [laGirlPromatte],
+    description:
+      "Base líquida de acabamento mate e longa duração, com cobertura em alta definição, disponível em diferentes tons.",
+    details: ["30 ml", "Acabamento mate", "Longa duração", "Vários tons disponíveis", "Por encomenda"],
+  },
+  {
+    id: "avene-spf50-creme-solar",
+    name: "Avène Very High Protection SPF50+ Creme Solar (50ml)",
+    category: "Cuidado Corporal",
+    price: 2350,
+    rating: 0,
+    reviews: 0,
+    images: [aveneSpf50],
+    description:
+      "Creme solar de proteção muito elevada, indicado para pele seca e sensível, com acabamento invisível.",
+    details: ["50 ml", "SPF50+", "Pele seca e sensível", "Por encomenda"],
+  },
+  {
+    id: "muriel-oleo-rosa-mosqueta",
+    name: "Muriel Óleo Corporal Rosa Mosqueta com Colágeno (100ml)",
+    category: "Cuidado Corporal",
+    price: 330,
+    rating: 0,
+    reviews: 0,
+    images: [murielRosaMosqueta],
+    description:
+      "Óleo corporal com rosa mosqueta, colágeno e vitamina E para regeneração e hidratação da pele. Auxilia no clareamento de manchas e cicatrizes e deixa a pele perfumada.",
+    details: ["100 ml", "Com colágeno e Vitamina E", "Regeneração e hidratação", "Por encomenda"],
+  },
+  {
+    id: "muriel-oleo-manga",
+    name: "Muriel Óleo Natural de Manga com Colágeno (100ml)",
+    category: "Cuidado Corporal",
+    price: 330,
+    rating: 0,
+    reviews: 0,
+    images: [murielManga],
+    description:
+      "Óleo natural de manga com colágeno, vitamina C e vitamina E que nutre a pele profundamente, com ação antioxidante que auxilia na redução de manchas e na uniformização do tom.",
+    details: ["100 ml", "Vitamina C + Vitamina E", "Ingredientes naturais", "Por encomenda"],
+  },
+  {
+    id: "sadoer-strawberry-body-lotion",
+    name: "Sadoer Strawberry Body Lotion (180g)",
+    category: "Cuidado Corporal",
+    price: 300,
+    rating: 0,
+    reviews: 0,
+    images: [sadoerStrawberry],
+    description:
+      "Loção corporal hidratante de morango com textura de gelado, que ajuda a deixar a pele macia, delicada e radiante.",
+    details: ["180 g", "Textura ice cream", "Aroma de morango", "Por encomenda"],
+  },
+  {
+    id: "sadoer-coconut-body-lotion",
+    name: "Sadoer Coconut Body Lotion (180g)",
+    category: "Cuidado Corporal",
+    price: 300,
+    rating: 0,
+    reviews: 0,
+    images: [sadoerCoconut],
+    description:
+      "Loção corporal hidratante com óleo de coco e textura de gelado, que ajuda a deixar a pele macia, hidratada e perfumada, com aquele cheirinho tropical e suave de coco.",
+    details: ["180 g", "Textura ice cream", "Sem álcool, metais pesados ou hormonas", "Por encomenda"],
+  },
+  {
+    id: "portia-m-marula-face-wash",
+    name: "Portia M Marula Face Wash (200ml)",
+    category: "Rosto & Lábios",
+    price: 750,
+    rating: 0,
+    reviews: 0,
+    images: [portiaMarula],
+    description:
+      "Gel de limpeza facial suave com marula, sem sulfatos e adequado para pele sensível.",
+    details: ["200 ml", "Sem sulfatos", "Pele sensível"],
+  },
+  {
+    id: "portia-m-pomegranate-face-wash",
+    name: "Portia M Pomegranate Face Wash (150ml)",
+    category: "Rosto & Lábios",
+    price: 750,
+    rating: 0,
+    reviews: 0,
+    images: [portiaPomegranate],
+    description:
+      "Gel de limpeza facial refrescante com romã, que limpa a pele com suavidade.",
+    details: ["150 ml", "Refrescante e purificante", "Uso diário"],
+  },
+  {
+    id: "bioderma-pigmentbio-foaming-cream",
+    name: "Bioderma Pigmentbio Foaming Cream (200ml)",
+    category: "Rosto & Lábios",
+    price: 2950,
+    rating: 0,
+    reviews: 0,
+    images: [biodermaPigmentbio],
+    description:
+      "Creme de limpeza espumoso e iluminador que esfolia, uniformiza o tom e ilumina a pele. Indicado para manchas escuras e pele sensível.",
+    details: ["200 ml", "Esfolia e ilumina", "Manchas escuras e pele sensível"],
+  },
+  {
+    id: "johnsons-active-kids-clean-fresh-shampoo",
+    name: "Johnson's Active Kids Clean & Fresh Shampoo (200ml)",
+    category: "Cabelo",
+    price: 380,
+    rating: 0,
+    reviews: 0,
+    images: [johnsonsActiveKids],
+    description:
+      "Shampoo para crianças que limpa profundamente o cabelo e o couro cabeludo, deixando uma sensação de frescura prolongada. Com extratos de aloé e chá verde.",
+    details: ["200 ml", "Clean & Fresh", "Sem lágrimas", "Por encomenda"],
+  },
+  {
+    id: "johnsons-baby-top-to-toe-wash",
+    name: "Johnson's Baby Top-to-Toe Wash (500ml)",
+    category: "Banho",
+    price: null,
+    rating: 0,
+    reviews: 0,
+    images: [johnsonsTopToToe],
+    description:
+      "Gel de banho para bebé que limpa suavemente a pele em desenvolvimento desde o primeiro dia, tão suave como a água pura. Adequado para recém-nascidos.",
+    details: ["500 ml", "Para corpo e cabelo", "Adequado para recém-nascidos"],
+  },
+  {
+    id: "lattafa-asad-edp",
+    name: "Lattafa Asad Eau de Parfum Masculino (100ml)",
+    category: "Perfume & Desodorizante",
+    price: 2900,
+    rating: 0,
+    reviews: 0,
+    images: [lattafaAsad],
+    description:
+      "Eau de parfum masculino Lattafa Asad, num frasco preto e dourado marcante. Original.",
+    details: ["100 ml", "Eau de parfum", "Masculino", "Original"],
+  },
+  {
+    id: "mini-ventilador-urso-rosa",
+    name: "Mini Ventilador Portátil Urso (Rosa)",
+    category: "Acessórios",
+    price: 370,
+    rating: 0,
+    reviews: 0,
+    images: [miniFanUrso],
+    description:
+      "Mini ventilador portátil recarregável por USB, com design de ursinho em rosa, ideal para levar na mala ou usar na secretária.",
+    details: ["Recarregável por USB", "Portátil", "Cor rosa"],
+  },
+  {
+    id: "mini-ventilador-coelho-lilas",
+    name: "Mini Ventilador Portátil Coelho (Lilás)",
+    category: "Acessórios",
+    price: 370,
+    rating: 0,
+    reviews: 0,
+    images: [miniFanCoelho],
+    description:
+      "Mini ventilador portátil recarregável por USB, com design de coelho em lilás e verde menta, com base de apoio.",
+    details: ["Recarregável por USB", "Portátil com base", "Cor lilás e menta"],
+  },
+  {
+    id: "sadoer-avocado-body-lotion",
+    name: "Sadoer Avocado Body Lotion (180g)",
+    category: "Cuidado Corporal",
+    price: 300,
+    rating: 0,
+    reviews: 0,
+    images: [sadoerAvocado],
+    description:
+      "Loção corporal hidratante de abacate com textura de gelado, que ajuda a deixar a pele macia, hidratada e cuidada, com um aroma suave.",
+    details: ["180 g", "Textura ice cream", "Aroma suave", "Por encomenda"],
   },
 ];
